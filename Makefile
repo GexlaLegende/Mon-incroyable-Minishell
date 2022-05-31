@@ -62,6 +62,6 @@ $(DIR_OBJ) :
 	mkdir -p $(DIR_OBJ)
 
 
-#### UTILS ####
+#### UTILS #####
 
 .PHONY : all bonus re clean fclean
