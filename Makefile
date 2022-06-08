@@ -6,20 +6,23 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/05/31 17:31:15 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/08 15:49:58 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### LISTES ####
 
-SOURCES = minishell.c
+SOURCES = minishell.c \
+		  lst_utils1.c \
+		  lst_utils2.c 
+
 OBJETS = $(SOURCES:.c=.o)
 INCLUDES = minishell.h
 
 
 #### DIRECTORY ####
 
-DIR_SRC = source
+DIR_SRC = sources
 DIR_OBJ = .object
 DIR_INC = include
 
@@ -35,10 +38,9 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 
 CC := gcc
 CFLAGS := -Wall -Werror -Wextra
-LDFLAGS := -L/Users/apercebo/homebrew/opt/readline/lib
+LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I/Users/apercebo/homebrew/opt/readline/include
 NAME := minishell
-
 
 
 #### STANDARD_RULE ####
@@ -49,7 +51,6 @@ clean :
 	rm -rf $(DIR_OBJ)
 fclean : clean
 	rm -rf minishell
-
 
 
 ### CUSTOM_RULE ####
