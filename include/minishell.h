@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/08 15:51:17 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:25:50 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 typedef struct s_list
 {
-	void			*content;
+	char			*cmd;
+	int				*redir_type;
+	char			*redir_file;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_data
+{
+	int	squote;
+	int	dquote;
+}	t_data;
 
 //Lst -----------------------------------------------
 t_list	*ft_lstnew(void *content);

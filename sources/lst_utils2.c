@@ -6,13 +6,13 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:44:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/08 15:48:48 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:53:24 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* Itère sur la liste ’lst’ et applique la fonction
+/* Itère sur la liste 'lst' et applique la fonction
 ’f’ au contenu chaque élément. */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
@@ -21,7 +21,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	begin = lst;
 	while (begin && f)
 	{
-		(*f)(begin->content);
+		(*f)(begin->cmd);
 		begin = begin->next;
 	}
 }
@@ -55,11 +55,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	begin = lst;
 	if (!lst)
 		return (0);
-	newlst = ft_lstnew(f(begin->content));
+	newlst = ft_lstnew(f(begin->cmd));
 	begin = begin->next;
 	while (begin)
 	{
-		new = ft_lstnew(f(begin->content));
+		new = ft_lstnew(f(begin->cmd));
 		if (!new)
 		{
 			ft_lstclear(&newlst, del);
@@ -72,16 +72,16 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 }
 
 /* Alloue (avec malloc(3)) et renvoie un nouvel
-élément. La variable membre ’content’ est
-initialisée à l’aide de la valeur du paramètre ’content’. */
-t_list	*ft_lstnew(void *content)
+élément. La variable membre ’cmd’ est
+initialisée à l’aide de la valeur du paramètre ’cmd’. */
+t_list	*ft_lstnew(void *cmd)
 {
 	t_list	*newelm;
 
 	newelm = (t_list *)malloc(sizeof(t_list));
 	if (!newelm)
 		return (0);
-	newelm->content = content;
+	newelm->cmd = cmd;
 	newelm->next = NULL;
 	return (newelm);
 }

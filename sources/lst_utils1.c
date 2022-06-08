@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/08 15:38:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:52:19 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	if (lst)
 	{
 		if (del)
-			del(lst->content);
+			del(lst->cmd);
 		free(lst);
 	}
 }
