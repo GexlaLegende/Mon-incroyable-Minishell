@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/08 15:49:58 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/10 13:20:03 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@
 
 SOURCES = minishell.c \
 		  lst_utils1.c \
-		  lst_utils2.c 
+		  lst_utils2.c \
+		  parsing.c \
+		  error.c \
+		  utils.c
 
 OBJETS = $(SOURCES:.c=.o)
 INCLUDES = minishell.h
@@ -37,7 +40,7 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 #### OTHER ####
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -fsanitize=address -g3
 LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I/Users/apercebo/homebrew/opt/readline/include
 NAME := minishell
