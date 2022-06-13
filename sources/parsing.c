@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/10 20:57:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:36:49 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 		quotes_switch(data, str, i);
 		if (str[i] == '|' && data->squote == 0 && data->dquote == 0)  //Detection du pipe
 		{
-			printf("MESSAGE DERREUR\n");
-			error = ft_parsing2(&str[start], data, i);
+			if (str[i + 1] == '|')
+				return (3);
+			error = ft_parsing2(&str[start], data, i - start);
 			if (error != 0)
 				return (error);
 			ft_addpipe(data);
@@ -42,7 +43,7 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 	}
 	if (data->squote == 1 || data->dquote == 1)
 		return (2);
-	error = ft_parsing2(&str[start], data, i);  //Envoie la derniere commande
+	error = ft_parsing2(&str[start], data, i - start);  //Envoie la derniere commande
 	if (error != 0)
 		return (error);
 	return (0);
@@ -50,13 +51,19 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 
 void	ft_addpipe(t_data *data)							//Fonction pour l'ajout du maillon pipe dans la liste chainée
 {
+	char	*str;
 	int		*redir_type;
 	char	**redir_file;
 
-	printf("%s\n", "pipe added");			//TODO erreur si || double pipes
+	//printf("%s\n", "pipe added");			//TODO erreur si || double pipes
 	redir_type = (int *)malloc(sizeof(int) * 2);
 	redir_file = malloc(sizeof(char *) * 2);
-	ft_lstadd_back(&data->cmd_table, ft_lstnew(NULL, redir_type, redir_file));
+	str = malloc(sizeof(char) * 2);
+	redir_type[0] = 5;
+	redir_file[0] = NULL;
+	str[0] = '|';
+	str[1] = '\0';
+	ft_lstadd_back(&data->cmd_table, ft_lstnew(str, redir_type, redir_file));
 }
 
 void	quotes_switch(t_data *data, char *str, int i)
@@ -87,14 +94,15 @@ int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxiem
 	int		sizeoftabl;
 
 	i = 0;
-	str[end] = '\0';								//Selectionne la commande en coupant au Pipe
+	if (str[end])
+		str[end] = '\0';								//Selectionne la commande en coupant au Pipe
 	command = NULL;
 	sizeoftabl = count_redir(str, data);
 	if (sizeoftabl == -1)
 		return (3);
 	redir_type = (int *)malloc(sizeof(int) * (sizeoftabl + 1));
 	redir_file = malloc(sizeof(char *) * (sizeoftabl + 1));
-	while (i < sizeoftabl)
+	while (i < sizeoftabl + 1)
 	{
 		redir_type[i] = 0;
 		redir_file[i] = NULL;
@@ -107,6 +115,8 @@ int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxiem
 		if ((str[i] == '>' || str[i] == '<') && data->squote == 0 && data->dquote == 0)  //TODO SIMPLIFIER SKIP EN UTILISANT LADDRESSE DE I
 		{
 			skip = redir_parsing(str, i, data, &redir_type, &redir_file);
+			if (skip < 0)
+				return (skip);
 			i = i + skip;
 		}
 		else
@@ -146,11 +156,19 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 		j++;
 	while (str[j])
 	{
-		if ((str[j] == ' ' || str[j] == '<' || str[j] == '<') && data->squote == 0 && data->dquote == 0)
+		quotes_switch(data, str, i);
+		if ((str[j] == ' ' || str[j] == '<' || str[j] == '>') && data->squote == 0 && data->dquote == 0)
 			break ;
+		printf("LE CHARA -- %c\n", str[j]);
+		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40 || str[j] == 41 ||
+				str[j] == 59 || str[j] == 47 || str[j] == 63 || str[j] == 124) &&
+				data->squote == 0 && data->dquote == 0)
+			return (-2);
 		(*redir_file)[data->r_tabl] = ft_strmjoin((*redir_file)[data->r_tabl], str[j]);
 		j++;
 	}
+	if (!((*redir_file)[data->r_tabl]))
+			return (-2);
 	data->r_tabl = data->r_tabl + 1;
 	while (str[j] == ' ')
 		j++;
@@ -188,11 +206,11 @@ int	count_redir(char *str, t_data *data)  //ERREUR >< ET CAS <> <-- A NE PAS GER
 
 
 //TODO
-// LA FONCTION ADD PIPE
-// FAIRE FONCTIONNER LE PARSING APRES LES PIPES
-// METTRE LES LISTES CHAINEES DANS LA BOUCLE READLINE + CLEAR LES ANCIENNES LISTES CHAINEES
-// FONCTION D"ERREUR A MACHINER
-// LES SEGFAULTS
+// FONCTION D"ERREUR A MACHINER -- à moitier fait ça mais sa passe crème tkt
+// LES SEGFAULTS (à trouver avant de les corriger)
 
 
-// GERER LES NOM DE FICHIER APRES LES REDIR KI COMMENCE PAR UN CHAR SPE EX : |, &, %.....
+// FAIT | GERER LES NOM DE FICHIER APRES LES REDIR KI COMMENCE PAR UN CHAR SPE EX : |, &, %.....
+// FAIT |N'EST PAS AUTORISER : ! # * ( ) ; / ?
+
+//Si $variable non trouvé marche pour heredoc mais pas les autre ?? (ps: oskour)

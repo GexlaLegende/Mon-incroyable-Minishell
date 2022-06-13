@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/08 20:52:19 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/11 00:56:27 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,31 @@ void	ft_lstadd_front(t_list **alst, t_list *new)
 }
 
 /* Supprime et libère la mémoire de l’élément passé en
-paramètre, et de tous les éléments qui suivent, à
-l’aide de ’del’ et de free(3) */
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+paramètre, et de tous les éléments qui suivent */
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*nexto;
+	int		i;
 
 	if (!lst)
 		return ;
+	nexto = (*lst)->next;
+	free(*lst);
+	(*lst) = nexto;
 	while (*lst != NULL)
 	{
+		i = 0;
 		nexto = (*lst)->next;
-		ft_lstdelone(*lst, (*del));
+		free((*lst)->cmd);
+		free((*lst)->redir_type);
+		while ((*lst)->redir_file[i])
+		{
+			free((*lst)->redir_file[i]);
+			i++;
+		}
+		free((*lst)->redir_file);
+		free(*lst);
 		(*lst) = nexto;
-	}
-}
-
-/* Libère la mémoire de l’élément passé en argument en
-utilisant la fonction ’del’ puis avec free(3). */
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (lst)
-	{
-		if (del)
-			del(lst->cmd);
-		free(lst);
 	}
 }
 

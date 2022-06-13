@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/10 18:25:39 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/11 02:08:51 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,19 @@ void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINER PUIS VERIF
 	while (begin)
 	{
 		nbr++;
+		printf("MAILLON %d ------------------------------\n", nbr);
 		printf("COMMAND - %s\n", begin->cmd);
 		if (begin->redir_type)
 			printf("TYPE 1 - %d \n", begin->redir_type[0]);
 		if (begin->redir_file)
 			printf("FILE 1 - %s\n", begin->redir_file[0]);
-		/* if (begin->redir_type)
-			printf("TYPE 2 - %d \n", begin->redir_type[1]);
-		if (begin->redir_file)
-			printf("FILE 2 - %s\n", begin->redir_file[1]); */
+		if (begin->redir_type[0] != 5 && begin->redir_type[0] != 0)
+		{
+			if (begin->redir_type)
+				printf("TYPE 2 - %d \n", begin->redir_type[1]);
+			if (begin->redir_file)
+				printf("FILE 2 - %s\n", begin->redir_file[1]);
+		}
 		begin = begin->next;
 	}
 }
@@ -47,14 +51,17 @@ int	main(int argc, char **argv, char **env)
 		if (argv)
 			if (env)
 				i = 0;
-	data.cmd_table = ft_lstnew(NULL, NULL, NULL); // CHANGER A METTRE DANS FONCTION + CLEAR LISTE A CHAKK FOIS
 	while (1)
 	{
+		data.cmd_table = ft_lstnew(NULL, NULL, NULL); // CHANGER A METTRE DANS FONCTION + CLEAR LISTE A CHAKK FOIS
 		str = readline("Minishell $> ");
+		add_history(str);
 		printf("INITIAL STRING = %s\n", str);
 		parserror(ft_parsing(str, &data));
 		afflistchaine(&data);
+		ft_lstclear(&data.cmd_table);
 	}
+	//rl_clear_history();    //Ne fonctionne pas
 	return (0);
 }
 
