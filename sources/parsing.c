@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/13 16:36:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:19:15 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premier découpage)
+int	ft_lexer(char *str, t_data *data) //Fonction principale du parsing (premier découpage)
 {
 	int	start;
 	int	i;
-	int error;
+	int	error;
 
 	data->squote = 0;
 	data->dquote = 0;
@@ -28,11 +28,11 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 	while (str[i])
 	{
 		quotes_switch(data, str, i);
-		if (str[i] == '|' && data->squote == 0 && data->dquote == 0)  //Detection du pipe
+		if (str[i] == '|' && data->squote == 0 && data->dquote == 0) //Detection du pipe
 		{
 			if (str[i + 1] == '|')
 				return (3);
-			error = ft_parsing2(&str[start], data, i - start);
+			error = ft_parser(&str[start], data, i - start);
 			if (error != 0)
 				return (error);
 			ft_addpipe(data);
@@ -43,13 +43,13 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 	}
 	if (data->squote == 1 || data->dquote == 1)
 		return (2);
-	error = ft_parsing2(&str[start], data, i - start);  //Envoie la derniere commande
+	error = ft_parser(&str[start], data, i - start); //Envoie la derniere commande
 	if (error != 0)
 		return (error);
 	return (0);
 }
 
-void	ft_addpipe(t_data *data)							//Fonction pour l'ajout du maillon pipe dans la liste chainée
+void	ft_addpipe(t_data *data)						//Fonction pour l'ajout du maillon pipe dans la liste chainée
 {
 	char	*str;
 	int		*redir_type;
@@ -84,7 +84,7 @@ void	quotes_switch(t_data *data, char *str, int i)
 	}
 }
 
-int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxieme découpage)
+int	ft_parser(char *str, t_data *data, int end) //Fonction secondaire (deuxieme découpage)
 {
 	int		i;
 	int		skip;
@@ -168,7 +168,7 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 		j++;
 	}
 	if (!((*redir_file)[data->r_tabl]))
-			return (-2);
+		return (-2);
 	data->r_tabl = data->r_tabl + 1;
 	while (str[j] == ' ')
 		j++;
@@ -179,7 +179,7 @@ int	count_redir(char *str, t_data *data)  //ERREUR >< ET CAS <> <-- A NE PAS GER
 {
 	int	i;
 	int	count;
-	
+
 	i = 0;
 	count = 0;
 	while (str[i])

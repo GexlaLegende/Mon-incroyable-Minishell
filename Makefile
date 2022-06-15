@@ -3,19 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
+#    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/10 13:20:03 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/15 15:23:14 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 #### LISTES ####
 
 SOURCES = minishell.c \
-		  lst_utils1.c \
-		  lst_utils2.c \
+		  cmd_lst_utils1.c \
+		  cmd_lst_utils2.c \
 		  parsing.c \
+		  environnement.c \
 		  error.c \
 		  utils.c
 

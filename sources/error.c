@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/11 01:56:00 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/15 12:27:52 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parserror(int nbr) //Fonction pour les erreurs de parsing
 	}
 	if (nbr == -2)
 	{
-		write(2, "Syntax error after >", 21);
+		write(2, "Syntax error after > < >> <<", 21);
 		exit(0);
 	}
 }

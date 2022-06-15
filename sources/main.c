@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/11 02:08:51 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:14:47 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINER PUIS VERIF
 {
-	int		nbr;
-	t_list	*begin;
+	int			nbr;
+	t_cmd_list	*begin;
 
 	nbr = 0;
 	begin = data->cmd_table;
@@ -57,7 +57,8 @@ int	main(int argc, char **argv, char **env)
 		str = readline("Minishell $> ");
 		add_history(str);
 		printf("INITIAL STRING = %s\n", str);
-		parserror(ft_parsing(str, &data));
+		parserror(ft_lexer(str, &data));
+		parserror(ft_env_var(&data, env));
 		afflistchaine(&data);
 		ft_lstclear(&data.cmd_table);
 	}
