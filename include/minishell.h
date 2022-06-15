@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/15 17:13:08 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 18:28:41 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void		ft_lstclear(t_cmd_list **lst);
 //----------------------------------------------------
 
 //Lst - env ------------------------------------------
-t_env_list	*ft_lstnew(char *name, char *value);
-void		ft_lstadd_front(t_env_list **alst, t_env_list *new);
-int			ft_lstsize(t_env_list *lst);
-t_env_list	*ft_lstlast(t_env_list *lst);
-void		ft_lstadd_back(t_env_list **alst, t_env_list *new);
-void		ft_lstclear(t_env_list **lst);
+t_env_list	*ft_env_lstnew(char *name, char *value);
+void		ft_env_lstadd_front(t_env_list **alst, t_env_list *new);
+int			ft_env_lstsize(t_env_list *lst);
+t_env_list	*ft_env_lstlast(t_env_list *lst);
+void		ft_env_lstadd_back(t_env_list **alst, t_env_list *new);
+void		ft_env_lstclear(t_env_list **lst);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------

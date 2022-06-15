@@ -6,16 +6,16 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:58:48 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/15 17:11:48 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 18:28:51 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /* Alloue (avec malloc(3)) et renvoie un nouvel
-élément. La variable membre ’cmd’ est
-initialisée à l’aide de la valeur du paramètre ’cmd’.  FONCTION FINIT*/
-t_env_list	*ft_lstnew(char *name, char *value)
+élément. La variable membre ’name’ est
+initialisée à l’aide de la valeur du paramètre ’name’.  FONCTION FINIT*/
+t_env_list	*ft_env_lstnew(char *name, char *value)
 {
 	t_env_list	*newelm;
 
@@ -30,7 +30,7 @@ t_env_list	*ft_lstnew(char *name, char *value)
 
 /* Supprime et libère la mémoire de l’élément passé en
 paramètre, et de tous les éléments qui suivent */
-void	ft_lstclear(t_env_list **lst)
+void	ft_env_lstclear(t_env_list **lst)
 {
 	t_env_list	*nexto;
 	int			i;

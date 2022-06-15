@@ -6,14 +6,14 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:57:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/15 16:59:51 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 18:29:00 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /* Ajoute l’élément ’new’ à la fin de la liste. */
-void	ft_lstadd_back(t_env_list **alst, t_env_list *new)
+void	ft_env_lstadd_back(t_env_list **alst, t_env_list *new)
 {
 	t_env_list	*begin;
 	t_env_list	*newelm;
@@ -35,7 +35,7 @@ void	ft_lstadd_back(t_env_list **alst, t_env_list *new)
 }
 
 /* Ajoute l’élément ’new’ au début de la liste. */
-void	ft_lstadd_front(t_env_list **alst, t_env_list *new)
+void	ft_env_lstadd_front(t_env_list **alst, t_env_list *new)
 {
 	if (alst != NULL && new != NULL)
 	{
@@ -45,7 +45,7 @@ void	ft_lstadd_front(t_env_list **alst, t_env_list *new)
 }
 
 /* Renvoie le dernier élément de la liste. */
-t_env_list	*ft_lstlast(t_env_list *lst)
+t_env_list	*ft_env_lstlast(t_env_list *lst)
 {	
 	t_env_list	*last;
 	t_env_list	*begin;
@@ -62,7 +62,7 @@ t_env_list	*ft_lstlast(t_env_list *lst)
 }
 
 /* Compte le nombre d’éléments de la liste. */
-int	ft_lstsize(t_env_list *lst)
+int	ft_env_lstsize(t_env_list *lst)
 {
 	int			nbr;
 	t_env_list	*begin;
