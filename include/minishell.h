@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/15 15:27:02 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 17:13:08 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,22 @@ typedef struct s_data
 	int			r_tabl;
 }	t_data;
 
-//Lst ------------------------------------------------
+//Lst - cmd ------------------------------------------
 t_cmd_list	*ft_lstnew(char *cmd, int *redir_type, char **redir_file);
 void		ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new);
 int			ft_lstsize(t_cmd_list *lst);
 t_cmd_list	*ft_lstlast(t_cmd_list *lst);
 void		ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new);
 void		ft_lstclear(t_cmd_list **lst);
+//----------------------------------------------------
+
+//Lst - env ------------------------------------------
+t_env_list	*ft_lstnew(char *name, char *value);
+void		ft_lstadd_front(t_env_list **alst, t_env_list *new);
+int			ft_lstsize(t_env_list *lst);
+t_env_list	*ft_lstlast(t_env_list *lst);
+void		ft_lstadd_back(t_env_list **alst, t_env_list *new);
+void		ft_lstclear(t_env_list **lst);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------

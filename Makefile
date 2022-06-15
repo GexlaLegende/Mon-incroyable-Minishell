@@ -6,7 +6,7 @@
 #    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/15 15:23:14 by dbouron          ###   ########lyon.fr    #
+#    Updated: 2022/06/15 17:15:05 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@
 SOURCES = minishell.c \
 		  cmd_lst_utils1.c \
 		  cmd_lst_utils2.c \
+		  env_lst_utils1.c \
+		  env_lst_utils2.c \
 		  parsing.c \
 		  environnement.c \
 		  error.c \
