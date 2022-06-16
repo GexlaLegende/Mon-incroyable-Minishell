@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/15 15:14:47 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 15:41:11 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,26 @@ void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINER PUIS VERIF
 	nbr = 0;
 	begin = data->cmd_table;
 	begin = begin->next;
+	dprintf(2, "\033[33mLISTE CHAINE CMD--------------\033[00m\n");
 	while (begin)
 	{
 		nbr++;
-		printf("MAILLON %d ------------------------------\n", nbr);
-		printf("COMMAND - %s\n", begin->cmd);
+		printf("Maillon %d ----------------------\n", nbr);
+		printf("Command - %s\n", begin->cmd);
 		if (begin->redir_type)
-			printf("TYPE 1 - %d \n", begin->redir_type[0]);
+			printf("Type 1 - %d \n", begin->redir_type[0]);
 		if (begin->redir_file)
-			printf("FILE 1 - %s\n", begin->redir_file[0]);
+			printf("File 1 - %s\n", begin->redir_file[0]);
 		if (begin->redir_type[0] != 5 && begin->redir_type[0] != 0)
 		{
 			if (begin->redir_type)
-				printf("TYPE 2 - %d \n", begin->redir_type[1]);
+				printf("Type 2 - %d \n", begin->redir_type[1]);
 			if (begin->redir_file)
-				printf("FILE 2 - %s\n", begin->redir_file[1]);
+				printf("File 2 - %s\n", begin->redir_file[1]);
 		}
 		begin = begin->next;
 	}
+	dprintf(2, "\n");
 }
 
 int	main(int argc, char **argv, char **env)
@@ -54,12 +56,15 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL); // CHANGER A METTRE DANS FONCTION + CLEAR LISTE A CHAKK FOIS
-		str = readline("Minishell $> ");
+		str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
 		add_history(str);
-		printf("INITIAL STRING = %s\n", str);
+		dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
 		parserror(ft_lexer(str, &data));
-		parserror(ft_env_var(&data, env));
 		afflistchaine(&data);
+		dprintf(2, "\033[33mVARIABLES ENV-----------------\033[00m\n");
+		parserror(ft_env_var(&data, env));
+		dprintf(2, "\n");
+		//afflistchaine(&data);
 		ft_lstclear(&data.cmd_table);
 	}
 	//rl_clear_history();    //Ne fonctionne pas

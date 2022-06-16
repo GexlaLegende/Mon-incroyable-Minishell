@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/15 18:28:41 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 14:15:44 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 typedef struct s_cmd_list
 {
-	char			*cmd;
-	int				*redir_type;
-	char			**redir_file;
-	struct s_list	*next;
+	char				*cmd;
+	int					*redir_type;
+	char				**redir_file;
+	struct s_cmd_list	*next;
 }	t_cmd_list;
 
 typedef struct s_env_list
 {
 	char				*name;
 	char				*value;
-	struct t_env_list	*next;
+	struct s_env_list	*next;
 }	t_env_list;
 
 typedef struct s_data
