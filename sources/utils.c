@@ -6,11 +6,11 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/10 14:11:50 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:02:57 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 char	*ft_strmjoin(char *s1, char c)
 {

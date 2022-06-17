@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/13 16:36:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:01:29 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 		quotes_switch(data, str, i);
 		if ((str[j] == ' ' || str[j] == '<' || str[j] == '>') && data->squote == 0 && data->dquote == 0)
 			break ;
-		printf("LE CHARA -- %c\n", str[j]);
 		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40 || str[j] == 41 ||
 				str[j] == 59 || str[j] == 47 || str[j] == 63 || str[j] == 124) &&
 				data->squote == 0 && data->dquote == 0)
