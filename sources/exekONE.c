@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:26:44 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:55:07 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,20 @@ char	**get_cmd(t_data *data) //Retourne un tableau avec la commande puis les arg
 	return (tabl);
 }
 
-int	exekonecmd(t_data *data) // execve (PATH+cmd | tabl [PATH+cmd][arg1][arg2]... | tabl env)
+int	exekonecmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd][arg1][arg2]... | tabl env)
 {
+	int	pid;
+
+	pid = 0;
 	data->arg_tabl = get_cmd(data);
 	if (put_path(data) == 2) // JOIN LE PATH ET LA CMD
 		return(2);
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(data->arg_tabl[0], data->arg_tabl, env);
+	}
+	waitpid(pid, NULL, 0);
 	return (0);
 }
 
@@ -81,9 +90,8 @@ int	ft_execution(t_data *data, char **env) //FONCTION PRINCIPALE DE L'EXECUTION
 {
 	while (env)
 		break;
-	printf("LST SIZE = %d\n", ft_lstsize(data->cmd_table));
 	if (ft_lstsize(data->cmd_table) == 1)
-		return (exekonecmd(data));
+		return (exekonecmd(data, env));
 	return (0);
 }
 

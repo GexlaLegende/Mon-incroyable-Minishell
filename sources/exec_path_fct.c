@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:26:17 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:55:22 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,10 @@ int	put_path(t_data *data)  //FONCTION QUI JOIN LE PATH ET LA COMMANDE
 {
 	char	*full_path;
 	int		i;
-	char	*str;
 
 	i = -1;
-	str = NULL;
 	full_path = malloc(sizeof(char) * 2);
 	full_path[0] = '\0';
-	printf("\n\n%d\n\n", data->path_nbr);
 	while(access(full_path, X_OK) == -1 && i < data->path_nbr)
 	{
 		i++;
@@ -80,10 +77,9 @@ int	put_path(t_data *data)  //FONCTION QUI JOIN LE PATH ET LA COMMANDE
 	}
 	if (access(full_path, X_OK) == 0)
 	{
-		str = data->arg_tabl[0];
-		data->arg_tabl[0][0] = '\0';
-		data->arg_tabl[0] = ft_strjoin(data->paths[i], str);
-		printf("arg_tabl[0] = %s\n", data->arg_tabl[0]);
+		free(data->arg_tabl[0]);
+		data->arg_tabl[0] = malloc(sizeof(char) * (ft_strlen(full_path) + 1));
+		data->arg_tabl[0] = full_path;
 		return (0);
 	}
 	else

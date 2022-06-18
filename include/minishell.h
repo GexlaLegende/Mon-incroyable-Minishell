@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:26:03 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:47:05 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		count_redir(char *str, t_data *data);
 int		ft_execution(t_data *data, char **env);
 char	**recup_path(char **env, t_data *data);
 char	*recupathline(char **env);
-int		exekonecmd(t_data *data);
+int		exekonecmd(t_data *data, char **env);
 char	**get_cmd(t_data *data);
 int		get_argnbr(char *str, t_data *data);
 int		put_path(t_data *data);
