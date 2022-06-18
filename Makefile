@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/17 16:55:12 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/18 18:24:20 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SOURCES = minishell.c \
 		  parsing.c \
 		  error.c \
 		  exekONE.c \
+		  exec_path_fct.c \
 		  utils.c
 
 OBJETS = $(SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/17 18:49:47 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:26:03 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_data
 	int		dquote;
 	int		r_tabl;
 	char	**paths;
+	char	**arg_tabl;
+	int		path_nbr;
 }	t_data;
 
 //Lst ------------------------------------------------
@@ -56,11 +58,12 @@ int		count_redir(char *str, t_data *data);
 
 //Execution-------------------------------------------
 int		ft_execution(t_data *data, char **env);
-char	**fonctionkirecuplavariablepathdanslenv(char **env);
+char	**recup_path(char **env, t_data *data);
 char	*recupathline(char **env);
 int		exekonecmd(t_data *data);
 char	**get_cmd(t_data *data);
 int		get_argnbr(char *str, t_data *data);
+int		put_path(t_data *data);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
@@ -70,6 +73,8 @@ void	exekerror(int nbr);
 
 //Utils-----------------------------------------------
 char	*ft_strmjoin(char *s1, char c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_1ststrjoin(char *s1, char *s2);
 size_t	ft_strlen(char *str);
 //----------------------------------------------------
 
