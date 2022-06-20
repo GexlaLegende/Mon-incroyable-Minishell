@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 17:05:50 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 19:53:52 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	result[j] = '\0';
 	return (result);
+}
+
+int	ft_isalnum(int c)
+{
+	if (((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) \
+		|| (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
 }

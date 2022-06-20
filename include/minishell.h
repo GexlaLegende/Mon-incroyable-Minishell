@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 17:07:16 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 19:45:22 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int			count_redir(char *str, t_data *data);
 //Environnement---------------------------------------
 int			ft_env_var(t_data *data, char **env);
 int			ft_put_env_in_lst(t_data *data, char **env);
+int			ft_search_and_replace_env_var(t_data *data);
+int			ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data);
 //----------------------------------------------------
 
 //Utils-----------------------------------------------
