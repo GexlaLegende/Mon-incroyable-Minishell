@@ -6,32 +6,30 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:57:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/15 18:29:00 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 16:33:40 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /* Ajoute l’élément ’new’ à la fin de la liste. */
-void	ft_env_lstadd_back(t_env_list **alst, t_env_list *new)
+void	ft_env_lstadd_back(t_env_list **lst, t_env_list *new)
 {
-	t_env_list	*begin;
-	t_env_list	*newelm;
+	t_env_list	*current;
 
-	begin = *alst;
-	if (!alst)
-		return ;
-	if (*alst == 0)
+	if (*lst == NULL)
 	{
-		*alst = new;
+		*lst = new;
 		return ;
 	}
-	while (begin)
+	if (new != NULL)
 	{
-		newelm = begin;
-		begin = begin->next;
+		current = *lst;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new;
 	}
-	newelm->next = new;
+	return ;
 }
 
 /* Ajoute l’élément ’new’ au début de la liste. */

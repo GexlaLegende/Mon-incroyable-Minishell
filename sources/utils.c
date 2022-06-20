@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/10 14:11:50 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:13:45 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strmjoin(char *s1, char c)
 	return (str);
 }
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -48,4 +48,58 @@ size_t	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (0);
+}
+
+static char	*stupidity_check(char *result, char const *s, unsigned int start,
+		size_t len)
+{
+	if (ft_strlen(s) > len)
+		result = malloc(sizeof(char) * (len + 1));
+	else
+		result = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
+	if (!result)
+		return (NULL);
+	return (result);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*result;
+	size_t	i;
+	size_t	j;
+
+	result = NULL;
+	i = start;
+	j = 0;
+	if (!s)
+		return (0);
+	if (start >= ft_strlen(s))
+		return ((char *)malloc(1 * 1));
+	result = stupidity_check(result, s, start, len);
+	if (!result)
+		return (NULL);
+	while (s[i] && i < (start + len))
+	{
+		result[j] = s[i];
+		i++;
+		j++;
+	}
+	result[j] = '\0';
+	return (result);
 }

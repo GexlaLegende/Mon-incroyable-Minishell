@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:58:48 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/15 18:28:51 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 16:42:47 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Alloue (avec malloc(3)) et renvoie un nouvel
 élément. La variable membre ’name’ est
-initialisée à l’aide de la valeur du paramètre ’name’.  FONCTION FINIT*/
+initialisée à l’aide de la valeur du paramètre ’name’. */
 t_env_list	*ft_env_lstnew(char *name, char *value)
 {
 	t_env_list	*newelm;
@@ -29,20 +29,13 @@ t_env_list	*ft_env_lstnew(char *name, char *value)
 }
 
 /* Supprime et libère la mémoire de l’élément passé en
-paramètre, et de tous les éléments qui suivent */
+paramètre, et de tous les éléments qui suivent. */
 void	ft_env_lstclear(t_env_list **lst)
 {
 	t_env_list	*nexto;
-	int			i;
 
-	if (!lst)
-		return ;
-	nexto = (*lst)->next;
-	free(*lst);
-	(*lst) = nexto;
-	while (*lst != NULL)
+	while (*lst)
 	{
-		i = 0;
 		nexto = (*lst)->next;
 		free((*lst)->name);
 		free((*lst)->value);

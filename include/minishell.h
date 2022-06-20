@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/16 14:15:44 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 16:12:35 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_env_list	*ft_env_lstnew(char *name, char *value);
 void		ft_env_lstadd_front(t_env_list **alst, t_env_list *new);
 int			ft_env_lstsize(t_env_list *lst);
 t_env_list	*ft_env_lstlast(t_env_list *lst);
-void		ft_env_lstadd_back(t_env_list **alst, t_env_list *new);
+void		ft_env_lstadd_back(t_env_list **lst, t_env_list *new);
 void		ft_env_lstclear(t_env_list **lst);
 //----------------------------------------------------
 
@@ -73,11 +73,14 @@ int			count_redir(char *str, t_data *data);
 
 //Environnement---------------------------------------
 int			ft_env_var(t_data *data, char **env);
+int			ft_put_env_in_lst(t_data *data, char **env);
 //----------------------------------------------------
 
 //Utils-----------------------------------------------
 char		*ft_strmjoin(char *s1, char c);
-size_t		ft_strlen(char *str);
+size_t		ft_strlen(const char *str);
+char		*ft_strchr(const char *s, int c);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 //----------------------------------------------------
 
 #endif

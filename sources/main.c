@@ -6,13 +6,13 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/16 15:41:11 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 16:45:32 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINER PUIS VERIF
+void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINEE PUIS VERIF
 {
 	int			nbr;
 	t_cmd_list	*begin;
@@ -42,6 +42,26 @@ void	afflistchaine(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINER PUIS VERIF
 	dprintf(2, "\n");
 }
 
+void	aff_list_env(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINEE ENV
+{
+	int			nbr;
+	t_env_list	*begin;
+
+	nbr = 0;
+	begin = data->env_table;
+	//begin = begin->next;
+	dprintf(2, "\033[33mLISTE CHAINE ENV--------------\033[00m\n");
+	while (begin)
+	{
+		printf("Maillon %d ----------------------\n", nbr);
+		printf("- Name : %s\n", begin->name);
+		printf("- Value : %s\n", begin->value);
+		begin = begin->next;
+		nbr++;
+	}
+	dprintf(2, "\n");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int		i;
@@ -61,21 +81,13 @@ int	main(int argc, char **argv, char **env)
 		dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
 		parserror(ft_lexer(str, &data));
 		afflistchaine(&data);
-		dprintf(2, "\033[33mVARIABLES ENV-----------------\033[00m\n");
 		parserror(ft_env_var(&data, env));
 		dprintf(2, "\n");
+		aff_list_env(&data);
 		//afflistchaine(&data);
 		ft_lstclear(&data.cmd_table);
+		//ft_env_lstclear(&data.env_table); //me dit que j'essaye de free un truc que j'ai pas malloc...
 	}
 	//rl_clear_history();    //Ne fonctionne pas
 	return (0);
 }
-
-// Pour voir tous le env
-/* while (env[i])
-	{
-		//printf("%d- %s\n", i, env[i]);
-		i++;
-	} */
-
-//ft_lstadd_back(data.cmd_table, ft_lstnew(NULL));

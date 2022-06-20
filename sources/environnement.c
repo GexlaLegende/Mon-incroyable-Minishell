@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/16 14:19:31 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 16:47:00 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,37 @@
 
 int	ft_env_var(t_data *data, char **env)
 {
-	int	i;
+	int	error;
+	
+	error = 0;
+	error = ft_put_env_in_lst(data, env);
+	if (error != 0)
+		return (error);
+	return (0);
+}
+
+int	ft_put_env_in_lst(t_data *data, char **env)
+{
+	int		i;
+	int		pos;
+	char	*name;
+	char	*value;
 
 	i = 0;
-	(void)data;
+	data->env_table = NULL;
+	dprintf(2, "\033[33mVARIABLES ENV-----------------\033[00m\n");
 	while (env[i])
-		printf("%s\n", env[i++]);
+	{
+		pos = 0;
+		while (env[i][pos] && env[i][pos] != '=')
+			pos++;
+		name = ft_substr(env[i], 0, pos);
+		value = ft_strchr(env[i], '=');
+		if (!name || !value)
+			return (-1);
+		printf("%s\t| name : %s | value : %s\n", env[i], name, value);
+		ft_env_lstadd_back(&data->env_table, ft_env_lstnew(name, value));
+		i++;
+	}
 	return (0);
 }
