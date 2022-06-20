@@ -6,21 +6,21 @@
 #    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/20 15:58:25 by dbouron          ###   ########lyon.fr    #
+#    Updated: 2022/06/20 17:07:05 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 #### LISTES ####
 
 SOURCES = main.c \
+		  parsing.c \
+		  environnement.c \
+		  error.c \
 		  cmd_lst_utils1.c \
 		  cmd_lst_utils2.c \
 		  env_lst_utils1.c \
 		  env_lst_utils2.c \
-		  parsing.c \
-		  environnement.c \
-		  error.c \
-		  utils.c
+		  ft_utils.c
 
 OBJETS = $(SOURCES:.c=.o)
 INCLUDES = minishell.h

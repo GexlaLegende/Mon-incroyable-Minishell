@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 16:45:32 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 17:02:34 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 		aff_list_env(&data);
 		//afflistchaine(&data);
 		ft_lstclear(&data.cmd_table);
-		//ft_env_lstclear(&data.env_table); //me dit que j'essaye de free un truc que j'ai pas malloc...
+		ft_env_lstclear(&data.env_table);
 	}
 	//rl_clear_history();    //Ne fonctionne pas
 	return (0);

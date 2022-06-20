@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 16:12:35 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 17:07:16 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int			ft_put_env_in_lst(t_data *data, char **env);
 //Utils-----------------------------------------------
 char		*ft_strmjoin(char *s1, char c);
 size_t		ft_strlen(const char *str);
-char		*ft_strchr(const char *s, int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 //----------------------------------------------------
 
