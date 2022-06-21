@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/13 18:01:29 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/21 06:58:09 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxiem
 		i++;
 	}
 	i = 0;
+	while (str[i] == ' ')
+		i++;
 	while (str[i])
 	{
 		quotes_switch(data, str, i);
@@ -129,6 +131,7 @@ int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxiem
 				i++;
 		}
 	}
+	command = ft_strmjoin(command, '\0');
 	ft_lstadd_back(&data->cmd_table, ft_lstnew(command, redir_type, redir_file));
 	return (0);
 }

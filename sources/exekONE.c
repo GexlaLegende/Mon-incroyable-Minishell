@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:55:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/21 07:43:04 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,18 @@ char	**get_cmd(t_data *data) //Retourne un tableau avec la commande puis les arg
 
 	str = data->cmd_table->cmd;
 	nbr = get_argnbr(str, data);
+	i = ft_strlen(str) - 1;
+	if (i == -1)
+		i = 0;
+	if (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
+	{
+		nbr--;
+		while (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
+			i--;
+		str[i + 1] = '\0';
+	}
 	tabl = malloc(sizeof(char *) * (nbr + 2));
 	tabl[nbr + 1] = NULL;
-	i = ft_strlen(str) - 1;
 	while (i > 0)
 	{
 		quotes_switch(data, str, i);
@@ -69,6 +78,46 @@ char	**get_cmd(t_data *data) //Retourne un tableau avec la commande puis les arg
 	return (tabl);
 }
 
+void	exec_cmd_one(t_data *data, char **env)
+{
+	execve(data->arg_tabl[0], data->arg_tabl, env);
+}
+
+int	cmd_redir(t_data *data, char **env)
+{
+	int	i;
+	int	file;
+
+	i = 0;
+	file = 0;
+	while (data->cmd_table->redir_type[i] != 0)
+	{
+		if (data->cmd_table->redir_type[i] == 1)
+		{
+			// DO REDIR '>>'
+		}
+		if (data->cmd_table->redir_type[i] == 2)
+		{
+			// DO REDIR '>'
+		}
+		if (data->cmd_table->redir_type[i] == 3)
+		{
+			// DO REDIR '<<'
+		}
+		if (data->cmd_table->redir_type[i] == 4)
+		{
+			file = open(data->cmd_table->redir_file[i], O_RDONLY);
+			if (file < 0)
+				return (-1);
+			dup2(file, STDIN_FILENO);
+			close(file);
+		}
+		i++;
+	}
+	exec_cmd_one(data, env);
+	return (0);
+}
+
 int	exekonecmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd][arg1][arg2]... | tabl env)
 {
 	int	pid;
@@ -80,7 +129,8 @@ int	exekonecmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd][a
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(data->arg_tabl[0], data->arg_tabl, env);
+		if (cmd_redir(data, env) != 0)
+			return (3);
 	}
 	waitpid(pid, NULL, 0);
 	return (0);

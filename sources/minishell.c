@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:55:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/21 05:53:15 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **env)
 		str = readline("Minishell $> ");
 		add_history(str);
 		parserror(ft_parsing(str, &data));
-		//afflistchaine(&data);
+		afflistchaine(&data);
 		data.cmd_table = data.cmd_table->next;
 		exekerror(ft_execution(&data, env));
 		ft_lstclear(&data.cmd_table);
