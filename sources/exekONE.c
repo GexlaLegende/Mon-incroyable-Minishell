@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 07:43:04 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/21 09:02:24 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ int	cmd_redir(t_data *data, char **env)
 		}
 		if (data->cmd_table->redir_type[i] == 2)
 		{
-			// DO REDIR '>'
+			file = open(data->cmd_table->redir_file[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (file < 0)
+				return (-1);
+			dup2(file, STDOUT_FILENO);
+			close(file);
 		}
 		if (data->cmd_table->redir_type[i] == 3)
 		{
