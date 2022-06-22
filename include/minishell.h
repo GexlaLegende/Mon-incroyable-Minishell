@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 06:24:19 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/22 07:34:15 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	char	**paths;
 	char	**arg_tabl;
 	int		path_nbr;
+	int		here_doc_nbr;
 }	t_data;
 
 //Lst ------------------------------------------------
@@ -79,6 +80,7 @@ char	*ft_strmjoin(char *s1, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_1ststrjoin(char *s1, char *s2);
 size_t	ft_strlen(char *str);
+int		str_diff(char *str1, char *str2);
 //----------------------------------------------------
 
 #endif

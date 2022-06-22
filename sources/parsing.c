@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 06:58:09 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/22 07:39:01 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,36 @@ int	ft_parsing2(char *str, t_data *data, int end) //Fonction secondaire (deuxiem
 	}
 	command = ft_strmjoin(command, '\0');
 	ft_lstadd_back(&data->cmd_table, ft_lstnew(command, redir_type, redir_file));
+	data->here_doc_nbr = data->here_doc_nbr + 1;
 	return (0);
+}
+
+void	here_doc_fct(t_data *data, char *str)
+{
+	char	*file;
+	int		fd;
+	char 	*str2;
+
+	str2 = NULL;
+	file = malloc(sizeof(char) * 3);
+	file[0] = '.';
+	file[1] = (char)(data->here_doc_nbr + 97);
+	file[2] = '\0';
+	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	while (1)
+	{
+		str2 = readline("> ");
+		if (str_diff(str, str2) == 0)
+			break ;
+		write(fd, str2, ft_strlen(str2));
+		write(fd, "\n", 1);
+	}
 }
 
 int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redir_file)
 {
 	int	j;
+
 	j = i;
 	if (str[j] == '>' && str[j + 1] == '>')
 	{
@@ -171,6 +195,8 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 	}
 	if (!((*redir_file)[data->r_tabl]))
 			return (-2);
+	if (str[i] == '<' && str[i + 1] == '<')
+		here_doc_fct(data, (*redir_file)[data->r_tabl]);
 	data->r_tabl = data->r_tabl + 1;
 	while (str[j] == ' ')
 		j++;

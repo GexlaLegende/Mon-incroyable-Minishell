@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 09:23:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/22 08:30:33 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ int	cmd_redir(t_data *data, char **env)
 		}
 		if (data->cmd_table->redir_type[i] == 3)
 		{
-			// DO REDIR '<<'
+			file = open(".a", O_RDONLY);
+			if (file < 0)
+				return (-1);
+			dup2(file, STDIN_FILENO);
+			close(file);
 		}
 		if (data->cmd_table->redir_type[i] == 4)
 		{
@@ -131,6 +135,8 @@ int	exekonecmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd][a
 	int	pid;
 
 	pid = 0;
+	if (data->cmd_table->cmd[0] == '\0')
+		return (2);
 	data->arg_tabl = get_cmd(data);
 	if (put_path(data) == 2) // JOIN LE PATH ET LA CMD
 		return(2);
@@ -141,6 +147,8 @@ int	exekonecmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd][a
 			return (3);
 	}
 	waitpid(pid, NULL, 0);
+	if (access(".a", F_OK) == 0)
+		unlink(".a");
 	return (0);
 }
 

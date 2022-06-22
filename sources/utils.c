@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 07:00:10 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/22 07:34:05 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,22 @@ char	*ft_1ststrjoin(char *s1, char *s2)
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	return (str);
+}
+
+int	str_diff(char *str1, char *str2)
+{
+	int	i;
+
+	if (!str1 || !str2)
+		return (1);
+	i = 0;
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (str1[i] != str2[i])
+		return (1);
+	return (0);
 }
