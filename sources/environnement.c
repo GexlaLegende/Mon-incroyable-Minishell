@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/20 20:12:35 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 13:25:57 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ int	ft_put_env_in_lst(t_data *data, char **env)
 	in each element of the cmd_list */
 int	ft_search_and_replace_env_var(t_data *data)
 {
-	t_cmd_list	*cmd_list;
 	int			i;
+	t_cmd_list	*cmd_list;
 
 	cmd_list = data->cmd_table;
-	i = 0;
 	while (cmd_list)
 	{
+		i = 0;
 		while (cmd_list->cmd[i])
 		{
-			if (cmd_list->cmd[i] && cmd_list->cmd[i] == '$')
+			if (cmd_list->cmd[i] == '$')
 				ft_replace_var_env(&cmd_list, i, data);
 			i++;
 		}
@@ -78,11 +78,18 @@ int	ft_search_and_replace_env_var(t_data *data)
 	in each element of the cmd_list */
 int	ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data)
 {
-	int	i;
+	int			i;
+	t_env_list	*env_list;
 
 	i = pos;
+	env_list = data->env_table;
 	if (ft_isalnum(cmd_list->cmd[i + 1]) == 1)
 	{
+		if (cmd_list->cmd[i + 1] == '0')
+		else
+		{
+			
+		}
 		//search if variable exists in env_list
 		//	if it exists, print its value
 		//	if doesn't exist, print nothing
