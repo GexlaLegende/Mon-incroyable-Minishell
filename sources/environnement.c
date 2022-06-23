@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/23 10:42:53 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 12:10:11 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,30 @@ int	ft_search_and_replace_env_var(t_data *data)
 	in each element of the cmd_list */
 int	ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data)
 {
-	int			i;
+	int			len;
 	t_env_list	*env_list;
 
-	i = pos;
+	len = 0;
 	env_list = data->env_table;
-	if (ft_isalnum(cmd_list->cmd[i + 1]) == 1)
+	if (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
 	{
-		if (cmd_list->cmd[i + 1] == '0')
+		if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
+			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
 		else
 		{
-			
+			while (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
+				len++;
+			//search if variable exists in env_list
+			if (exists) //	if it exists, print its value
+				cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len, );
+			else //	if doesn't exist, print nothing
+				cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len, "");
 		}
-		//search if variable exists in env_list
-		//	if it exists, print its value
-		//	if doesn't exist, print nothing
-		//if $ + 1 == 0, display shell
 	}
-	/* else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
+}
+
+/*
+	else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
 		|| cmd_list->cmd[i + 1] == '\'' || cmd_list->cmd[i + 1] == '"')
 	{
 		//verify if {('" opened is closed with same quotes system
@@ -106,7 +112,10 @@ int	ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data)
 		|| cmd_list->cmd[i + 1] == '*')
 	{
 		//replace by nothing or special action (see notion)
-	} */
-	else
-		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, ???, "");
+	}
+*/
+
+void	ft_search_var_env_in_list()
+{
+	
 }

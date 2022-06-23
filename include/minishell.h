@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 19:45:22 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 12:01:56 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int			ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data);
 char		*ft_strmjoin(char *s1, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			ft_isalnum(int c);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char		*ft_strdup(const char *s1);
+char		*ft_replace_word(char *str, int start, int len, char *word);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 //----------------------------------------------------
 
 #endif
