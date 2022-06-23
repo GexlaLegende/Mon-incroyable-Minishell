@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 03:44:44 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:57:37 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		get_argnbr(char *str, t_data *data);
 int		put_path(t_data *data);
 int		cmd_redir(t_data *data, char **env, int nbr);
 int		exec_cmds(t_data *data, char **env);
+char	**rm_quote(char **tabl);
 //----------------------------------------------------
 
 //Errors----------------------------------------------

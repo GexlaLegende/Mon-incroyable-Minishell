@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 06:38:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:00:27 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,28 @@ char	**get_cmd(t_data *data) //Retourne un tableau avec la commande puis les arg
 	}
 	tabl[nbr] = &str[i];
 	tabl[nbr][ft_strlen(tabl[nbr])] = '\0';
+	tabl = rm_quote(tabl);
+	return (tabl);
+}
+
+char	**rm_quote(char **tabl)
+{
+	int	i;
+
+	i = 0;
+	while (tabl[i])
+	{
+		if (tabl[i][0] == '"' && tabl[i][ft_strlen(tabl[i]) - 1] == '"')
+		{
+			tabl[i][ft_strlen(tabl[i]) - 1] = '\0';
+			tabl[i] = &tabl[i][1];
+		}
+		else if (tabl[i][0] == '\'' && tabl[i][ft_strlen(tabl[i]) - 1] == '\'')
+		{
+			tabl[i][ft_strlen(tabl[i]) - 1] = '\0';
+			tabl[i] = &tabl[i][1];
+		}
+		i++;
+	}
 	return (tabl);
 }
