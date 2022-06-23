@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/18 18:55:22 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:35:36 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int	put_path(t_data *data)  //FONCTION QUI JOIN LE PATH ET LA COMMANDE
 	}
 	if (access(full_path, X_OK) == 0)
 	{
-		free(data->arg_tabl[0]);
-		data->arg_tabl[0] = malloc(sizeof(char) * (ft_strlen(full_path) + 1));
 		data->arg_tabl[0] = full_path;
 		return (0);
 	}

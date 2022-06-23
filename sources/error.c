@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/21 06:33:10 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 03:32:54 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	exekerror(int nbr) //Fonction pour les erreurs d'execution (0 == good)
 	if (nbr == 3) // - /!\ IN CHILD PROCESS
 	{
 		write(2, "Error with redirections\n", 25);
+		exit(0);
+	}
+	if (nbr == 4) // - /!\ IN CHILD PROCESS
+	{
+		write(2, "No command after pipe\n", 23);
 		exit(0);
 	}
 }
