@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 07:28:34 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:14:32 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		get_argnbr(char *str, t_data *data);
 int		put_path(t_data *data);
 int		cmd_redir(t_data *data, char **env, int nbr);
 int		exec_cmds(t_data *data, char **env);
-char	**rm_quote(char **tabl);
+char	**rm_quote(char **tabl, t_data *data);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
@@ -84,6 +84,7 @@ void	exekerror(int nbr);
 char	*ft_strmjoin(char *s1, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_1ststrjoin(char *s1, char *s2);
+char	*ft_strjoin_c(char *s1, char c);
 size_t	ft_strlen(char *str);
 int		str_diff(char *str1, char *str2);
 //----------------------------------------------------

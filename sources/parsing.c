@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/22 07:39:01 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:31:55 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,7 @@ void	here_doc_fct(t_data *data, char *str)
 	char 	*str2;
 
 	str2 = NULL;
-	file = malloc(sizeof(char) * 3);
-	file[0] = '.';
-	file[1] = (char)(data->here_doc_nbr + 97);
-	file[2] = '\0';
+	file = ft_strjoin_c("/tmp/.here_doc", (char)(data->here_doc_nbr + 97));
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	while (1)
 	{

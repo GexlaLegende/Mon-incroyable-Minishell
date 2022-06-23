@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 06:58:56 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:30:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 			char 	*str2;
 
 			str2 = NULL;
-			here_doc_file = malloc(sizeof(char) * 3);
-			here_doc_file[0] = '.';
-			here_doc_file[1] = (char)(nbr + 97);
-			here_doc_file[2] = '\0';			
+			here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));			
 			file = open(here_doc_file, O_RDONLY);
 			if (file < 0)
 				return (-1);
@@ -124,10 +121,7 @@ int	exec_cmds(t_data *data, char **env)
 	i = 0;
 	while (i < data->lst_nbr)
 	{
-		hd_file = malloc(sizeof(char) * 3);
-		hd_file[0] = '.';
-		hd_file[1] = (char)(i + 97);
-		hd_file[2] = '\0';
+		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(i + 97));	
 		if (access(hd_file, F_OK) == 0)
 			unlink(hd_file);
 		free(hd_file);

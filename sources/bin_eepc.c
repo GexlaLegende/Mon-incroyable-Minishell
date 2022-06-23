@@ -6,13 +6,13 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 07:46:19 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 09:38:04 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	bin_echo()
+/* void	bin_echo()
 {
 	
 }
@@ -34,3 +34,4 @@ void	bin_cd()
 {
 	
 }
+ */

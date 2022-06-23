@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 07:00:27 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:34:21 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	exec_one_cmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd]
 			return (3);
 	}
 	waitpid(pid, NULL, 0);
-	if (access(".a", F_OK) == 0)
-		unlink(".a");
+	if (access("/tmp/.here_doca", F_OK) == 0)
+		unlink("/tmp/.here_doca");
 	return (0);
 }
 
@@ -95,30 +95,53 @@ char	**get_cmd(t_data *data) //Retourne un tableau avec la commande puis les arg
 		else
 			i--;
 	}
+	tabl[nbr] = malloc(sizeof(char) * ft_strlen(&str[i])); // PAS SUR !
 	tabl[nbr] = &str[i];
 	tabl[nbr][ft_strlen(tabl[nbr])] = '\0';
-	tabl = rm_quote(tabl);
+	tabl = rm_quote(tabl, data);
 	return (tabl);
 }
 
-char	**rm_quote(char **tabl)
+char	**rm_quote(char **tabl, t_data *data)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		x;
+	char	*str;
+	int		nbr;
 
 	i = 0;
-	while (tabl[i])
+	j = 0;
+	str = NULL;
+	data->dquote = 0;
+	data->squote = 0;
+	while (tabl[j])
 	{
-		if (tabl[i][0] == '"' && tabl[i][ft_strlen(tabl[i]) - 1] == '"')
+		i = 0;
+		str = malloc(sizeof(char) * (ft_strlen(tabl[j]) + 1));
+		str[ft_strlen(tabl[j])] = '\0';
+		x = 0;
+		nbr = 0;
+		while (tabl[j][i])
 		{
-			tabl[i][ft_strlen(tabl[i]) - 1] = '\0';
-			tabl[i] = &tabl[i][1];
+			
+			quotes_switch(data, tabl[j], i);
+			/* if ((tabl[j][i] == '"' && data->squote == 0) || (tabl[j][i] == '\'' && data->dquote == 0))
+				nbr++; */
+			if (tabl[j][i] == '"' && data->squote == 0)
+				nbr++;
+			else if (tabl[j][i] == '\'' && data->dquote == 0)
+				nbr++;
+			else
+			{
+				str[x] = tabl[j][i];
+				x++;
+			}
+			i++;
 		}
-		else if (tabl[i][0] == '\'' && tabl[i][ft_strlen(tabl[i]) - 1] == '\'')
-		{
-			tabl[i][ft_strlen(tabl[i]) - 1] = '\0';
-			tabl[i] = &tabl[i][1];
-		}
-		i++;
+		str[ft_strlen(tabl[j]) - nbr] = '\0';
+		tabl[j] = str;
+		j++;
 	}
 	return (tabl);
 }

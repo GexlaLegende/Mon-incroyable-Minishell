@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 03:32:54 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:38:03 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parserror(int nbr) //Fonction pour les erreurs de parsing
 	if (nbr == 1)
 	{
 		write(2, "syntax error near unexpected token `|'\n", 40);
-		exit(0);
+		return (1);
 	}
 	if (nbr == 2)
 	{

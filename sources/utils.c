@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/22 07:34:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:16:46 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i] = s1[i];
 	while (s2[j])
 		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strjoin_c(char *s1, char c)
+{
+	char	*str;
+	int		i;
+
+	i = -1;
+	str = malloc(sizeof(char) * (ft_strlen(s1) + 2));
+	if (!str)
+		return (NULL);
+	while (s1[++i])
+		str[i] = s1[i];
+	str[i++] = c;
 	str[i] = '\0';
 	return (str);
 }
