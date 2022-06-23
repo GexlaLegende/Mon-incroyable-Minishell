@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/22 13:25:57 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 10:42:53 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data)
 		//	if doesn't exist, print nothing
 		//if $ + 1 == 0, display shell
 	}
-	else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
+	/* else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
 		|| cmd_list->cmd[i + 1] == '\'' || cmd_list->cmd[i + 1] == '"')
 	{
 		//verify if {('" opened is closed with same quotes system
@@ -104,6 +104,9 @@ int	ft_replace_var_env(t_cmd_list **cmd_list, int pos, t_data *data)
 	else if (cmd_list->cmd[i + 1] == '!' || cmd_list->cmd[i + 1] == '?' \
 		|| cmd_list->cmd[i + 1] == '$' || cmd_list->cmd[i + 1] == '@' \
 		|| cmd_list->cmd[i + 1] == '*')
+	{
 		//replace by nothing or special action (see notion)
-
+	} */
+	else
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, ???, "");
 }
