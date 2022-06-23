@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 12:01:44 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:46:12 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,17 +139,22 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	k = 0;
 	newlen = ft_strlen(str) - len + ft_strlen(word);
 	result = malloc(sizeof(char) * (newlen + 1));
+	dprintf(2, "str = %s\nword = %s\nnewlen = %d\nstart = %d\n", str, word, newlen, start);
 	while (str[k])
 	{
+		dprintf(2, "i'm in while\n");
 		if (k == start)
 		{
+			dprintf(2, "i'm in if\n");
 			while (word[j])
 				result[i++] = word[j++];
 			k = start + len;
 		}
 		result[i++] = str[k++];
 	}
+	dprintf(2, "result = %s\n", result);
 	free(str);
+	dprintf(2, "result = %s\n", result);
 	return (result);
 }
 

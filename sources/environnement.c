@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/23 16:04:54 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:37:58 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,18 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	char	*value;
 
 	len = 0;
-	dprintf(2, "cmd = %s\npos = %d\n", cmd_list->cmd, pos);
 	if (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
 	{
-		dprintf(2, "je rentre dans le if alnum\n");
+		dprintf(2, "cmd = %s\npos = %d\n", cmd_list->cmd, pos);
 		if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
-		{
-			dprintf(2, "je rentre dans le if $0\n");
 			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
-			dprintf(2, "je sors du replace word\n");
-		}
 		else
 		{
 			while (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
-				len++;//boucle infinie
+			{
+				len++;
+				pos++;
+			}
 			value = ft_search_var_env_in_list(data, cmd_list->cmd, pos, len);//search if variable exists in env_list
 			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len, value);
 		}
