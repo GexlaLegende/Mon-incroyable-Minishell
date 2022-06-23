@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 17:02:34 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 15:36:48 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **env)
 		parserror(ft_env_var(&data, env));
 		dprintf(2, "\n");
 		aff_list_env(&data);
-		//afflistchaine(&data);
+		afflistchaine(&data);
 		ft_lstclear(&data.cmd_table);
 		ft_env_lstclear(&data.env_table);
 	}
