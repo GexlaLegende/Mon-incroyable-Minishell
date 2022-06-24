@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/24 12:17:11 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 14:33:53 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,15 @@ int	ft_search_and_replace_env_var(t_data *data)
 		i = 0;
 		while (cmd_list->cmd[i])
 		{
-			if (cmd_list->cmd[i] == '$')
+			if (cmd_list->cmd[i] == '$' \
+				&& (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \
+				|| cmd_list->cmd[i + 1] == '_'))
 			{
 				ft_replace_var_env(cmd_list, i, data);
-				dprintf(2, "i = %d\n", i);
-				i--;
+				dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
+				if (i > 0)
+					i--;
+				dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
 			}
 			i++;
 		}
@@ -89,20 +93,18 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 
 	len = 0;
 	i = pos;
-	if (ft_isalnum(cmd_list->cmd[i + 1]) == 1 || cmd_list->cmd[i + 1] == '_')
+	if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
+	else
 	{
-		if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
-			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
-		else
+		while (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \
+			|| cmd_list->cmd[i + 1] == '_')
 		{
-			while (ft_isalnum(cmd_list->cmd[i + 1]) == 1 || cmd_list->cmd[i + 1] == '_')
-			{
-				len++;
-				i++;
-			}
-			value = ft_search_var_env_in_list(data, cmd_list->cmd, pos, len);//search if variable exists in env_list
-			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
+			len++;
+			i++;
 		}
+		value = ft_is_var_env(data, cmd_list->cmd, pos, len);//search if variable exists in env_list
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
 }
 
@@ -122,7 +124,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 */
 
 /* if variable exists, replace by value, if not, replace by nothing */
-char	*ft_search_var_env_in_list(t_data *data, char *cmd, int pos, int len)
+char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 {
 	t_env_list	*env_list;
 	char		*var_name;
