@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/11 02:08:36 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:39:50 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -33,6 +37,11 @@ typedef struct s_data
 	int		squote;
 	int		dquote;
 	int		r_tabl;
+	char	**paths;
+	char	**arg_tabl;
+	int		path_nbr;
+	int		here_doc_nbr;
+	int		lst_nbr;
 }	t_data;
 
 //Lst ------------------------------------------------
@@ -45,7 +54,6 @@ void	ft_lstclear(t_list **lst);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------
-void	parserror(int nbr);
 int		ft_parsing(char *str, t_data *data);
 int		ft_parsing2(char *str, t_data *data, int end);
 void	ft_addpipe(t_data *data);
@@ -54,9 +62,31 @@ int		redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***red
 int		count_redir(char *str, t_data *data);
 //----------------------------------------------------
 
+//Execution-------------------------------------------
+int		ft_execution(t_data *data, char **env);
+char	**recup_path(char **env, t_data *data);
+char	*recupathline(char **env);
+int		exec_one_cmd(t_data *data, char **env);
+char	**get_cmd(t_data *data);
+int		get_argnbr(char *str, t_data *data);
+int		put_path(t_data *data);
+int		cmd_redir(t_data *data, char **env, int nbr);
+int		exec_cmds(t_data *data, char **env);
+char	**rm_quote(char **tabl, t_data *data);
+//----------------------------------------------------
+
+//Errors----------------------------------------------
+int		parserror(int nbr);
+void	exekerror(int nbr);
+//----------------------------------------------------
+
 //Utils-----------------------------------------------
 char	*ft_strmjoin(char *s1, char c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_1ststrjoin(char *s1, char *s2);
+char	*ft_strjoin_c(char *s1, char c);
 size_t	ft_strlen(char *str);
+int		str_diff(char *str1, char *str2);
 //----------------------------------------------------
 
 #endif
