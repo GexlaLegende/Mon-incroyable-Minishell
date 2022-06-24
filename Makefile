@@ -6,25 +6,28 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/23 07:07:32 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/24 15:32:51 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### LISTES ####
 
-SOURCES = minishell.c \
-		  lst_utils1.c \
-		  lst_utils2.c \
+SOURCES = main.c \
 		  parsing.c \
+		  environnement.c \
 		  error.c \
+		  cmd_lst_utils1.c \
+		  cmd_lst_utils2.c \
+		  env_lst_utils1.c \
+		  env_lst_utils2.c \
+		  ft_utils.c
 		  exekONE.c \
 		  exec_path_fct.c \
 		  exec_one_cmd.c \
 		  bin_eepc.c \
 		  bin_exit.c \
 		  bin_export.c \
-		  bin_unset.c \
-		  utils.c
+		  bin_unset.c 
 
 OBJETS = $(SOURCES:.c=.o)
 INCLUDES = minishell.h

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/11 00:56:27 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:20:50 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /* Ajoute l’élément ’new’ à la fin de la liste. */
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new)
 {
-	t_list	*begin;
-	t_list	*newelm;
+	t_cmd_list	*begin;
+	t_cmd_list	*newelm;
 
 	begin = *alst;
 	if (!alst)
@@ -35,7 +35,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 }
 
 /* Ajoute l’élément ’new’ au début de la liste. */
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new)
 {
 	if (alst != NULL && new != NULL)
 	{
@@ -46,9 +46,9 @@ void	ft_lstadd_front(t_list **alst, t_list *new)
 
 /* Supprime et libère la mémoire de l’élément passé en
 paramètre, et de tous les éléments qui suivent */
-void	ft_lstclear(t_list **lst)
+void	ft_lstclear(t_cmd_list **lst)
 {
-	t_list	*nexto;
+	t_cmd_list	*nexto;
 	int		i;
 
 	if (!lst)
@@ -74,10 +74,10 @@ void	ft_lstclear(t_list **lst)
 }
 
 /* Compte le nombre d’éléments de la liste. */
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_cmd_list *lst)
 {
 	int		nbr;
-	t_list	*begin;
+	t_cmd_list	*begin;
 
 	nbr = 0;
 	begin = lst;

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 06:37:44 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:59:30 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ int	parserror(int nbr) //Fonction pour les erreurs de parsing
 	}
 	if (nbr == -2) //lst
 	{
-		write(2, "Syntax error after >\n", 22);
+		write(2, "Syntax error after > < >> <<", 21);
 		return (1);
+	}
+	if (nbr == -3)
+	{
+		write(2, "Malloc went wrong", 17);
+		exit(0);
 	}
 	return (0);
 }
