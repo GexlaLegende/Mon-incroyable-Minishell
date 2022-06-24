@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 16:15:23 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:45:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_lexer(char *str, t_data *data) //Fonction principale du parsing (premier découpage)
 {
-	int	start;
-	int	i;
-	int	error;
-	int	y;
+	int		start;
+	int		i;
+	int		error;
+	int		y;
 
 	data->squote = 0;
 	data->dquote = 0;

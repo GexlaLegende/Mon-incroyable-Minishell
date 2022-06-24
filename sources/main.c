@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 17:35:25 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:28:41 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **env)
 		//dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
 		data.here_doc_nbr = 0;
 		str = readline("Minishell $> "); //str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
-		add_history(str);
+		add_history(str); // Faire une fonction special pour voir si str est composé que d'espaces ou de tab
 		error = parserror(ft_lexer(str, &data));
 		//afflistchaine(&data);
 		if (error == 0)

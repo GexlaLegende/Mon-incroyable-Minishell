@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 06:29:16 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:27:27 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	exec_one_cmd(t_data *data, char **env) // execve (PATH+cmd | tabl [PATH+cmd]
 	int	pid;
 
 	pid = 0;
-	if (data->cmd_table->cmd[0] == '\0')
-		return (0);
 	data->arg_tabl = get_cmd(data);
 	if (put_path(data) == 2) // JOIN LE PATH ET LA CMD
 		return (2);
