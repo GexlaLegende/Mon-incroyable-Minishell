@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 12:13:27 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 15:28:00 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,34 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 	char	*str;
 	t_data	data;
+	int		error;
 
 	i = 0;
 	if (argc)
 		if (argv)
 			if (env)
 				i = 0;
+	data.paths = recup_path(env, &data);
 	while (1)
 	{
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL); // CHANGER A METTRE DANS FONCTION + CLEAR LISTE A CHAKK FOIS
-		str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
+		//dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
+		data.here_doc_nbr = 0;
+		str = readline("Minishell $> "); //str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
 		add_history(str);
-		dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
-		parserror(ft_lexer(str, &data));
-		afflistchaine(&data);
+		error = parserror(ft_lexer(str, &data));
 		parserror(ft_env_var(&data, env));
-		dprintf(2, "\n");
-		aff_list_env(&data);
-		afflistchaine(&data);
-		ft_lstclear(&data.cmd_table);
+		if (error == 0)
+		{
+			data.cmd_table = data.cmd_table->next;
+			exekerror(ft_execution(&data, env));
+		}
+		if (error != -1)
+			ft_lstclear(&data.cmd_table);
 		ft_env_lstclear(&data.env_table);
 	}
+	//aff_list_env(&data);
+	//afflistchaine(&data);
 	//rl_clear_history();    //Ne fonctionne pas
 	return (0);
 }

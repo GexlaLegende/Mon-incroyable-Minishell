@@ -3,42 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/20 19:18:21 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 14:59:30 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	Displays errors of parsing */
-
-void	parserror(int nbr)
+int	parserror(int nbr) //Fonction pour les erreurs de parsing
 {
 	if (nbr == 1)
 	{
-		write(2, "syntax error near unexpected token `|'", 39);
-		exit(0);
+		write(2, "syntax error near unexpected token `|'\n", 40);
+		return (-1);
 	}
-	if (nbr == 2)
+	if (nbr == 2) //lst
 	{
-		write(2, "Error quote not closed", 23);
-		exit(0);
+		write(2, "Error quote not closed\n", 24);
+		return (2);
 	}
-	if (nbr == 3)
+	if (nbr == 3) //lst
 	{
-		write(2, "Syntax error", 13);
-		exit(0);
+		write(2, "Syntax error\n", 14);
+		return (3);
 	}
-	if (nbr == -2)
+	if (nbr == -2) //lst
 	{
 		write(2, "Syntax error after > < >> <<", 21);
-		exit(0);
+		return (1);
 	}
 	if (nbr == -3)
 	{
 		write(2, "Malloc went wrong", 17);
 		exit(0);
 	}
+	return (0);
+}
+
+void	exekerror(int nbr) //Fonction pour les erreurs d'execution (0 == good)
+{
+	if (nbr == 2)
+		write(2, "Command not found\n", 19);
+	if (nbr == 3) // - /!\ IN CHILD PROCESS
+		write(2, "Error with redirections\n", 25);
+	if (nbr == 4) // - /!\ IN CHILD PROCESS
+		write(2, "No command after pipe\n", 23);
 }
