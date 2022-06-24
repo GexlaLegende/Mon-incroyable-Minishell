@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 14:30:40 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 06:32:45 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 		}
 		if (data->cmd_table->redir_type[i] == 3) // <<
 		{
-			char 	*str2;
+			char	*str2;
 
 			str2 = NULL;
-			here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));			
+			here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));
 			file = open(here_doc_file, O_RDONLY);
 			if (file < 0)
 				return (-1);
@@ -66,11 +66,11 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 
 int	exec_cmds(t_data *data, char **env)
 {
-	int	fds[data->lst_nbr][2];
+	int		fds[data->lst_nbr][2];
 	int		i;
 	int		pid;
 	int		j;
-	int 	status;
+	int		status;
 	char	*hd_file;
 
 	i = 0;
@@ -84,7 +84,7 @@ int	exec_cmds(t_data *data, char **env)
 	{
 		data->arg_tabl = get_cmd(data);
 		if (put_path(data) == 2) // JOIN LE PATH ET LA CMD
-			return(2);
+			return (2);
 		j = 0;
 		pid = fork();
 		if (pid == 0)
@@ -117,7 +117,7 @@ int	exec_cmds(t_data *data, char **env)
 	}
 	i = 0;
 	while (i++ < data->lst_nbr)
-        wait(&status);
+		wait(&status);
 	i = 0;
 	while (i < data->lst_nbr)
 	{
@@ -143,13 +143,10 @@ int	ft_execution(t_data *data, char **env) //FONCTION PRINCIPALE DE L'EXECUTION
 		if (last->cmd[0] == '\0')
 			return (4);
 		data->lst_nbr = (data->lst_nbr / 2) + 1;
-		return(exec_cmds(data, env));
+		return (exec_cmds(data, env));
 	}
 	return (0);
 }
-
-
-
 
 
 /* int nombre = -1;

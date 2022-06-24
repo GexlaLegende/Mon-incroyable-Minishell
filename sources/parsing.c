@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 14:31:55 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 06:35:45 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,29 @@ int	ft_parsing(char *str, t_data *data) //Fonction principale du parsing (premie
 {
 	int	start;
 	int	i;
-	int error;
+	int	error;
+	int	y;
 
 	data->squote = 0;
 	data->dquote = 0;
 	data->r_tabl = 0;
 	i = 0;
 	start = 0;
-	if (str[0] == '|')
+	y = 0;
+	while (str[y] && (str[y] == ' ' || str[y] == '\n'))
+		y++;
+	if (str[y] == '|')
 		return (1);
 	while (str[i])
 	{
+		y = i;
 		quotes_switch(data, str, i);
 		if (str[i] == '|' && data->squote == 0 && data->dquote == 0)  //Detection du pipe
 		{
-			if (str[i + 1] == '|')
+			y++;
+			while (str[y] && (str[y] == ' ' || str[y] == '\n'))
+				y++;
+			if (str[y] == '|')
 				return (3);
 			error = ft_parsing2(&str[start], data, i - start);
 			if (error != 0)
@@ -141,7 +149,7 @@ void	here_doc_fct(t_data *data, char *str)
 {
 	char	*file;
 	int		fd;
-	char 	*str2;
+	char	*str2;
 
 	str2 = NULL;
 	file = ft_strjoin_c("/tmp/.here_doc", (char)(data->here_doc_nbr + 97));
@@ -183,15 +191,15 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 		quotes_switch(data, str, i);
 		if ((str[j] == ' ' || str[j] == '<' || str[j] == '>') && data->squote == 0 && data->dquote == 0)
 			break ;
-		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40 || str[j] == 41 ||
-				str[j] == 59 || str[j] == 47 || str[j] == 63 || str[j] == 124) &&
-				data->squote == 0 && data->dquote == 0)
+		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40
+				|| str[j] == 41 || str[j] == 59 || str[j] == 47 || str[j] == 63
+				|| str[j] == 124) && data->squote == 0 && data->dquote == 0)
 			return (-2);
 		(*redir_file)[data->r_tabl] = ft_strmjoin((*redir_file)[data->r_tabl], str[j]);
 		j++;
 	}
 	if (!((*redir_file)[data->r_tabl]))
-			return (-2);
+		return (-2);
 	if (str[i] == '<' && str[i + 1] == '<')
 		here_doc_fct(data, (*redir_file)[data->r_tabl]);
 	data->r_tabl = data->r_tabl + 1;
@@ -204,7 +212,7 @@ int	count_redir(char *str, t_data *data)  //ERREUR >< ET CAS <> <-- A NE PAS GER
 {
 	int	i;
 	int	count;
-	
+
 	i = 0;
 	count = 0;
 	while (str[i])

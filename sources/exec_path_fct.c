@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 06:35:36 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 06:30:42 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 char	*recupathline(char **env) //RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	i = 0;
 	while (env[i])
 	{
-		if (env[i][0] == 'P' && env[i][1] == 'A' && env[i][2] == 'T' && env[i][3] == 'H' && env[i][4] == '=')
+		if (env[i][0] == 'P' && env[i][1] == 'A' && env[i][2] == 'T' &&
+				env[i][3] == 'H' && env[i][4] == '=')
 		{
 			str = malloc(sizeof(char) * (ft_strlen(env[i]) - 4));
 			str = &env[i][5];
@@ -33,10 +34,10 @@ char	*recupathline(char **env) //RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
 
 char	**recup_path(char **env, t_data *data) //RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
 {
-	int	i;
+	int		i;
 	char	*str;
 	char	**tabl;
-	int	nbr;
+	int		nbr;
 
 	str = recupathline(env);
 	i = -1;
@@ -60,15 +61,17 @@ char	**recup_path(char **env, t_data *data) //RETOURNE UN TABLEAU DE PATHS  -  [
 	return (tabl);
 }
 
-int	put_path(t_data *data)  //FONCTION QUI JOIN LE PATH ET LA COMMANDE 
+int	put_path(t_data *data) //FONCTION QUI JOIN LE PATH ET LA COMMANDE  -  [OK] - 22 lines
 {
 	char	*full_path;
 	int		i;
 
 	i = -1;
+	if (access(data->arg_tabl[0], X_OK) == 0)
+		return (0);
 	full_path = malloc(sizeof(char) * 2);
 	full_path[0] = '\0';
-	while(access(full_path, X_OK) == -1 && i < data->path_nbr)
+	while (access(full_path, X_OK) == -1 && i < data->path_nbr)
 	{
 		i++;
 		full_path[0] = '\0';
