@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 15:15:18 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:49:51 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void		ft_env_lstclear(t_env_list **lst);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------
-void		parserror(int nbr);
 int			ft_lexer(char *str, t_data *data); //parsing
 int			ft_parser(char *str, t_data *data, int end); //parsing2
 void		ft_addpipe(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/24 14:33:53 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 16:23:42 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,24 @@ int	ft_search_and_replace_env_var(t_data *data)
 	t_cmd_list	*cmd_list;
 
 	cmd_list = data->cmd_table;
-	cmd_list = cmd_list->next;
+	data->squote = 0;
+	data->dquote = 0;
+	//cmd_list = cmd_list->next;
 	while (cmd_list)
 	{
 		i = 0;
 		while (cmd_list->cmd[i])
 		{
+			quotes_switch(data, cmd_list->cmd, i);
 			if (cmd_list->cmd[i] == '$' \
 				&& (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \
-				|| cmd_list->cmd[i + 1] == '_'))
+				|| cmd_list->cmd[i + 1] == '_') && data->squote == 0)
 			{
 				ft_replace_var_env(cmd_list, i, data);
-				dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
+				//dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
 				if (i > 0)
 					i--;
-				dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
+				//dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
 			}
 			i++;
 		}

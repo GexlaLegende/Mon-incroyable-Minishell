@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/24 15:32:51 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/24 16:38:40 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SOURCES = main.c \
 		  cmd_lst_utils2.c \
 		  env_lst_utils1.c \
 		  env_lst_utils2.c \
-		  ft_utils.c
+		  ft_utils.c \
 		  exekONE.c \
 		  exec_path_fct.c \
 		  exec_one_cmd.c \
@@ -50,7 +50,7 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 #### OTHER ####
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Werror -Wextra #-fsanitize=address -g3
 LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I/Users/apercebo/homebrew/opt/readline/include
 NAME := minishell

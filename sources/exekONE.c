@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 06:32:45 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:51:11 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	exec_cmds(t_data *data, char **env)
 
 int	ft_execution(t_data *data, char **env) //FONCTION PRINCIPALE DE L'EXECUTION
 {
-	t_list	*last;
+	t_cmd_list	*last;
 
 	last = ft_lstlast(data->cmd_table);
 	data->lst_nbr = ft_lstsize(data->cmd_table);
