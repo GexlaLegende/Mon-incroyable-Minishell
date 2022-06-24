@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/23 16:37:58 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 12:17:11 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ int	ft_search_and_replace_env_var(t_data *data)
 		while (cmd_list->cmd[i])
 		{
 			if (cmd_list->cmd[i] == '$')
+			{
 				ft_replace_var_env(cmd_list, i, data);
+				dprintf(2, "i = %d\n", i);
+				i--;
+			}
 			i++;
 		}
 		cmd_list = cmd_list->next;
@@ -80,23 +84,24 @@ int	ft_search_and_replace_env_var(t_data *data)
 void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 {
 	int		len;
+	int		i;
 	char	*value;
 
 	len = 0;
-	if (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
+	i = pos;
+	if (ft_isalnum(cmd_list->cmd[i + 1]) == 1 || cmd_list->cmd[i + 1] == '_')
 	{
-		dprintf(2, "cmd = %s\npos = %d\n", cmd_list->cmd, pos);
 		if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
 			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
 		else
 		{
-			while (ft_isalnum(cmd_list->cmd[pos + 1]) == 1)
+			while (ft_isalnum(cmd_list->cmd[i + 1]) == 1 || cmd_list->cmd[i + 1] == '_')
 			{
 				len++;
-				pos++;
+				i++;
 			}
 			value = ft_search_var_env_in_list(data, cmd_list->cmd, pos, len);//search if variable exists in env_list
-			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len, value);
+			cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 		}
 	}
 }
@@ -123,7 +128,7 @@ char	*ft_search_var_env_in_list(t_data *data, char *cmd, int pos, int len)
 	char		*var_name;
 
 	env_list = data->env_table;
-	var_name = ft_substr(cmd, pos, len);
+	var_name = ft_substr(cmd, pos + 1, len);
 	while (env_list)
 	{
 		if (ft_strncmp(var_name, env_list->name, len) == 0)

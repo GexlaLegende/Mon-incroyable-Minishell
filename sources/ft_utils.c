@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:53:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/23 16:46:12 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 12:09:19 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,22 +139,21 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	k = 0;
 	newlen = ft_strlen(str) - len + ft_strlen(word);
 	result = malloc(sizeof(char) * (newlen + 1));
-	dprintf(2, "str = %s\nword = %s\nnewlen = %d\nstart = %d\n", str, word, newlen, start);
 	while (str[k])
 	{
-		dprintf(2, "i'm in while\n");
 		if (k == start)
 		{
-			dprintf(2, "i'm in if\n");
 			while (word[j])
+			{
 				result[i++] = word[j++];
+			}
 			k = start + len;
 		}
-		result[i++] = str[k++];
+		if (str[k] != '\0')
+			result[i++] = str[k++];
 	}
-	dprintf(2, "result = %s\n", result);
+	result[i] = '\0';
 	free(str);
-	dprintf(2, "result = %s\n", result);
 	return (result);
 }
 
@@ -163,7 +162,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	n = 0;
+	while ((s1[i] || s2[i]))
 	{
 		if (s1[i] != s2[i])
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
