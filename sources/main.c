@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 16:15:33 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:35:25 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ int	main(int argc, char **argv, char **env)
 		error = parserror(ft_lexer(str, &data));
 		//afflistchaine(&data);
 		if (error == 0)
+		{
 			data.cmd_table = data.cmd_table->next;
-		parserror(ft_env_var(&data, env));
-		if (error == 0)
+			parserror(ft_env_var(&data, env));
 			exekerror(ft_execution(&data, env));
+		}
 		if (error != -1)
 			ft_lstclear(&data.cmd_table);
 		ft_env_lstclear(&data.env_table);
