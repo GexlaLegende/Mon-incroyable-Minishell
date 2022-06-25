@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 06:57:11 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:03:36 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,28 @@ int	str_is_empty(char *str)
 	return (0);
 }
 
+/* void	handler(int sigtype)
+{
+	if (sigtype == SIGINT)
+		//ah oui
+	else if (sigtype == SIGQUIT)
+		//ah oui
+} */
+
 int	main(int argc, char **argv, char **env)
 {
-	int		i;
-	char	*str;
-	t_data	data;
-	int		error;
+	int					i;
+	char				*str;
+	t_data				data;
+	int					error;
+	//struct sigaction	action;
 
 	i = 0;
+	//action.sa_handler = handler;
+	//action.sa_flags = SA_RESTART;
+	//sigaction(SIGINT, &action, NULL); // ctrl-C
+	//sigaction(SIGUSR2, &action, NULL); // ctrl-D = EOF = special = chiant
+	//sigaction(SIGQUIT, &action, NULL); // ctrl-backslash
 	if (argc)
 		if (argv)
 			if (env)

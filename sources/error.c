@@ -6,11 +6,13 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 14:59:30 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:02:47 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// NORME -- {OK}
 
 int	parserror(int nbr) //Fonction pour les erreurs de parsing
 {
@@ -35,10 +37,9 @@ int	parserror(int nbr) //Fonction pour les erreurs de parsing
 		return (1);
 	}
 	if (nbr == -3)
-	{
 		write(2, "Malloc went wrong", 17);
+	if (nbr == -3)
 		exit(0);
-	}
 	return (0);
 }
 

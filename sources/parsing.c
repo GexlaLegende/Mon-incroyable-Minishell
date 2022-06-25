@@ -6,11 +6,11 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 06:48:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:38:18 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int	ft_lexer(char *str, t_data *data) //Fonction principale du parsing (premier découpage)
 {

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 06:51:25 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:55:06 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <signal.h>
 
 typedef struct s_cmd_list
 {
@@ -50,6 +51,10 @@ typedef struct s_data
 	int			path_nbr;
 	int			here_doc_nbr;
 	int			lst_nbr;
+	int			nbr;
+	int			i;
+	int			j;
+	int			x;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -94,11 +99,13 @@ char	**recup_path(char **env, t_data *data);
 char	*recupathline(char **env);
 int		exec_one_cmd(t_data *data, char **env);
 char	**get_cmd(t_data *data);
+char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl);
 int		get_argnbr(char *str, t_data *data);
 int		put_path(t_data *data);
 int		cmd_redir(t_data *data, char **env, int nbr);
 int		exec_cmds(t_data *data, char **env);
 char	**rm_quote(char **tabl, t_data *data);
+char	*rm_quote2(t_data *data, char **tabl, char *str);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
@@ -119,6 +126,7 @@ char		*ft_strjoin(char *s1, char *s2);
 char		*ft_1ststrjoin(char *s1, char *s2);
 char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
+char		*ft_malloc_str(char *s1);
 //----------------------------------------------------
 
 #endif

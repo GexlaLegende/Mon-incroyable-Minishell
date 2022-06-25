@@ -6,58 +6,78 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 18:36:32 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 10:39:34 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+int	forward_redir(t_data *data, int i)
+{
+	int	file;
+
+	file = 0;
+	if (data->cmd_table->redir_type[i] == 1)
+	{
+		file = open(data->cmd_table->redir_file[i],
+				O_CREAT | O_RDWR | O_APPEND, 0644);
+		if (file < 0)
+			return (-1);
+		dup2(file, STDOUT_FILENO);
+		close(file);
+	}
+	if (data->cmd_table->redir_type[i] == 2)
+	{
+		file = open(data->cmd_table->redir_file[i],
+				O_CREAT | O_RDWR | O_TRUNC, 0644);
+		if (file < 0)
+			return (-1);
+		dup2(file, STDOUT_FILENO);
+		close(file);
+	}
+	return (0);
+}
+
+int	backward_redir(t_data *data, int i, int nbr)
+{
+	int		file;
+	char	*here_doc_file;
+	char	*str2;
+
+	file = 0;
+	if (data->cmd_table->redir_type[i] == 3)
+	{
+		str2 = NULL;
+		here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));
+		file = open(here_doc_file, O_RDONLY);
+		if (file < 0)
+			return (-1);
+		dup2(file, STDIN_FILENO);
+		close(file);
+	}
+	if (data->cmd_table->redir_type[i] == 4)
+	{
+		file = open(data->cmd_table->redir_file[i], O_RDONLY);
+		if (file < 0)
+			return (-1);
+		dup2(file, STDIN_FILENO);
+		close(file);
+	}
+	return (0);
+}
+
+// 1 - >> 2 - > 3 - << 4 - <
 int	cmd_redir(t_data *data, char **env, int nbr)
 {
 	int		i;
-	int		file;
-	char	*here_doc_file;
 
 	i = 0;
-	file = 0;
 	while (data->cmd_table->redir_type[i] != 0)
 	{
-		if (data->cmd_table->redir_type[i] == 1) // >>
-		{
-			file = open(data->cmd_table->redir_file[i], O_CREAT | O_RDWR | O_APPEND, 0644);
-			if (file < 0)
-				return (-1);
-			dup2(file, STDOUT_FILENO);
-			close(file);
-		}
-		if (data->cmd_table->redir_type[i] == 2) // >
-		{
-			file = open(data->cmd_table->redir_file[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
-			if (file < 0)
-				return (-1);
-			dup2(file, STDOUT_FILENO);
-			close(file);
-		}
-		if (data->cmd_table->redir_type[i] == 3) // <<
-		{
-			char	*str2;
-
-			str2 = NULL;
-			here_doc_file = ft_strjoin_c("/tmp/.here_doc", (char)(nbr + 97));
-			file = open(here_doc_file, O_RDONLY);
-			if (file < 0)
-				return (-1);
-			dup2(file, STDIN_FILENO);
-			close(file);
-		}
-		if (data->cmd_table->redir_type[i] == 4) // <
-		{
-			file = open(data->cmd_table->redir_file[i], O_RDONLY);
-			if (file < 0)
-				return (-1);
-			dup2(file, STDIN_FILENO);
-			close(file);
-		}
+		if (forward_redir(data, i) == -1)
+			return (-1);
+		if (backward_redir(data, i, nbr) == -1)
+			return (-1);
 		i++;
 	}
 	if (data->cmd_table->cmd[0] == '\0')
@@ -71,35 +91,34 @@ int	exec_cmds(t_data *data, char **env)
 	int		fds[data->lst_nbr][2];
 	int		i;
 	int		pid;
-	int		j;
 	int		status;
 	char	*hd_file;
 
 	i = 0;
 	while (i < data->lst_nbr - 1)
 	{
-		pipe(fds[i]);                                           //A CHECK ERROR
+		pipe(fds[i]);
 		i++;
 	}
 	i = 0;
-	while (i < data->lst_nbr)  //MAIN WHILE
+	while (i < data->lst_nbr)
 	{
 		data->arg_tabl = get_cmd(data);
-		if (put_path(data) == 2) // JOIN LE PATH ET LA CMD
+		if (put_path(data) == 2)
 			return (2);
-		j = 0;
+		data->j = 0;
 		pid = fork();
 		if (pid == 0)
 		{
-			if (i != data->lst_nbr - 1)  //IF NOT LAST CMD
+			if (i != data->lst_nbr - 1)
 				dup2(fds[i][1], STDOUT_FILENO);
-			if (i != 0)  //IF NOT FIRST CMD
+			if (i != 0)
 				dup2(fds[i - 1][0], STDIN_FILENO);
-			while (j < data->lst_nbr - 1)
+			while (data->j < data->lst_nbr - 1)
 			{
-				close(fds[j][0]);
-				close(fds[j][1]);                                           //A CHECK ERROR
-				j++;
+				close(fds[data->j][0]);
+				close(fds[data->j][1]);
+				data->j = data->j + 1;
 			}
 			if (cmd_redir(data, env, i) != 0)
 				return (3);
@@ -114,7 +133,7 @@ int	exec_cmds(t_data *data, char **env)
 	while (i < data->lst_nbr - 1)
 	{
 		close(fds[i][0]);
-		close(fds[i][1]);                                           //A CHECK ERROR
+		close(fds[i][1]);
 		i++;
 	}
 	i = 0;
@@ -123,7 +142,7 @@ int	exec_cmds(t_data *data, char **env)
 	i = 0;
 	while (i < data->lst_nbr)
 	{
-		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(i + 97));	
+		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(i + 97));
 		if (access(hd_file, F_OK) == 0)
 			unlink(hd_file);
 		free(hd_file);
@@ -132,7 +151,8 @@ int	exec_cmds(t_data *data, char **env)
 	return (0);
 }
 
-int	ft_execution(t_data *data, char **env) //FONCTION PRINCIPALE DE L'EXECUTION
+//FONCTION PRINCIPALE DE L'EXECUTION
+int	ft_execution(t_data *data, char **env)
 {
 	t_cmd_list	*last;
 
@@ -149,20 +169,3 @@ int	ft_execution(t_data *data, char **env) //FONCTION PRINCIPALE DE L'EXECUTION
 	}
 	return (0);
 }
-
-
-/* int nombre = -1;
-while(tabl[++nombre])
-	printf("%d -- %s\n", nombre, tabl[nombre]); */
-
-/* printf("%s\n", tabl[0]);
-	printf("%s\n", tabl[1]);
-	printf("%s\n", tabl[2]);
-	printf("%s\n", tabl[3]);
-	printf("%s\n", tabl[4]);
-	printf("%s\n", tabl[5]);
-	printf("%s\n", tabl[6]);
-	printf("%s\n", tabl[7]);
-	printf("%s\n", tabl[8]); */
-
-// ls >a -a > b -l

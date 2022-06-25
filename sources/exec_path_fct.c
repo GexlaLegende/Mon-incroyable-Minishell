@@ -6,13 +6,16 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 06:30:42 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:57:30 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*recupathline(char **env) //RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
+// NORME -- {OK}
+
+//RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
+char	*recupathline(char **env)
 {
 	int		i;
 	char	*str;
@@ -32,36 +35,36 @@ char	*recupathline(char **env) //RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
 	return (str);
 }
 
-char	**recup_path(char **env, t_data *data) //RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
+//RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
+char	**recup_path(char **env, t_data *data)
 {
 	int		i;
 	char	*str;
 	char	**tabl;
-	int		nbr;
 
 	str = recupathline(env);
 	i = -1;
-	nbr = 0;
+	data->nbr = 0;
 	while (str[++i])
 		if (str[i] == ':')
-			nbr++;
-	data->path_nbr = nbr;
-	tabl = malloc(sizeof(char *) * (nbr + 2));
+			data->nbr = data->nbr + 1;
+	data->path_nbr = data->nbr;
+	tabl = malloc(sizeof(char *) * (data->nbr + 2));
 	while (i-- > 0)
+	{
 		if (str[i] == ':')
 		{
-			tabl[nbr] = malloc(sizeof(char) * ft_strlen(&str[i + 1]));
-			tabl[nbr] = &str[i + 1];
-			tabl[nbr][ft_strlen(tabl[nbr])] = '\0';
+			tabl[data->nbr] = ft_malloc_str(&str[i + 1]);
 			str[i] = '\0';
-			nbr--;
+			data->nbr = data->nbr - 1;
 		}
-	tabl[nbr] = &str[i];
-	tabl[nbr][ft_strlen(tabl[nbr])] = '\0';
+	}
+	tabl[data->nbr] = ft_malloc_str(&str[i]);
 	return (tabl);
 }
 
-int	put_path(t_data *data) //FONCTION QUI JOIN LE PATH ET LA COMMANDE  -  [OK] - 22 lines
+//FONCTION QUI JOIN LE PATH ET LA COMMANDE  -  [OK] - 22 lines
+int	put_path(t_data *data)
 {
 	char	*full_path;
 	int		i;
