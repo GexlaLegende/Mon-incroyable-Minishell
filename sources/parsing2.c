@@ -1,50 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_eepc.c                                         :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:38:01 by apercebo         ###   ########.fr       */
+/*   Created: 2022/06/25 14:55:57 by apercebo          #+#    #+#             */
+/*   Updated: 2022/06/25 15:13:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* void	bin_echo()
+void	quotes_switch(t_data *data, char *str, int i)
 {
-	
-} */
-
-/* void	bin_env(t_data *data)
-{
-	int		 nbr;
-	t_env_list  *begin;
-	
-	nbr = 0;
-	begin = data->env_table;
-	while (begin)
+	if (str[i] == '\'' && data->dquote == 0)
 	{
-		printf("%s", begin->name);
-		//checker si affiche un truc quand il n'a pas de value
-		printf("=%s\n", begin->value);
-		begin = begin->next;
-		nbr++;
+		if (data->squote == 0)
+			data->squote = 1;
+		else
+			data->squote = 0;
 	}
-} */
-
-/* 
-void	bin_pwd()
-{
-	char cwd[PATH_MAX];
-	
-	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
+	if (str[i] == '"' && data->squote == 0)
+	{
+		if (data->dquote == 0)
+			data->dquote = 1;
+		else
+			data->dquote = 0;
+	}
 }
-
-void	bin_cd()
-{
-	
-}
- */

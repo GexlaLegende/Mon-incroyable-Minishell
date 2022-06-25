@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/25 11:39:52 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/25 14:57:17 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@
 
 SOURCES = main.c \
 		  parsing.c \
+		  parsing2.c \
+		  parsing_redir.c \
 		  environnement.c \
 		  error.c \
 		  cmd_lst_utils1.c \
@@ -21,6 +23,8 @@ SOURCES = main.c \
 		  env_lst_utils1.c \
 		  env_lst_utils2.c \
 		  ft_utils.c \
+		  ft_utils2.c \
+		  ft_utils3.c \
 		  execution_one.c \
 		  execution_two.c \
 		  exec_path_fct.c \

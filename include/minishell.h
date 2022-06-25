@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 11:40:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:39:05 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env_list
 
 typedef struct s_data
 {
+	char		*main_str;
 	t_cmd_list	*cmd_table;
 	t_env_list	*env_table;
 	int			squote;
@@ -53,12 +54,26 @@ typedef struct s_data
 	int			lst_nbr;
 	int			nbr;
 	int			i;
+	int			li;
+	int			ly;
 	int			j;
+	int			rdj;
 	int			x;
 	int			exec_i;
+	int			lexer_error;
+	int			lexer_start;
 	int			error_getcmd;
+	int			main_error;
 	int			**fds;
 	int			pid;
+	int			rdi;
+	int			pskip;
+	char		*pcommand;
+	int			*redir_type;
+	char		**redir_file;
+	int			tabl_s;
+	int			parser_error;
+	int			rd_error;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -84,9 +99,12 @@ int			ft_lexer(char *str, t_data *data); //parsing
 int			ft_parser(char *str, t_data *data, int end); //parsing2
 void		ft_addpipe(t_data *data);
 void		quotes_switch(t_data *data, char *str, int i);
-int			redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redir_file);
+int			redir_parsing(char *str, t_data *data);
 int			count_redir(char *str, t_data *data);
 int			str_is_empty(char *str);
+void		here_doc_fct(t_data *data, char *str);
+int			ft_lexer2(t_data *data, char *str);
+int			ft_parser2(t_data *data, char *str);
 //----------------------------------------------------
 
 //Environnement---------------------------------------
@@ -98,27 +116,27 @@ char		*ft_is_var_env(t_data *data, char *cmd, int pos, int len);
 //----------------------------------------------------
 
 //Execution-------------------------------------------
-int		ft_execution(t_data *data, char **env);
-char	**recup_path(char **env, t_data *data);
-char	*recupathline(char **env);
-int		exec_one_cmd(t_data *data, char **env);
-char	**get_cmd(t_data *data);
-char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl);
-int		get_argnbr(char *str, t_data *data);
-int		put_path(t_data *data);
-int		cmd_redir(t_data *data, char **env, int nbr);
-int		exec_cmds(t_data *data, char **env);
-char	**rm_quote(char **tabl, t_data *data);
-char	*rm_quote2(t_data *data, char **tabl, char *str);
-int		forward_redir(t_data *data, int i);
-int		backward_redir(t_data *data, int i, int nbr);
-int		getcmd_and_pipe(t_data *data, char **env);
-int		exec_cmds_second(t_data *data, char **env);
+int			ft_execution(t_data *data, char **env);
+char		**recup_path(char **env, t_data *data);
+char		*recupathline(char **env);
+int			exec_one_cmd(t_data *data, char **env);
+char		**get_cmd(t_data *data);
+char		**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl);
+int			get_argnbr(char *str, t_data *data);
+int			put_path(t_data *data);
+int			cmd_redir(t_data *data, char **env, int nbr);
+int			exec_cmds(t_data *data, char **env);
+char		**rm_quote(char **tabl, t_data *data);
+char		*rm_quote2(t_data *data, char **tabl, char *str);
+int			forward_redir(t_data *data, int i);
+int			backward_redir(t_data *data, int i, int nbr);
+int			getcmd_and_pipe(t_data *data, char **env);
+int			exec_cmds_second(t_data *data, char **env);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
-int		parserror(int nbr);
-void	exekerror(int nbr);
+int			parserror(int nbr);
+void		exekerror(int nbr);
 //----------------------------------------------------
 
 //Utils-----------------------------------------------

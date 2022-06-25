@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/24 16:23:42 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:37:08 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	ft_search_and_replace_env_var(t_data *data)
 	cmd_list = data->cmd_table;
 	data->squote = 0;
 	data->dquote = 0;
-	//cmd_list = cmd_list->next;
 	while (cmd_list)
 	{
 		i = 0;
@@ -74,10 +73,8 @@ int	ft_search_and_replace_env_var(t_data *data)
 				|| cmd_list->cmd[i + 1] == '_') && data->squote == 0)
 			{
 				ft_replace_var_env(cmd_list, i, data);
-				//dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
 				if (i > 0)
 					i--;
-				//dprintf(2, "cmd[i] = %c | i = %d\n", cmd_list->cmd[i], i);
 			}
 			i++;
 		}
@@ -96,7 +93,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 
 	len = 0;
 	i = pos;
-	if (cmd_list->cmd[pos + 1] == '0') //if $0, display shell
+	if (cmd_list->cmd[pos + 1] == '0')
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
 	else
 	{
@@ -106,7 +103,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 			len++;
 			i++;
 		}
-		value = ft_is_var_env(data, cmd_list->cmd, pos, len);//search if variable exists in env_list
+		value = ft_is_var_env(data, cmd_list->cmd, pos, len);
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
 }

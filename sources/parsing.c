@@ -6,64 +6,71 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 09:38:18 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 14:45:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_lexer(char *str, t_data *data) //Fonction principale du parsing (premier découpage)
+int	ft_lexer2(t_data *data, char *str)
 {
-	int		start;
-	int		i;
-	int		error;
-	int		y;
-
-	data->squote = 0;
-	data->dquote = 0;
-	data->r_tabl = 0;
-	i = 0;
-	start = 0;
-	y = 0;
-	while (str[y] && (str[y] == ' ' || str[y] == '\n'))
-		y++;
-	if (str[y] == '|')
-		return (1);
-	while (str[i])
+	while (str[data->li])
 	{
-		y = i;
-		quotes_switch(data, str, i);
-		if (str[i] == '|' && data->squote == 0 && data->dquote == 0) //Detection du pipe
+		data->ly = data->li;
+		quotes_switch(data, str, data->li);
+		if (str[data->li] == '|' && data->squote == 0 && data->dquote == 0)
 		{
-			y++;
-			while (str[y] && (str[y] == ' ' || str[y] == '\n'))
-				y++;
-			if (str[y] == '|')
+			data->ly++;
+			while (str[data->ly] && (str[data->ly] == ' '
+					|| str[data->ly] == '\n'))
+				data->ly++;
+			if (str[data->ly] == '|')
 				return (3);
-			error = ft_parser(&str[start], data, i - start);
-			if (error != 0)
-				return (error);
+			data->lexer_error = ft_parser(&str[data->lexer_start],
+					data, data->li - data->lexer_start);
+			if (data->lexer_error != 0)
+				return (data->lexer_error);
 			ft_addpipe(data);
-			start = i + 1;
+			data->lexer_start = data->li + 1;
 			data->r_tabl = 0;
 		}
-		i++;
+		data->li++;
 	}
-	if (data->squote == 1 || data->dquote == 1)
-		return (2);
-	error = ft_parser(&str[start], data, i - start); //Envoie la derniere commande
-	if (error != 0)
-		return (error);
 	return (0);
 }
 
-void	ft_addpipe(t_data *data)						//Fonction pour l'ajout du maillon pipe dans la liste chainée
+//Fonction principale du parsing (premier découpage)
+int	ft_lexer(char *str, t_data *data)
+{
+	data->squote = 0;
+	data->dquote = 0;
+	data->r_tabl = 0;
+	data->li = 0;
+	data->lexer_start = 0;
+	data->ly = 0;
+	while (str[data->ly] && (str[data->ly] == ' ' || str[data->ly] == '\n'))
+		data->ly++;
+	if (str[data->ly] == '|')
+		return (1);
+	data->lexer_error = ft_lexer2(data, str);
+	if (data->lexer_error != 0)
+		return (data->lexer_error);
+	if (data->squote == 1 || data->dquote == 1)
+		return (2);
+	data->lexer_error = ft_parser(&str[data->lexer_start],
+			data, data->li - data->lexer_start);
+	if (data->lexer_error != 0)
+		return (data->lexer_error);
+	return (0);
+}
+
+//Fonction pour l'ajout du maillon pipe dans la liste chainée
+void	ft_addpipe(t_data *data)
 {
 	char	*str;
 	int		*redir_type;
 	char	**redir_file;
 
-	//printf("%s\n", "pipe added");			//TODO erreur si || double pipes
 	redir_type = (int *)malloc(sizeof(int) * 2);
 	redir_file = malloc(sizeof(char *) * 2);
 	str = malloc(sizeof(char) * 2);
@@ -74,179 +81,70 @@ void	ft_addpipe(t_data *data)						//Fonction pour l'ajout du maillon pipe dans 
 	ft_lstadd_back(&data->cmd_table, ft_lstnew(str, redir_type, redir_file));
 }
 
-void	quotes_switch(t_data *data, char *str, int i)
+int	ft_parser2(t_data *data, char *str)
 {
-	if (str[i] == '\'' && data->dquote == 0) //switch single quote
+	while (str[data->rdi] == ' ')
+		data->rdi++;
+	while (str[data->rdi])
 	{
-		if (data->squote == 0)
-			data->squote = 1;
-		else
-			data->squote = 0;
-	}
-	if (str[i] == '"' && data->squote == 0) //switch double quote
-	{
-		if (data->dquote == 0)
-			data->dquote = 1;
-		else
-			data->dquote = 0;
-	}
-}
-
-int	ft_parser(char *str, t_data *data, int end) //Fonction secondaire (deuxieme découpage)
-{
-	int		i;
-	int		skip;
-	char	*command;
-	int		*redir_type;
-	char	**redir_file;
-	int		sizeoftabl;
-
-	i = 0;
-	if (str[end])
-		str[end] = '\0';								//Selectionne la commande en coupant au Pipe
-	command = NULL;
-	sizeoftabl = count_redir(str, data);
-	if (sizeoftabl == -1)
-		return (3);
-	redir_type = (int *)malloc(sizeof(int) * (sizeoftabl + 1));
-	redir_file = malloc(sizeof(char *) * (sizeoftabl + 1));
-	while (i < sizeoftabl + 1)
-	{
-		redir_type[i] = 0;
-		redir_file[i] = NULL;
-		i++;
-	}
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	while (str[i])
-	{
-		quotes_switch(data, str, i);
-		if ((str[i] == '>' || str[i] == '<') && data->squote == 0 && data->dquote == 0)  //TODO SIMPLIFIER SKIP EN UTILISANT LADDRESSE DE I
+		quotes_switch(data, str, data->rdi);
+		if ((str[data->rdi] == '>' || str[data->rdi] == '<')
+			&& data->squote == 0 && data->dquote == 0)
 		{
-			skip = redir_parsing(str, i, data, &redir_type, &redir_file);
-			if (skip < 0)
-				return (skip);
-			i = i + skip;
+			data->pskip = redir_parsing(str, data);
+			if (data->pskip < 0)
+				return (data->pskip);
+			data->rdi = data->rdi + data->pskip;
 		}
 		else
 		{
-			command = ft_strmjoin(command, str[i]);
-			if (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
-				while (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
-					i++;
+			data->pcommand = ft_strmjoin(data->pcommand, str[data->rdi]);
+			if (str[data->rdi] == ' ' && data->squote == 0 && data->dquote == 0)
+				while (str[data->rdi] == ' ' && data->squote == 0
+					&& data->dquote == 0)
+					data->rdi++;
 			else
-				i++;
+				data->rdi++;
 		}
 	}
-	command = ft_strmjoin(command, '\0');
-	ft_lstadd_back(&data->cmd_table, ft_lstnew(command, redir_type, redir_file));
-	data->here_doc_nbr = data->here_doc_nbr + 1;
 	return (0);
 }
 
-void	here_doc_fct(t_data *data, char *str)
+//Fonction secondaire (deuxieme découpage)
+int	ft_parser(char *str, t_data *data, int end)
 {
-	char	*file;
-	int		fd;
-	char	*str2;
-
-	str2 = NULL;
-	file = ft_strjoin_c("/tmp/.here_doc", (char)(data->here_doc_nbr + 97));
-	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	while (1)
+	data->rdi = 0;
+	if (str[end])
+		str[end] = '\0';
+	data->pcommand = NULL;
+	data->tabl_s = count_redir(str, data);
+	if (data->tabl_s == -1)
+		return (3);
+	data->redir_type = (int *)malloc(sizeof(int) * (data->tabl_s + 1));
+	data->redir_file = malloc(sizeof(char *) * (data->tabl_s + 1));
+	while (data->rdi < data->tabl_s + 1)
 	{
-		str2 = readline("> ");
-		if (str_diff(str, str2) == 0)
-			break ;
-		write(fd, str2, ft_strlen(str2));
-		write(fd, "\n", 1);
+		data->redir_type[data->rdi] = 0;
+		data->redir_file[data->rdi] = NULL;
+		data->rdi++;
 	}
+	data->rdi = 0;
+	data->parser_error = ft_parser2(data, str);
+	if (data->parser_error != 0)
+		return (data->parser_error);
+	data->pcommand = ft_strmjoin(data->pcommand, '\0');
+	ft_lstadd_back(&data->cmd_table,
+		ft_lstnew(data->pcommand, data->redir_type, data->redir_file));
+	data->here_doc_nbr = data->here_doc_nbr + 1;
+	return (0);
 }
-
-int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redir_file)
-{
-	int	j;
-
-	j = i;
-	if (str[j] == '>' && str[j + 1] == '>')
-	{
-		(*redir_type)[data->r_tabl] = 1;
-		j++;
-	}
-	else if (str[j] == '>')
-		(*redir_type)[data->r_tabl] = 2;
-	else if (str[j] == '<' && str[j + 1] == '<')
-	{
-		(*redir_type)[data->r_tabl] = 3;
-		j++;
-	}
-	else if (str[j] == '<')
-		(*redir_type)[data->r_tabl] = 4;
-	j++;
-	while (str[j] == ' ')
-		j++;
-	while (str[j])
-	{
-		quotes_switch(data, str, j);
-		//printf("QUOTE D-S -- |%d|%d|\n", data->dquote, data->squote);
-		if ((str[j] == ' ' || str[j] == '<' || str[j] == '>') && data->squote == 0 && data->dquote == 0)
-			break ;
-		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40
-				|| str[j] == 41 || str[j] == 59 || str[j] == 47 || str[j] == 63
-				|| str[j] == 124) && data->squote == 0 && data->dquote == 0)
-			return (-2);
-		(*redir_file)[data->r_tabl] = ft_strmjoin((*redir_file)[data->r_tabl], str[j]);
-		//printf("STR -- ||%s||\n", (*redir_file)[data->r_tabl]);
-		j++;
-	}
-	if (!((*redir_file)[data->r_tabl]))
-		return (-2);
-	(*redir_file) = rm_quote((*redir_file), data);
-	if (str[i] == '<' && str[i + 1] == '<')
-		here_doc_fct(data, (*redir_file)[data->r_tabl]);
-	data->r_tabl = data->r_tabl + 1;
-	while (str[j] == ' ')
-		j++;
-	return (j - i);
-}
-
-int	count_redir(char *str, t_data *data)  //ERREUR >< ET CAS <> <-- A NE PAS GERER
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		quotes_switch(data, str, i);
-		if ((str[i] == '>' || str[i] == '<') && data->squote == 0 && data->dquote == 0)
-		{
-			if (str[i] == '>' && str[i + 1] == '>')
-				i++;
-			if (str[i] == '<' && str[i + 1] == '<')
-				i++;
-			if (str[i] == '>' && str[i + 1] == '<')
-				return (-1);
-			if (str[i] == '<' && str[i + 1] == '>')
-				return (-1);
-			count++;
-			if (str[i + 1] == '>' && str[i + 1] == '<')
-				return (-1);
-		}
-		i++;
-	}
-	return (count);
-}
-
 
 //TODO
 // FONCTION D"ERREUR A MACHINER -- à moitier fait ça mais sa passe crème tkt
 // LES SEGFAULTS (à trouver avant de les corriger)
 
-
-// FAIT | GERER LES NOM DE FICHIER APRES LES REDIR KI COMMENCE PAR UN CHAR SPE EX : |, &, %.....
+// FAIT | GERER LES NOM DE FICHIER APRES LES REDIR KI -
+// - COMMENCE PAR UN CHAR SPE EX : |, &, %.....
 // FAIT |N'EST PAS AUTORISER : ! # * ( ) ; / ?
 
 //Si $variable non trouvé marche pour heredoc mais pas les autre ?? (ps: oskour)

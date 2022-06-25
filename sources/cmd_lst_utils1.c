@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils1.c                                       :+:      :+:    :+:   */
+/*   cmd_lst_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/15 15:20:50 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:28:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ paramètre, et de tous les éléments qui suivent */
 void	ft_lstclear(t_cmd_list **lst)
 {
 	t_cmd_list	*nexto;
-	int		i;
+	int			i;
 
 	if (!lst)
 		return ;
@@ -76,7 +76,7 @@ void	ft_lstclear(t_cmd_list **lst)
 /* Compte le nombre d’éléments de la liste. */
 int	ft_lstsize(t_cmd_list *lst)
 {
-	int		nbr;
+	int			nbr;
 	t_cmd_list	*begin;
 
 	nbr = 0;
