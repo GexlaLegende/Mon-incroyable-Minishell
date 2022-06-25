@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 15:49:51 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 06:51:25 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		ft_addpipe(t_data *data);
 void		quotes_switch(t_data *data, char *str, int i);
 int			redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redir_file);
 int			count_redir(char *str, t_data *data);
+int			str_is_empty(char *str);
 //----------------------------------------------------
 
 //Environnement---------------------------------------

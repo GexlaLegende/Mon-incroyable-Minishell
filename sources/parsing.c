@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 17:45:40 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 06:48:07 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,8 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 		j++;
 	while (str[j])
 	{
-		quotes_switch(data, str, i);
+		quotes_switch(data, str, j);
+		//printf("QUOTE D-S -- |%d|%d|\n", data->dquote, data->squote);
 		if ((str[j] == ' ' || str[j] == '<' || str[j] == '>') && data->squote == 0 && data->dquote == 0)
 			break ;
 		if ((str[j] == 33 || str[j] == 35 || str[j] == 42 || str[j] == 40
@@ -196,10 +197,12 @@ int	redir_parsing(char *str, int i, t_data *data, int **redir_type, char ***redi
 				|| str[j] == 124) && data->squote == 0 && data->dquote == 0)
 			return (-2);
 		(*redir_file)[data->r_tabl] = ft_strmjoin((*redir_file)[data->r_tabl], str[j]);
+		//printf("STR -- ||%s||\n", (*redir_file)[data->r_tabl]);
 		j++;
 	}
 	if (!((*redir_file)[data->r_tabl]))
 		return (-2);
+	(*redir_file) = rm_quote((*redir_file), data);
 	if (str[i] == '<' && str[i + 1] == '<')
 		here_doc_fct(data, (*redir_file)[data->r_tabl]);
 	data->r_tabl = data->r_tabl + 1;

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/24 18:28:41 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 06:57:11 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ void	aff_list_env(t_data *data)  //POUR PRINT TOUTE LA LISTE CHAINEE ENV
 	dprintf(2, "\n");
 }
 
+int	str_is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != 9)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int		i;
@@ -77,13 +91,12 @@ int	main(int argc, char **argv, char **env)
 	data.paths = recup_path(env, &data);
 	while (1)
 	{
-		data.cmd_table = ft_lstnew(NULL, NULL, NULL); // CHANGER A METTRE DANS FONCTION + CLEAR LISTE A CHAKK FOIS
-		//dprintf(2, "\033[33mINITIAL STRING----------------\033[00m\n\t%s\n\n", str);
+		data.cmd_table = ft_lstnew(NULL, NULL, NULL);
 		data.here_doc_nbr = 0;
-		str = readline("Minishell $> "); //str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
-		add_history(str); // Faire une fonction special pour voir si str est composé que d'espaces ou de tab
+		str = readline("Minishell $> ");
+		if (str_is_empty(str) != 0)
+			add_history(str);
 		error = parserror(ft_lexer(str, &data));
-		//afflistchaine(&data);
 		if (error == 0)
 		{
 			data.cmd_table = data.cmd_table->next;
@@ -97,5 +110,6 @@ int	main(int argc, char **argv, char **env)
 	//aff_list_env(&data);
 	//afflistchaine(&data);
 	//rl_clear_history();    //Ne fonctionne pas
+	//str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
 	return (0);
 }
