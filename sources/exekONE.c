@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 10:39:34 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:27:17 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,67 +86,76 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 	return (0);
 }
 
+int	getcmd_and_pipe(t_data *data, char **env)
+{
+	if (put_path(data) == 2)
+		return (2);
+	data->j = 0;
+	data->pid = fork();
+	if (data->pid == 0)
+	{
+		if (data->exec_i != data->lst_nbr - 1)
+			dup2(data->fds[data->exec_i][1], STDOUT_FILENO);
+		if (data->exec_i != 0)
+			dup2(data->fds[data->exec_i - 1][0], STDIN_FILENO);
+		while (data->j < data->lst_nbr - 1)
+		{
+			close(data->fds[data->j][0]);
+			close(data->fds[data->j][1]);
+			data->j = data->j + 1;
+		}
+		if (cmd_redir(data, env, data->exec_i) != 0)
+			return (3);
+	}
+	if (data->cmd_table->next)
+		data->cmd_table = data->cmd_table->next;
+	if (data->cmd_table->next)
+		data->cmd_table = data->cmd_table->next;
+	data->exec_i++;
+	return (0);
+}
+
 int	exec_cmds(t_data *data, char **env)
 {
-	int		fds[data->lst_nbr][2];
-	int		i;
-	int		pid;
 	int		status;
 	char	*hd_file;
 
-	i = 0;
-	while (i < data->lst_nbr - 1)
+	data->exec_i = -1;
+	data->fds = malloc(sizeof(int *) * (data->lst_nbr + 1));
+	while (++data->exec_i <= data->lst_nbr)
+		data->fds[data->exec_i] = malloc(sizeof(int) * 2);
+	data->exec_i = 0;
+	while (data->exec_i < data->lst_nbr - 1)
 	{
-		pipe(fds[i]);
-		i++;
+		pipe(data->fds[data->exec_i]);
+		data->exec_i++;
 	}
-	i = 0;
-	while (i < data->lst_nbr)
+	data->exec_i = 0;
+	while (data->exec_i < data->lst_nbr)
 	{
 		data->arg_tabl = get_cmd(data);
-		if (put_path(data) == 2)
-			return (2);
-		data->j = 0;
-		pid = fork();
-		if (pid == 0)
-		{
-			if (i != data->lst_nbr - 1)
-				dup2(fds[i][1], STDOUT_FILENO);
-			if (i != 0)
-				dup2(fds[i - 1][0], STDIN_FILENO);
-			while (data->j < data->lst_nbr - 1)
-			{
-				close(fds[data->j][0]);
-				close(fds[data->j][1]);
-				data->j = data->j + 1;
-			}
-			if (cmd_redir(data, env, i) != 0)
-				return (3);
-		}
-		if (data->cmd_table->next)
-			data->cmd_table = data->cmd_table->next;
-		if (data->cmd_table->next)
-			data->cmd_table = data->cmd_table->next;
-		i++;
+		data->error_getcmd = getcmd_and_pipe(data, env);
+		if (data->error_getcmd != 0)
+			return (data->error_getcmd);
 	}
-	i = 0;
-	while (i < data->lst_nbr - 1)
+	data->exec_i = 0;
+	while (data->exec_i < data->lst_nbr - 1)
 	{
-		close(fds[i][0]);
-		close(fds[i][1]);
-		i++;
+		close(data->fds[data->exec_i][0]);
+		close(data->fds[data->exec_i][1]);
+		data->exec_i++;
 	}
-	i = 0;
-	while (i++ < data->lst_nbr)
+	data->exec_i = 0;
+	while (data->exec_i++ < data->lst_nbr)
 		wait(&status);
-	i = 0;
-	while (i < data->lst_nbr)
+	data->exec_i = 0;
+	while (data->exec_i < data->lst_nbr)
 	{
-		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(i + 97));
+		hd_file = ft_strjoin_c("/tmp/.here_doc", (char)(data->exec_i + 97));
 		if (access(hd_file, F_OK) == 0)
 			unlink(hd_file);
 		free(hd_file);
-		i++;
+		data->exec_i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 09:55:06 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:15:19 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ typedef struct s_data
 	int			i;
 	int			j;
 	int			x;
+	int			exec_i;
+	int			error_getcmd;
+	int			**fds;
+	int			pid;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -106,6 +110,8 @@ int		cmd_redir(t_data *data, char **env, int nbr);
 int		exec_cmds(t_data *data, char **env);
 char	**rm_quote(char **tabl, t_data *data);
 char	*rm_quote2(t_data *data, char **tabl, char *str);
+int		forward_redir(t_data *data, int i);
+int		backward_redir(t_data *data, int i, int nbr);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
