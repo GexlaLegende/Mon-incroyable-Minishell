@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:39:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:18:36 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ int			forward_redir(t_data *data, int i);
 int			backward_redir(t_data *data, int i, int nbr);
 int			getcmd_and_pipe(t_data *data, char **env);
 int			exec_cmds_second(t_data *data, char **env);
+//----------------------------------------------------
+
+//Builtins--------------------------------------------
+void		bin_env(t_data *data);
+void		bin_export(char **arg, t_data *data);
+void		ft_display_env(t_data *data);
+t_env_list	*ft_search_env(t_data *data, char *name);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
