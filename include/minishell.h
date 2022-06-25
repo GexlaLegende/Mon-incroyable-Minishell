@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 11:15:19 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:40:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ char	**rm_quote(char **tabl, t_data *data);
 char	*rm_quote2(t_data *data, char **tabl, char *str);
 int		forward_redir(t_data *data, int i);
 int		backward_redir(t_data *data, int i, int nbr);
+int		getcmd_and_pipe(t_data *data, char **env);
+int		exec_cmds_second(t_data *data, char **env);
 //----------------------------------------------------
 
 //Errors----------------------------------------------

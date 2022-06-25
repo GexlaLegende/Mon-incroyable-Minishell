@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/25 09:38:40 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/25 11:39:52 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SOURCES = main.c \
 		  env_lst_utils1.c \
 		  env_lst_utils2.c \
 		  ft_utils.c \
-		  exekONE.c \
+		  execution_one.c \
+		  execution_two.c \
 		  exec_path_fct.c \
 		  exec_one_cmd.c \
 		  rm_quote.c \
