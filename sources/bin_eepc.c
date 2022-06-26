@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 17:29:27 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:29:09 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	bin_env(t_data *data)
 	{
 		printf("%s", begin->name);
 		//checker si affiche un truc quand il n'a pas de value
-		printf("=%s\n", begin->value);
+		if (begin->value)//marche pas
+			printf("=%s\n", begin->value);
 		begin = begin->next;
 		i++;
 	}
@@ -55,7 +56,6 @@ int	bin_pwd()
 	char cwd[PATH_MAX];
 	
 	getcwd(cwd, sizeof(cwd));
-	printf("YOUPI\n");
 	printf("%s\n", cwd);
 	return (0);
 }

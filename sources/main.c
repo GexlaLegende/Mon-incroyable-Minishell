@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 10:25:01 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:46:08 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1 || !(argv[0]))
 		exit (0);
 	data.paths = recup_path(env, &data);
+	parserror(ft_put_env_in_lst(&data, env));
 	while (1)
 	{
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL);
@@ -66,13 +67,13 @@ int	main(int argc, char **argv, char **env)
 		if (data.main_error == 0)
 		{
 			data.cmd_table = data.cmd_table->next;
-			parserror(ft_env_var(&data, env));
+			parserror(ft_env_var(&data));
 			exekerror(ft_execution(&data, env));
 		}
 		if (data.main_error != -1)
 			ft_lstclear(&data.cmd_table);
-		ft_env_lstclear(&data.env_table);
 	}
+	ft_env_lstclear(&data.env_table);
 	rl_clear_history();
 	return (0);
 }

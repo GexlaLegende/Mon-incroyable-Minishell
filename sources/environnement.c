@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   environnement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/26 11:43:46 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:57:53 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_env_var(t_data *data, char **env)
+int	ft_env_var(t_data *data)
 {
 	int	error;
 
 	error = 0;
-	error = ft_put_env_in_lst(data, env);
-	if (error != 0)
-		return (error);
 	error = ft_search_and_replace_env_var(data);
 	if (error != 0)
 		return (error);
