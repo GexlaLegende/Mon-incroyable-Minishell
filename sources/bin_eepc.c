@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:38:01 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:34:43 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 /* void	bin_env(t_data *data)
 {
-	int		 nbr;
-	t_env_list  *begin;
-	
-	nbr = 0;
+	int			i;
+	t_env_list	*begin;
+
+	i = 0;
 	begin = data->env_table;
 	while (begin)
 	{
@@ -30,7 +30,7 @@
 		//checker si affiche un truc quand il n'a pas de value
 		printf("=%s\n", begin->value);
 		begin = begin->next;
-		nbr++;
+		i++;
 	}
 } */
 
@@ -42,7 +42,6 @@ void	bin_pwd()
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 }
-
 void	bin_cd()
 {
 	

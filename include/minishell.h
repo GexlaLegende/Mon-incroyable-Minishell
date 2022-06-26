@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:39:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:35:30 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_cmd_list
 {
@@ -134,6 +134,13 @@ int			getcmd_and_pipe(t_data *data, char **env);
 int			exec_cmds_second(t_data *data, char **env);
 //----------------------------------------------------
 
+//Builtins--------------------------------------------
+void		bin_env(t_data *data);
+void		bin_export(char **arg, t_data *data);
+void		ft_display_env(t_data *data);
+t_env_list	*ft_search_env(t_data *data, char *name);
+//----------------------------------------------------
+
 //Errors----------------------------------------------
 int			parserror(int nbr);
 void		exekerror(int nbr);
@@ -153,6 +160,7 @@ char		*ft_1ststrjoin(char *s1, char *s2);
 char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);
+void		ft_putendl(char *s);
 //----------------------------------------------------
 
 #endif
