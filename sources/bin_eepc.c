@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 18:19:30 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 10:02:35 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	bin_pwd()
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 }
-
 void	bin_cd()
 {
 	

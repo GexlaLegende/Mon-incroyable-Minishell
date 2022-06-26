@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:39:50 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:49:49 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,29 @@ int	str_is_empty(char *str)
 	return (0);
 }
 
-/* void	handler(int sigtype)
+void	handler(int sigtype)
 {
 	if (sigtype == SIGINT)
-		//ah oui
-	else if (sigtype == SIGQUIT)
-		//ah oui
-} */
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
-//struct sigaction	action;
-
-//action.sa_handler = handler;
-//action.sa_flags = SA_RESTART;
-//sigaction(SIGINT, &action, NULL); // ctrl-C
-//sigaction(SIGUSR2, &action, NULL); // ctrl-D = EOF = special = chiant
-//sigaction(SIGQUIT, &action, NULL); // ctrl-backslash
 int	main(int argc, char **argv, char **env)
 {
 	t_data				data;
+	struct sigaction	action;
+	struct sigaction	action2;
 
+	action.sa_handler = handler;
+	action.sa_flags = SA_RESTART;
+	action2.sa_handler = SIG_IGN;
+	action2.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &action, NULL); // ctrl-C
+	sigaction(SIGQUIT, &action2, NULL); // ctrl-backslash
 	if (argc != 1 || !(argv[0]))
 		exit (0);
 	data.paths = recup_path(env, &data);
@@ -66,10 +70,10 @@ int	main(int argc, char **argv, char **env)
 			ft_lstclear(&data.cmd_table);
 		ft_env_lstclear(&data.env_table);
 	}
+	rl_clear_history();
 	return (0);
 }
 
-//rl_clear_history();
 //aff_list_env(&data);
 //afflistchaine(&data);
 //rl_clear_history();    //Ne fonctionne pas

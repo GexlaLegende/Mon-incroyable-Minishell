@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:49:15 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 11:53:16 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:12:04 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,20 @@ int	str_diff(char *str1, char *str2)
 	if (str1[i] != str2[i])
 		return (1);
 	return (0);
+}
+
+void	ft_putendl(char *s)
+{
+	int	nbr;
+
+	nbr = 0;
+	if (s)
+	{
+		while (s[nbr])
+		{
+			write(1, &s[nbr], 1);
+			nbr++;
+		}
+		write(1, "\n", 1);
+	}
 }

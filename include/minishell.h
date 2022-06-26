@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 18:18:36 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 10:02:24 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_cmd_list
 {
@@ -160,6 +160,7 @@ char		*ft_1ststrjoin(char *s1, char *s2);
 char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);
+void		ft_putendl(char *s);
 //----------------------------------------------------
 
 #endif
