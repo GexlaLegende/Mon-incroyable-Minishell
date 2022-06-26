@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 17:36:17 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:34:21 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	bin_unset(char **arg, t_data *data)
 		{
 			while (ft_isalnum(arg[j][i]) == 1 || arg[j][i] == '_')
 				i++;
-			if (arg[j][i] == '=' && i > 0)
+			if ((arg[j][i] == '=' || arg[j][i] == '\0') && i > 0)
 			{
 				name = ft_substr(arg[j], 0, i);
 				p_env_name = ft_search_preenv(data, name);
