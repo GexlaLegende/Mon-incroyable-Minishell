@@ -6,13 +6,13 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 09:33:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:02:59 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* void	bin_export(char **arg, t_data *data)
+void	bin_export(char **arg, t_data *data)
 {
 	int			i;
 	int			j;
@@ -90,4 +90,3 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	}
 	return (NULL);
 }
- */

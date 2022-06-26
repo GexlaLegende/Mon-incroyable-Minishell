@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 09:34:43 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:02:35 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	
 } */
 
-/* void	bin_env(t_data *data)
+void	bin_env(t_data *data)
 {
 	int			i;
 	t_env_list	*begin;
@@ -32,7 +32,7 @@
 		begin = begin->next;
 		i++;
 	}
-} */
+}
 
 /* 
 void	bin_pwd()
