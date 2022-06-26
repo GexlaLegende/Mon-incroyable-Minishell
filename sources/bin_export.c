@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 10:02:59 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:38:11 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	bin_export(char **arg, t_data *data)
 		{
 			while (ft_isalnum(arg[j][i]) == 1 || arg[j][i] == '_')
 				i++;
-			if (arg[j][i] == '=' && i > 0)
+			if ((arg[j][i] == '=' || arg[j][i] == ' ') && i > 0)
 			{
 				name = ft_substr(arg[j], 0, i);
 				value = ft_substr(arg[j], i + 1, ft_strlen(arg[j]) - (i + 1));
@@ -50,7 +50,7 @@ void	bin_export(char **arg, t_data *data)
 				while (arg[j][i] && arg[j][i] != ' ')
 					i++;
 				name = ft_substr(arg[j], 0, i);
-				printf("bash: export: `%s': not a valid identifier\n", name);
+				printf("minishell: export: `%s': not a valid identifier\n", name);
 			}
 			if (arg[j][i])
 				i++;
@@ -84,7 +84,7 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	current_elmt = data->env_table;
 	while (current_elmt)
 	{
-		if (ft_strncmp(name, current_elmt->name, ft_strlen(name)) == 0)
+		if (ft_strncmp(name, current_elmt->name) == 0)
 			return (current_elmt);
 		current_elmt = current_elmt->next;
 	}

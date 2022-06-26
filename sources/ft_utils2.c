@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:49:00 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 11:50:47 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 11:43:22 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,11 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	return (result);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2)
 {
 	size_t	i;
 
 	i = 0;
-	n = 0;
 	while ((s1[i] || s2[i]))
 	{
 		if (s1[i] != s2[i])

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 09:49:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:25:01 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ int	str_is_empty(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
-		if (str[i] != ' ' && str[i] != 9)
-			return (1);
-		i++;
+		while (str[i])
+		{
+			if (str[i] != ' ' && str[i] != 9)
+				return (1);
+			i++;
+		}
 	}
 	return (0);
 }
