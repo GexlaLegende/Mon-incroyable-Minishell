@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 13:39:39 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:01:24 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parserror(int nbr)
 	if (nbr == 2)
 	{
 		write(2, "Error quote not closed\n", 24);
-		return (2);
+		return (-1);
 	}
 	if (nbr == 3)
 	{

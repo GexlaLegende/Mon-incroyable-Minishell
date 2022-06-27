@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 16:12:44 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:09:13 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	main(int argc, char **argv, char **env)
 		free(data.main_str);
 		if (data.main_error != -1)
 			ft_lstclear(&data.cmd_table_temp);
+		else
+			free(data.cmd_table);
 	}
 	ft_env_lstclear(&data.env_table);
 	rl_clear_history();
