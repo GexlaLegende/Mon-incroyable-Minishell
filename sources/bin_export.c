@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 10:02:59 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:41:48 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	bin_export(char **arg, t_data *data)
 	char		*value;
 	t_env_list	*p_env_name;
 
-	if (!arg)
+	j = 0;
+	if (!arg[j])
 	{
 		ft_display_env(data);
 		return ;
 	}
-	j = 0;
 	while (arg[j])
 	{
 		i = 0;
@@ -33,24 +33,29 @@ void	bin_export(char **arg, t_data *data)
 		{
 			while (ft_isalnum(arg[j][i]) == 1 || arg[j][i] == '_')
 				i++;
-			if (arg[j][i] == '=' && i > 0)
+			if ((arg[j][i] == '=' || arg[j][i] == '\0') && i > 0)
 			{
 				name = ft_substr(arg[j], 0, i);
-				value = ft_substr(arg[j], i + 1, ft_strlen(arg[j]) - (i + 1));
+				if (arg[j][i] == '=')
+				{
+					value = ft_substr(arg[j], i + 1, ft_strlen(arg[j]) - (i + 1));
+					i = ft_strlen(arg[j]);
+				}
+				else
+					value = "";
 				p_env_name = ft_search_env(data, name);
 				if (!p_env_name)
 					ft_env_lstadd_back(&data->env_table, \
 						ft_env_lstnew(name, value));
 				else
-					p_env_name->value = ft_replace_word(p_env_name->value, 0, \
-						ft_strlen(value), value);
+					p_env_name->value = ft_strdup(value);
 			}
 			else
 			{
 				while (arg[j][i] && arg[j][i] != ' ')
 					i++;
 				name = ft_substr(arg[j], 0, i);
-				printf("bash: export: `%s': not a valid identifier\n", name);
+				printf("minishell: export: `%s': not a valid identifier\n", name);
 			}
 			if (arg[j][i])
 				i++;
@@ -61,19 +66,17 @@ void	bin_export(char **arg, t_data *data)
 
 void	ft_display_env(t_data *data)
 {
-	int			i;
 	t_env_list	*begin;
 
 	//trier par ordre alphabetique
-	i = 0;
 	begin = data->env_table;
 	while (begin)
 	{
 		printf("declare -x %s", begin->name);
 		//checker si affiche un truc quand il n'a pas de value
-		printf("=%s\n", begin->value);
+		if (begin->value)//marche pas
+			printf("=\"%s\"\n", begin->value);
 		begin = begin->next;
-		i++;
 	}
 }
 
@@ -84,7 +87,7 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 	current_elmt = data->env_table;
 	while (current_elmt)
 	{
-		if (ft_strncmp(name, current_elmt->name, ft_strlen(name)) == 0)
+		if (ft_strncmp(name, current_elmt->name) == 0)
 			return (current_elmt);
 		current_elmt = current_elmt->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 11:41:06 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:00:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 			return (-1);
 		i++;
 	}
-	if (data->cmd_table->cmd[0] == '\0')
-		exit (0);
-	execve(data->arg_tabl[0], data->arg_tabl, env);
+	if (data->is_built_in == 0)
+	{
+		if (data->cmd_table->cmd[0] == '\0')
+			exit (0);
+		execve(data->arg_tabl[0], data->arg_tabl, env);
+	}
 	return (0);
 }
 

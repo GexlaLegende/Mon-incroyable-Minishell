@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 09:57:30 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:23:08 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*recupathline(char **env)
 		if (env[i][0] == 'P' && env[i][1] == 'A' && env[i][2] == 'T' &&
 				env[i][3] == 'H' && env[i][4] == '=')
 		{
-			str = malloc(sizeof(char) * (ft_strlen(env[i]) - 4));
+			//str = malloc(sizeof(char) * (ft_strlen(env[i]) - 4));
 			str = &env[i][5];
 			str[ft_strlen(env[i]) - 5] = '\0';
 		}

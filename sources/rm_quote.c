@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:37:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 09:38:26 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 11:54:333 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,27 @@ char	*rm_quote2(t_data *data, char **tabl, char *str)
 	}
 	data->i = data->i + 1;
 	return (str);
+}
+
+int	ft_is_builtin(const char *s1)
+{
+	size_t	i;
+	
+
+	i = 0;
+	if (ft_strncmp(s1, "pwd") == 0)
+		return (0);
+	if (ft_strncmp(s1, "env") == 0)
+		return (0);
+	if (ft_strncmp(s1, "cd") == 0)
+		return (0);
+	if (ft_strncmp(s1, "echo") == 0)
+		return (0);
+	if (ft_strncmp(s1, "export") == 0)
+		return (0);
+	if (ft_strncmp(s1, "unset") == 0)
+		return (0);
+	if (ft_strncmp(s1, "exit") == 0)
+		return (0);
+	return (1);
 }

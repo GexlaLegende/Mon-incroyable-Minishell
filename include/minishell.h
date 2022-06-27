@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 10:02:24 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:58:51 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_data
 	int			tabl_s;
 	int			parser_error;
 	int			rd_error;
+	int			is_built_in;
+	int			bin_nbr;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -108,7 +110,7 @@ int			ft_parser2(t_data *data, char *str);
 //----------------------------------------------------
 
 //Environnement---------------------------------------
-int			ft_env_var(t_data *data, char **env);
+int			ft_env_var(t_data *data);
 int			ft_put_env_in_lst(t_data *data, char **env);
 int			ft_search_and_replace_env_var(t_data *data);
 void		ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data);
@@ -135,10 +137,15 @@ int			exec_cmds_second(t_data *data, char **env);
 //----------------------------------------------------
 
 //Builtins--------------------------------------------
+int			built_in(t_data *data, char **env, int nbr);
+int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
+int			bin_pwd();
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_data *data);
 t_env_list	*ft_search_env(t_data *data, char *name);
+void		bin_unset(char **arg, t_data *data);
+t_env_list	*ft_search_preenv(t_data *data, char *name);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
@@ -154,7 +161,7 @@ int			ft_isalnum(int c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strdup(const char *s1);
 char		*ft_replace_word(char *str, int start, int len, char *word);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strncmp(const char *s1, const char *s2);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_1ststrjoin(char *s1, char *s2);
 char		*ft_strjoin_c(char *s1, char c);
