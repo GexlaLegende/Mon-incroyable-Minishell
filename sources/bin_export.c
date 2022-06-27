@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 21:41:48 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 09:51:46 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	bin_export(char **arg, t_data *data)
 	j = 0;
 	if (!arg[j])
 	{
+		ft_sort_list(data);
 		ft_display_env(data);
 		return ;
 	}
@@ -74,7 +75,7 @@ void	ft_display_env(t_data *data)
 	{
 		printf("declare -x %s", begin->name);
 		//checker si affiche un truc quand il n'a pas de value
-		if (begin->value)//marche pas
+		if (begin->value) //marche pas
 			printf("=\"%s\"\n", begin->value);
 		begin = begin->next;
 	}

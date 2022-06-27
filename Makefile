@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
+#    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/26 10:26:55 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/27 09:36:05 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES = main.c \
 		  parsing2.c \
 		  parsing_redir.c \
 		  environnement.c \
+		  env_in_list.c \
 		  error.c \
 		  cmd_lst_utils1.c \
 		  cmd_lst_utils2.c \
