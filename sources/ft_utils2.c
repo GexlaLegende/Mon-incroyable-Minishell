@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:49:00 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 23:19:44 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 23:34:36 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	*ft_strdup(const char *s1)
 {
 	char	*result;
 
-	if (!s1)
-		return (NULL);
 	result = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!result)
 		return (NULL);

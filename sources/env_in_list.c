@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/27 22:45:49 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 23:28:43 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,16 @@ t_env_list	*ft_dup_list(t_env_list *list)
 	while (elemt)
 	{
 		name = ft_strdup(elemt->name);
-		value = ft_strdup(elemt->value);
+		if (!name)
+			return (NULL);
+		if (elemt->value != NULL)
+		{
+			value = ft_strdup(elemt->value);
+			if (!value)
+				return (NULL);
+		}
+		else
+			value = NULL;
 		ft_env_lstadd_back(&new_list, ft_env_lstnew(name, value));
 		elemt = elemt->next;
 	}
