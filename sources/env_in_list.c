@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/27 22:36:31 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 22:42:58 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_sort_list(t_data *data)
 	dprintf(2, "\033[31mDEBUT list DUP------------------------------------------------------------------------------------\033[00m\n");
 	ft_display_env(data->env_table_sorted);//for debugging
 	dprintf(2, "\033[31mFIN list DUP--------------------------------------------------------------------------------------\033[00m\n");
-	dprintf(2, "\033[33mBefore sort list----------------------------------------------------------------------------------\033[00m\n");
 	
 	start = data->env_table_sorted;
 	while (start->next)
@@ -63,7 +62,7 @@ void	ft_sort_list(t_data *data)
 		analyse = start->next;
 		while (analyse)
 		{
-			if (ft_strncmp(analyse->name, min->name) > 0)
+			if (ft_strncmp(min->name, analyse->name) > 0)
 				min = analyse;
 			analyse = analyse->next;
 		}
@@ -79,7 +78,6 @@ void	ft_sort_list(t_data *data)
 	dprintf(2, "\033[32mDEBUT list SORTED----------------------------------------------------------------------------------\033[00m\n");
 	ft_display_env(data->env_table_sorted);//for debugging
 	dprintf(2, "\033[32mFIN list SORTED------------------------------------------------------------------------------------\033[00m\n");
-	dprintf(2, "\033[33mAfter sort list----------------------------------------------------------------------------------\033[00m\n");
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
