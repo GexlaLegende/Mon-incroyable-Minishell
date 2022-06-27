@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 18:37:37 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 21:05:27 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
 int			bin_pwd();
 void		bin_export(char **arg, t_data *data);
-void		ft_display_env(t_data *data);
+void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);

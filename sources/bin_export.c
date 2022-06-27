@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 16:25:59 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 21:03:26 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bin_export(char **arg, t_data *data)
 	if (!arg[j])
 	{
 		ft_sort_list(data);
-		ft_display_env(data);
+		//ft_display_env(data->env_table_sorted);
 		return ;
 	}
 	while (arg[j])
@@ -65,12 +65,11 @@ void	bin_export(char **arg, t_data *data)
 	}
 }
 
-void	ft_display_env(t_data *data)
+void	ft_display_env(t_env_list *list)
 {
 	t_env_list	*begin;
 
-	//trier par ordre alphabetique
-	begin = data->env_table;
+	begin = list;
 	while (begin)
 	{
 		printf("declare -x %s", begin->name);
