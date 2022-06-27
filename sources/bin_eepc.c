@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 21:29:09 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 08:11:14 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //FONCTION QUI RENVOIE VERS LES FONCTIONS BUILT-IN
 int	built_in(t_data *data, char **env, int nbr)// Les arguments sont dans data -> data->arg_tabl (arg_tabl[0] étant le nom de la cmd ex: -> env)
 {
+	printf("IN BUILT IN\n");
 	data->is_built_in = 1;
 	cmd_redir(data, env, nbr);
 	if (ft_strncmp(data->arg_tabl[0], "pwd") == 0)

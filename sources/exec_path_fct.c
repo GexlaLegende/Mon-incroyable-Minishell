@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 10:23:08 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 08:33:28 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	put_path(t_data *data)
 		free(full_path);
 		full_path = ft_1ststrjoin(data->paths[i], data->arg_tabl[0]);
 	}
+	free(data->arg_tabl[0]);
 	if (access(full_path, X_OK) == 0)
 	{
 		data->arg_tabl[0] = full_path;

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:41:08 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 17:30:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 07:55:33 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	getcmd_and_pipe(t_data *data, char **env)
 {
-	if (put_path(data) == 2)
-		return (2);
+	if (ft_is_builtin(data->arg_tabl[0]) != 0)
+		if (put_path(data) == 2)
+			return (2);
 	data->j = 0;
 	data->pid = fork();
 	if (data->pid == 0)
@@ -35,10 +36,11 @@ int	getcmd_and_pipe(t_data *data, char **env)
 			if (built_in(data, env, data->bin_nbr) != 0)
 				return (5);
 			data->is_built_in = 0;
-			return (0);
+			exit (0);
 		}
-		if (cmd_redir(data, env, data->exec_i) != 0)
-			return (3);
+		else
+			if (cmd_redir(data, env, data->exec_i) != 0)
+				return (3);
 	}
 	if (data->cmd_table->next)
 		data->cmd_table = data->cmd_table->next;

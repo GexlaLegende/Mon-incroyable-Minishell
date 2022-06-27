@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 19:58:51 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 08:39:35 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_data
 	int			rd_error;
 	int			is_built_in;
 	int			bin_nbr;
+	int			bin_inpipe;
+	int			nbr_save;
 }	t_data;
 
 //Lst - cmd ------------------------------------------

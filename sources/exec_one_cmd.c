@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 16:48:36 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 08:44:49 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	exec_one_cmd(t_data *data, char **env)
 
 	pid = 0;
 	data->bin_nbr = 0;
+	data->is_built_in = 0;
 	data->arg_tabl = get_cmd(data);
 	if (ft_is_builtin(data->arg_tabl[0]) == 0)
 	{
 		if (built_in(data, env, data->bin_nbr) != 0)
 			return (5);
-		data->is_built_in = 0;
 		return (0);
 	}
 	if (put_path(data) == 2)
@@ -40,6 +40,11 @@ int	exec_one_cmd(t_data *data, char **env)
 	waitpid(pid, NULL, 0);
 	if (access("/tmp/.here_doca", F_OK) == 0)
 		unlink("/tmp/.here_doca");
+	pid = 0;
+	printf("%d\n", data->nbr_save);
+	while (pid <= data->nbr_save + 1)
+		free(data->arg_tabl[pid++]);
+	free(data->arg_tabl);
 	return (0);
 }
 
@@ -112,6 +117,7 @@ char	**get_cmd(t_data *data)
 			i--;
 		str[i + 1] = '\0';
 	}
+	data->nbr_save = data->nbr;
 	tabl = malloc(sizeof(char *) * (data->nbr + 2));
 	tabl[data->nbr + 1] = NULL;
 	tabl = put_cmd_in_arg(i, data, str, tabl);
