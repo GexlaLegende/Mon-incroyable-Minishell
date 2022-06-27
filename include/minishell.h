@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 09:51:15 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 16:23:54 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ int			ft_parser2(t_data *data, char *str);
 //Environnement---------------------------------------
 int			ft_env_var(t_data *data);
 int			ft_put_env_in_lst(t_data *data, char **env);
+void		ft_sort_list(t_data *data);
+t_env_list	*ft_dup_list(t_env_list *list);
+void		ft_swap_elmt_list(t_env_list *elt1, t_env_list *elt2);
+int			ft_list_is_sorted(t_env_list *list);
 int			ft_search_and_replace_env_var(t_data *data);
 void		ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data);
 char		*ft_is_var_env(t_data *data, char *cmd, int pos, int len);
