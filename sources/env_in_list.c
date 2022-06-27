@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/27 16:42:48 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 19:03:42 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,31 @@ int	ft_put_env_in_lst(t_data *data, char **env)
 
 void	ft_sort_list(t_data *data)
 {
-	int	i;
-
-	i = 0;
+	t_env_list	*tmp;
+	t_env_list	*current;
+	t_env_list	*last;
+	
 	data->env_table_sorted = NULL;
 	data->env_table_sorted = ft_dup_list(data->env_table);
 	ft_display_env(data);//for debugging
 	dprintf(2, "Before sort list\n");
+	current = data->env_table_sorted;
 	while (ft_list_is_sorted(data->env_table_sorted) != 0)
 	{
-		while (data->env_table_sorted->next)
+		last = data->env_table_sorted;
+		while (current->next)
 		{
-			while (data->env_table_sorted->name[i] && data->env_table_sorted->next->name[i] \
-				&& data->env_table_sorted->name[i] == data->env_table_sorted->next->name[i])
-				i++;
-			if (data->env_table_sorted->name[i] > data->env_table_sorted->next->name[i])
+			if (ft_strncmp(current->name, current->next->name) > 0)
 			{
-				dprintf(2, "Before swap list\nname = %s | name + 1 = %s\n", data->env_table_sorted->name, data->env_table_sorted->next->name);
-				ft_swap_elmt_list(data->env_table_sorted, data->env_table_sorted->next);//il me faut un current
-				dprintf(2, "Before swap list\nname = %s | name + 1 = %s\n", data->env_table_sorted->name, data->env_table_sorted->next->name);
-				dprintf(2, "After swap list\n");
+				dprintf(2, "Before swap list\nname = %s | name + 1 = %s\n", current->name, current->next->name);
+				tmp = last->next;
+				last->next = current->next;
+				last->next = current->next->next;
+				current->next->next = tmp;
+				dprintf(2, "After swap list\nname = %s | name + 1 = %s\n", current->name, current->next->name);
 			}
-			data->env_table = data->env_table->next;
+			last = current;
+			current = current->next;
 		}
 	}
 	ft_display_env(data);//for debugging
@@ -87,7 +90,7 @@ t_env_list	*ft_dup_list(t_env_list *list)
 	return (new_list);
 }
 
-void	ft_swap_elmt_list(t_env_list *elt1, t_env_list *elt2)
+/* void	ft_swap_elmt_list(t_env_list *elt1, t_env_list *elt2)
 {
 	t_env_list	*tmp;
 
@@ -96,7 +99,7 @@ void	ft_swap_elmt_list(t_env_list *elt1, t_env_list *elt2)
 	elt2->next = elt1;
 	elt1 = elt2;
 	elt2 = tmp;
-}
+} */
 
 int	ft_list_is_sorted(t_env_list *list)
 {
@@ -107,10 +110,7 @@ int	ft_list_is_sorted(t_env_list *list)
 	elemt = list;
 	while (elemt)
 	{
-		while (elemt->name[i] && elemt->next->name[i] \
-			&& elemt->name[i] == elemt->next->name[i])
-			i++;
-		if (elemt->name[i] > elemt->next->name[i])
+		if (ft_strncmp(elemt->name, elemt->next->name) > 0)
 			return (1);
 		elemt = elemt->next;
 	}
