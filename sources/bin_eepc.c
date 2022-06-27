@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 08:11:14 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 23:00:17 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	bin_env(t_data *data)
 	begin = data->env_table;
 	while (begin)
 	{
-		printf("%s", begin->name);
-		//checker si affiche un truc quand il n'a pas de value
-		if (begin->value)//marche pas
+		if (begin->value != NULL)
+		{
+			printf("%s", begin->name);
 			printf("=%s\n", begin->value);
+		}
 		begin = begin->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 21:03:26 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 23:24:19 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bin_export(char **arg, t_data *data)
 	if (!arg[j])
 	{
 		ft_sort_list(data);
-		//ft_display_env(data->env_table_sorted);
+		ft_display_env(data->env_table_sorted);
 		return ;
 	}
 	while (arg[j])
@@ -43,7 +43,7 @@ void	bin_export(char **arg, t_data *data)
 					i = ft_strlen(arg[j]);
 				}
 				else
-					value = "";
+					value = NULL;
 				p_env_name = ft_search_env(data, name);
 				if (!p_env_name)
 					ft_env_lstadd_back(&data->env_table, \
@@ -65,6 +65,7 @@ void	bin_export(char **arg, t_data *data)
 	}
 }
 
+/* Display a list */
 void	ft_display_env(t_env_list *list)
 {
 	t_env_list	*begin;
@@ -73,13 +74,15 @@ void	ft_display_env(t_env_list *list)
 	while (begin)
 	{
 		printf("declare -x %s", begin->name);
-		//checker si affiche un truc quand il n'a pas de value
-		if (begin->value) //marche pas
+		if (begin->value)
 			printf("=\"%s\"\n", begin->value);
+		else
+			printf("\n");
 		begin = begin->next;
 	}
 }
 
+/* Search a environment variable in env_table by name */
 t_env_list	*ft_search_env(t_data *data, char *name)
 {
 	t_env_list	*current_elmt;

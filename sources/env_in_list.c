@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/27 22:42:58 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/27 22:45:49 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	ft_put_env_in_lst(t_data *data, char **env)
 	return (0);
 }
 
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
+/* Sort env_table in the alphabetical order of names */
 void	ft_sort_list(t_data *data)
 {
 	t_env_list	*start;
@@ -51,10 +49,6 @@ void	ft_sort_list(t_data *data)
 	
 	data->env_table_sorted = NULL;
 	data->env_table_sorted = ft_dup_list(data->env_table);
-	dprintf(2, "\033[31mDEBUT list DUP------------------------------------------------------------------------------------\033[00m\n");
-	ft_display_env(data->env_table_sorted);//for debugging
-	dprintf(2, "\033[31mFIN list DUP--------------------------------------------------------------------------------------\033[00m\n");
-	
 	start = data->env_table_sorted;
 	while (start->next)
 	{
@@ -74,15 +68,9 @@ void	ft_sort_list(t_data *data)
 		min->value = tmp_value;
 		start = start->next;
 	}
-	
-	dprintf(2, "\033[32mDEBUT list SORTED----------------------------------------------------------------------------------\033[00m\n");
-	ft_display_env(data->env_table_sorted);//for debugging
-	dprintf(2, "\033[32mFIN list SORTED------------------------------------------------------------------------------------\033[00m\n");
 }
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
+/* Duplicates a list in another one and return it */
 t_env_list	*ft_dup_list(t_env_list *list)
 {
 	t_env_list	*elemt;
@@ -101,46 +89,3 @@ t_env_list	*ft_dup_list(t_env_list *list)
 	}
 	return (new_list);
 }
-
-int	ft_list_is_sorted(t_env_list *list)
-{
-	int			i;
-	t_env_list	*elemt;
-
-	i = 0;
-	elemt = list;
-	while (elemt)
-	{
-		if (ft_strncmp(elemt->name, elemt->next->name) > 0)
-			return (1);
-		elemt = elemt->next;
-	}
-	return (0);
-}
-
-
-
-/* void Tri_Selection(liste *tete)
-{
-	liste *p, *q, *min;
-	int aide;
-	
-	p = tete;
-	while (p->next != NULL)
-	{
-		min = p;
-		q = p->next;
-		while (q != NULL)
-		{
-			if (q->val < min->val)
-			{
-				min = q;
-			}
-			q = q->next;
-		}
-		aide = p->val;
-		p->val = min->val;
-		min->val = aide;
-		p = p->next;
-	}
-} */
