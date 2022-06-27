@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 08:39:35 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:46:26 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data
 {
 	char		*main_str;
 	t_cmd_list	*cmd_table;
+	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
 	int			squote;
 	int			dquote;
@@ -78,6 +79,7 @@ typedef struct s_data
 	int			bin_nbr;
 	int			bin_inpipe;
 	int			nbr_save;
+	int			free_i;
 }	t_data;
 
 //Lst - cmd ------------------------------------------

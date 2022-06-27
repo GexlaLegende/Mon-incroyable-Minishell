@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 08:44:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:12:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	exec_one_cmd(t_data *data, char **env)
 	if (access("/tmp/.here_doca", F_OK) == 0)
 		unlink("/tmp/.here_doca");
 	pid = 0;
-	printf("%d\n", data->nbr_save);
 	while (pid <= data->nbr_save + 1)
 		free(data->arg_tabl[pid++]);
 	free(data->arg_tabl);
@@ -80,9 +79,7 @@ char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl)
 		quotes_switch(data, str, i);
 		if (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
 		{
-			tabl[data->nbr] = malloc(sizeof(char) * ft_strlen(&str[i + 1]));
-			tabl[data->nbr] = &str[i + 1];
-			tabl[data->nbr][ft_strlen(tabl[data->nbr])] = '\0';
+			tabl[data->nbr] = ft_malloc_str(&str[i + 1]);
 			while (str[i] == ' ' && data->squote == 0 && data->dquote == 0)
 				i--;
 			str[i + 1] = '\0';
@@ -91,9 +88,7 @@ char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl)
 		else
 			i--;
 	}
-	tabl[data->nbr] = malloc(sizeof(char) * ft_strlen(&str[i]));
-	tabl[data->nbr] = &str[i];
-	tabl[data->nbr][ft_strlen(tabl[data->nbr])] = '\0';
+	tabl[data->nbr] = ft_malloc_str(&str[i]);
 	tabl = rm_quote(tabl, data);
 	return (tabl);
 }
@@ -107,7 +102,7 @@ char	**get_cmd(t_data *data)
 
 	str = data->cmd_table->cmd;
 	data->nbr = get_argnbr(str, data);
-	i = ft_strlen(str) - 1;
+	i = strlen(str) - 1;
 	if (i == -1)
 		i = 0;
 	if (str[i] == ' ' && data->squote == 0 && data->dquote == 0)

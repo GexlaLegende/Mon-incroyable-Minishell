@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 08:58:47 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:12:44 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ int	main(int argc, char **argv, char **env)
 		data.main_error = parserror(ft_lexer(data.main_str, &data));
 		if (data.main_error == 0)
 		{
+			data.cmd_table_temp = data.cmd_table;
 			data.cmd_table = data.cmd_table->next;
 			parserror(ft_env_var(&data));
 			exekerror(ft_execution(&data, env));
 		}
+		free(data.main_str);
 		if (data.main_error != -1)
-			ft_lstclear(&data.cmd_table);
+			ft_lstclear(&data.cmd_table_temp);
 	}
 	ft_env_lstclear(&data.env_table);
 	rl_clear_history();
@@ -82,3 +84,68 @@ int	main(int argc, char **argv, char **env)
 //afflistchaine(&data);
 //rl_clear_history();    //Ne fonctionne pas
 //str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");
+
+/* printf("%p\n", data.cmd_table->cmd);
+		printf("%p\n", &data.cmd_table->redir_type[0]);
+		printf("%p\n", &data.cmd_table->redir_type[1]);
+		printf("%p\n", data.arg_tabl);
+		printf("%p\n", data.arg_tabl[0]);
+		printf("%p\n", data.arg_tabl[1]);
+		printf("%p\n", data.arg_tabl[2]);
+		printf("%p\n", data.paths);
+		printf("%p\n", data.paths[0]);
+		printf("%p\n", data.paths[1]);
+		printf("%p\n", data.paths[2]);
+		printf("%p\n", data.paths[3]);
+		printf("%p\n", data.paths[4]);
+		printf("%p\n", data.paths[5]);
+		printf("%p\n", data.paths[6]);
+		printf("%p\n", data.paths[7]);
+		printf("%p\n", data.paths[8]);
+		printf("%p\n", data.paths[9]); */
+		/* while (data.env_table->next->next)
+		{
+			printf("%p\n", data.env_table);
+			data.env_table = data.env_table->next;
+		}
+		printf("%p\n", data.env_table->name);
+		printf("%p\n", data.env_table->value);
+		printf("%p\n", data.env_table->next); */
+		//sleep(20);
+		/* printf("%p\n", data.main_str);
+		printf("%p\n", data.cmd_table);
+		printf("%p\n", data.env_table);
+		printf("%p\n", &data.squote);
+		printf("%p\n", &data.dquote);
+		printf("%p\n", &data.r_tabl);
+		printf("%p\n", data.paths);
+		printf("%p\n", data.arg_tabl);
+		printf("%p\n", &data.path_nbr);
+		printf("%p\n", &data.here_doc_nbr);
+		printf("%p\n", &data.lst_nbr);
+		printf("%p\n", &data.nbr);
+		printf("%p\n", &data.i);
+		printf("%p\n", &data.li);
+		printf("%p\n", &data.ly);
+		printf("%p\n", &data.j);
+		printf("%p\n", &data.rdj);
+		printf("%p\n", &data.x);
+		printf("%p\n", &data.exec_i);
+		printf("%p\n", &data.lexer_error);
+		printf("%p\n", &data.lexer_start);
+		printf("%p\n", &data.error_getcmd);
+		printf("%p\n", &data.main_error);
+		printf("%p\n", &data.fds);
+		printf("%p\n", &data.pid);
+		printf("%p\n", &data.rdi);
+		printf("%p\n", &data.pskip);
+		printf("%p\n", data.pcommand);
+		printf("%p\n", data.redir_type);
+		printf("%p\n", data.redir_file);
+		printf("%p\n", &data.tabl_s);
+		printf("%p\n", &data.parser_error);
+		printf("%p\n", &data.rd_error);
+		printf("%p\n", &data.is_built_in);
+		printf("%p\n", &data.bin_nbr);
+		printf("%p\n", &data.bin_inpipe);
+		printf("%p\n", &data.nbr_save); */

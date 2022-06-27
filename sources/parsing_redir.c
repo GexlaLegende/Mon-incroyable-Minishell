@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:18:34 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 15:33:48 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:45:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	count_redir(char *str, t_data *data)
 	int	i;
 	int	count;
 
-	i = 0;
+	i = -1;
 	count = 0;
-	while (str[i++])
+	while (str[++i])
 	{
 		quotes_switch(data, str, i);
 		if ((str[i] == '>' || str[i] == '<') && data->squote == 0

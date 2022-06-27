@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 12:28:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:42:18 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,12 @@ void	ft_lstclear(t_cmd_list **lst)
 	(*lst) = nexto;
 	while (*lst != NULL)
 	{
-		i = 0;
+		i = -1;
 		nexto = (*lst)->next;
 		free((*lst)->cmd);
 		free((*lst)->redir_type);
-		while ((*lst)->redir_file[i])
-		{
+		while ((*lst)->redir_file[++i])
 			free((*lst)->redir_file[i]);
-			i++;
-		}
 		free((*lst)->redir_file);
 		free(*lst);
 		(*lst) = nexto;
