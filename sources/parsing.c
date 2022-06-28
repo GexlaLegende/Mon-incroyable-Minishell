@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/25 14:45:38 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:00:26 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	ft_parser(char *str, t_data *data, int end)
 
 //TODO
 // FONCTION D"ERREUR A MACHINER -- à moitier fait ça mais sa passe crème tkt
-// LES SEGFAULTS (à trouver avant de les corriger)
+// LES SEGFAULTS (à trouver avant de les corriger)return (2)
 
 // FAIT | GERER LES NOM DE FICHIER APRES LES REDIR KI -
 // - COMMENCE PAR UN CHAR SPE EX : |, &, %.....

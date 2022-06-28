@@ -31,6 +31,7 @@ char	**rm_quote(char **tabl, t_data *data)
 		while (tabl[data->j][data->i])
 			str = rm_quote2(data, tabl, str);
 		str[ft_strlen(tabl[data->j]) - data->nbr] = '\0';
+		free(tabl[data->j]);
 		tabl[data->j] = str;
 		data->j = data->j + 1;
 	}

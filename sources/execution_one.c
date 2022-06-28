@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 08:23:36 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:33:08 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	backward_redir(t_data *data, int i, int nbr)
 			return (-1);
 		dup2(file, STDIN_FILENO);
 		close(file);
+		free(here_doc_file);
 	}
 	if (data->cmd_table->redir_type[i] == 4)
 	{
@@ -115,6 +116,10 @@ int	exec_cmds(t_data *data, char **env)
 		free(hd_file);
 		data->exec_i++;
 	}
+	data->free_i = -1;
+	while (++data->free_i <= data->lst_nbr)
+		free(data->fds[data->free_i]);
+	free(data->fds);
 	return (0);
 }
 
