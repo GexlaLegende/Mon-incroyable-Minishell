@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 15:46:26 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 10:08:29 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	t_cmd_list	*cmd_table;
 	t_cmd_list	*cmd_table_temp;
 	t_env_list	*env_table;
+	t_env_list	*env_table_sorted;
 	int			squote;
 	int			dquote;
 	int			r_tabl;
@@ -116,6 +117,9 @@ int			ft_parser2(t_data *data, char *str);
 //Environnement---------------------------------------
 int			ft_env_var(t_data *data);
 int			ft_put_env_in_lst(t_data *data, char **env);
+void		ft_sort_list(t_data *data);
+t_env_list	*ft_dup_list(t_env_list *list);
+void		ft_insertion_sort(t_data *data);
 int			ft_search_and_replace_env_var(t_data *data);
 void		ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data);
 char		*ft_is_var_env(t_data *data, char *cmd, int pos, int len);
@@ -144,9 +148,9 @@ int			exec_cmds_second(t_data *data, char **env);
 int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
-int			bin_pwd();
+int			bin_pwd(void);
 void		bin_export(char **arg, t_data *data);
-void		ft_display_env(t_data *data);
+void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
