@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 18:19:21 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 19:07:56 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,38 @@ int	str_is_empty(char *str)
 	return (0);
 }
 
-/* static void	handler(int sigtype)
+static void	handler(int sigtype)
 {
 	if (sigtype == SIGINT)
 	{
-		if (!g_signal_flags)
-			printf("\n");
+		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-} */
+}
 
-/* void setup_term(int	save)
+static void	handler2(int sigtype)
 {
-    static struct termios t;
-	static int	ifsave;
-	struct termios saved;
+	if (sigtype == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+	if (sigtype == SIGQUIT)
+	{
+		printf("Quit: 3\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
+
+void setup_term(int	save)
+{
+    struct 			termios t;
+	static int		ifsave;
+	static struct	termios saved;
 
 	if (!ifsave)
 	{
@@ -59,7 +74,7 @@ int	str_is_empty(char *str)
 	   tcsetattr(STDOUT_FILENO, TCSANOW, &saved);
 	else
 	   tcsetattr(STDOUT_FILENO, TCSANOW, &t);
-} */
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -73,10 +88,13 @@ int	main(int argc, char **argv, char **env)
 	{
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL);
 		data.here_doc_nbr = 0;
-		//setup_term(0);
-		/* signal(SIGINT, handler); // ctrl-C
-		signal(SIGQUIT, SIG_IGN); // ctrl-backslash */
+		signal(SIGINT, handler); // ctrl-C
+		signal(SIGQUIT, SIG_IGN); // ctrl-backslash
+		setup_term(0);
 		data.main_str = readline("Minishell $> ");
+		setup_term(1);
+		if (!data.main_str)
+			bin_exit(&data, 0);
 		if (str_is_empty(data.main_str) != 0)
 			add_history(data.main_str);
 		data.main_error = parserror(ft_lexer(data.main_str, &data));
@@ -84,6 +102,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			data.cmd_table_temp = data.cmd_table;
 			data.cmd_table = data.cmd_table->next;
+			signal(SIGINT, handler2);
+			signal(SIGQUIT, handler2);
 			parserror(ft_env_var(&data));
 			exekerror(ft_execution(&data, env));
 		}
