@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/28 21:09:43 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:16:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	ft_insertion_sort(t_data *data)
 	start = data->env_table_sorted;
 	while (start->next)
 	{
-		printf("A\n");
 		min = start;
 		analyse = start->next;
 		while (analyse)
