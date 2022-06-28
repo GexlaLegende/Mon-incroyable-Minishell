@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:08:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:26:56 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **env)
 		data.main_str = readline("Minishell $> ");
 		if (str_is_empty(data.main_str) != 0)
 			add_history(data.main_str);
+		dprintf(2, "INITIAL = %s\nTEST = %s\n", data.main_str, ft_search_and_change_env_var(&data, data.main_str));//for test
 		data.main_error = parserror(ft_lexer(data.main_str, &data));
 		if (data.main_error == 0)
 		{
