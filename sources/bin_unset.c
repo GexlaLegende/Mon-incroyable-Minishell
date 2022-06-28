@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 21:34:21 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 10:24:38 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	bin_unset(char **arg, t_data *data)
 	char		*name;
 	t_env_list	*save_p_next;
 	t_env_list	*p_env_name;
-	
+
 	j = 0;
 	while (arg[j])
 	{
