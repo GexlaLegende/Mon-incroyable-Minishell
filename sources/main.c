@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 12:26:56 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 15:44:54 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	str_is_empty(char *str)
 	return (0);
 }
 
-void	handler(int sigtype)
+static void	handler(int sigtype)
 {
 	if (sigtype == SIGINT)
 	{
@@ -40,18 +40,32 @@ void	handler(int sigtype)
 	}
 }
 
+void setup_term(int	save)
+{
+    static struct termios t;
+	static int	ifsave;
+	struct termios saved;
+
+	if (!ifsave)
+	{
+		tcgetattr(STDOUT_FILENO, &saved);
+		ifsave = 1;
+	}
+    tcgetattr(STDOUT_FILENO, &t);
+	t.c_lflag &= ~ECHOCTL;
+	t.c_cc[VQUIT] = 0;
+	if (save == 1)
+	   tcsetattr(STDOUT_FILENO, TCSANOW, &saved);
+	else
+	   tcsetattr(STDOUT_FILENO, TCSANOW, &t);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data				data;
-	struct sigaction	action;
-	struct sigaction	action2;
 
-	action.sa_handler = handler;
-	action.sa_flags = SA_RESTART;
-	action2.sa_handler = SIG_IGN;
-	action2.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &action, NULL); // ctrl-C
-	sigaction(SIGQUIT, &action2, NULL); // ctrl-backslash
+	signal(SIGINT, handler); // ctrl-C
+	signal(SIGQUIT, SIG_IGN); // ctrl-backslash */
 	if (argc != 1 || !(argv[0]))
 		exit (0);
 	data.paths = recup_path(env, &data);
@@ -60,6 +74,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL);
 		data.here_doc_nbr = 0;
+		setup_term(0);
 		data.main_str = readline("Minishell $> ");
 		if (str_is_empty(data.main_str) != 0)
 			add_history(data.main_str);
@@ -71,6 +86,7 @@ int	main(int argc, char **argv, char **env)
 			parserror(ft_env_var(&data));
 			exekerror(ft_execution(&data, env));
 		}
+		setup_term(1);
 		free(data.main_str);
 		if (data.main_error != -1)
 			ft_lstclear(&data.cmd_table_temp);
