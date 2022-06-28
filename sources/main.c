@@ -63,7 +63,6 @@ int	main(int argc, char **argv, char **env)
 		data.main_str = readline("Minishell $> ");
 		if (str_is_empty(data.main_str) != 0)
 			add_history(data.main_str);
-		dprintf(2, "INITIAL = %s\nTEST = %s\n", data.main_str, ft_search_and_change_env_var(&data, data.main_str));//for test
 		data.main_error = parserror(ft_lexer(data.main_str, &data));
 		if (data.main_error == 0)
 		{

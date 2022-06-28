@@ -16,21 +16,21 @@
 char	*ft_search_and_change_env_var(t_data *data, char *str)
 {
 	int		i;
-	char	*result;
 
 	i = 0;
+	dprintf(2, "Init = %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 \
 			|| str[i + 1] == '_') && data->squote == 0)
 		{
-			result = ft_change_var_env(str, i, data);
+			str = ft_change_var_env(str, i, data);
 			if (i > 0)
 				i--;
 		}
 		i++;
 	}
-	return (0);
+	return (str);
 }
 
 /*	Replace environment variables by their value in str of here_doc */
