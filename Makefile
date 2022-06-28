@@ -6,7 +6,7 @@
 #    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/28 12:05:09 by dbouron          ###   ########lyon.fr    #
+#    Updated: 2022/06/28 16:31:00 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SOURCES = main.c \
 		  exec_one_cmd.c \
 		  rm_quote.c \
 		  bin_eepc.c \
+		  bin_cd.c \
 		  bin_exit.c \
 		  bin_export.c \
 		  bin_unset.c 

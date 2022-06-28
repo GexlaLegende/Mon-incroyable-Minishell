@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 10:38:35 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 17:47:02 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int	built_in(t_data *data, char **env, int nbr)
 		bin_unset(&data->arg_tabl[1], data);
 	if (ft_strncmp(data->arg_tabl[0], "echo") == 0)
 		bin_echo(data);
+	if (ft_strncmp(data->arg_tabl[0], "cd") == 0)
+		bin_cd(data);
+	if (ft_strncmp(data->arg_tabl[0], "exit") == 0)
+		bin_exit(data, data->is_pipe);
 	i = 0;
 	while (i <= data->nbr_save + 1)
 		free(data->arg_tabl[i++]);
@@ -80,16 +84,21 @@ void	bin_env(t_data *data)
 
 	i = 0;
 	begin = data->env_table;
-	while (begin)
+	if (data->arg_tabl[1] == NULL)
 	{
-		if (begin->value != NULL)
+		while (begin)
 		{
-			printf("%s", begin->name);
-			printf("=%s\n", begin->value);
+			if (begin->value != NULL)
+			{
+				printf("%s", begin->name);
+				printf("=%s\n", begin->value);
+			}
+			begin = begin->next;
+			i++;
 		}
-		begin = begin->next;
-		i++;
 	}
+	else
+		printf("env: No such file or directory\n");
 }
 
 /* Display the PATH of the current position */
@@ -101,8 +110,3 @@ int	bin_pwd(void)
 	printf("%s\n", cwd);
 	return (0);
 }
-
-/* void	bin_cd()
-{
-	
-} */

@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:03:40 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 17:14:07 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_display_env(t_env_list *list)
 	}
 }
 
-/* Search a environment variable in env_table by name */
+/*	Search a environment variable in env_table by name 
+	and return a pointer to the element of the list */
 t_env_list	*ft_search_env(t_data *data, char *name)
 {
 	t_env_list	*current_elmt;

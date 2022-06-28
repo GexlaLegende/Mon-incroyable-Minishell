@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 16:40:59 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:46:50 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_data
 	int			e;
 	int			f;
 	int			echo_n;
+	int			is_pipe;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -155,6 +156,9 @@ int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
 int			bin_pwd(void);
+void		bin_cd(t_data *data);
+char		*ft_chr_var_env(t_data *data, char *str);
+void		ft_update_var_env(t_data *data, char *name, char *value);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
@@ -165,6 +169,7 @@ t_env_list	*ft_search_preenv(t_data *data, char *name);
 void		ft_remove_env_var(char **arg, t_data *data);
 void		ft_name_error(char **arg, t_data *data);
 int			bin_echo(t_data *data);
+void		bin_exit(t_data *data, int pipe);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
