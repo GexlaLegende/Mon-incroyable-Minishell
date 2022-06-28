@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 16:12:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 18:22:37 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	exec_one_cmd(t_data *data, char **env)
 
 	pid = 0;
 	data->bin_nbr = 0;
-	data->is_built_in = 0;
 	data->arg_tabl = get_cmd(data);
 	if (ft_is_builtin(data->arg_tabl[0]) == 0)
 	{

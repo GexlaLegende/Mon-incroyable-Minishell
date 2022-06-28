@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 17:33:08 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 18:22:41 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,13 @@ int	ft_execution(t_data *data, char **env)
 
 	last = ft_lstlast(data->cmd_table);
 	data->lst_nbr = ft_lstsize(data->cmd_table);
+	data->is_pipe = 0;
+	data->is_built_in = 0;
 	if (data->lst_nbr == 1)
 		return (exec_one_cmd(data, env));
 	if (data->lst_nbr > 1)
 	{
+		data->is_pipe = 1;
 		if (last->cmd[0] == '\0')
 			return (4);
 		data->lst_nbr = (data->lst_nbr / 2) + 1;
