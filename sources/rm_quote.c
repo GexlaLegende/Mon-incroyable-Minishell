@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:37:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:21:42 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 20:37:22 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,18 @@ int	ft_is_builtin(const char *s1)
 	if (ft_strncmp(s1, "exit") == 0)
 		return (0);
 	return (1);
+}
+
+char	*ft_found_path(t_data *data, char *str)
+{
+	t_env_list	*env_list;
+
+	env_list = data->env_table;
+	while (env_list)
+	{
+		if (ft_strncmp(str, env_list->name) == 0)
+			return (ft_malloc_str(env_list->value));
+		env_list = env_list->next;
+	}
+	return ("");
 }

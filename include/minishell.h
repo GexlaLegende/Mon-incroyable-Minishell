@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 17:46:50 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 20:24:45 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char		*ft_change_var_env(char *str, int pos, t_data *data);
 
 //Execution-------------------------------------------
 int			ft_execution(t_data *data, char **env);
-char		**recup_path(char **env, t_data *data);
+char		**recup_path(t_data *data);
 char		*recupathline(char **env);
 int			exec_one_cmd(t_data *data, char **env);
 char		**get_cmd(t_data *data);
@@ -192,6 +192,7 @@ char		*ft_strjoin_c(char *s1, char c);
 int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);
 void		ft_putendl(char *s);
+char		*ft_found_path(t_data *data, char *str);
 //----------------------------------------------------
 
 #endif

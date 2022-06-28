@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 15:06:09 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:57:15 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // NORME -- {OK}
 
 //RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
-char	*recupathline(char **env)
+/* char	*recupathline(char **env)
 {
 	int		i;
 	char	*str;
@@ -33,16 +33,16 @@ char	*recupathline(char **env)
 		i++;
 	}
 	return (str);
-}
+} */
 
 //RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
-char	**recup_path(char **env, t_data *data)
+char	**recup_path(t_data *data)
 {
 	int		i;
 	char	*str;
 	char	**tabl;
 
-	str = recupathline(env);
+	str = ft_found_path(data, "PATH");
 	i = -1;
 	data->nbr = 0;
 	while (str[++i])
@@ -59,7 +59,7 @@ char	**recup_path(char **env, t_data *data)
 			data->nbr = data->nbr - 1;
 		}
 	}
-	tabl[data->nbr] = ft_malloc_str(&str[i]);
+	tabl[data->nbr] = ft_malloc_str(str);
 	return (tabl);
 }
 

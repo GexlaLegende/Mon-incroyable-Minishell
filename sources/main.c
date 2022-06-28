@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 19:07:56 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:23:39 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1 || !(argv[0]))
 		exit (0);
-	data.paths = recup_path(env, &data);
 	parserror(ft_put_env_in_lst(&data, env));
 	while (1)
 	{
+		data.paths = recup_path(&data);
 		data.cmd_table = ft_lstnew(NULL, NULL, NULL);
 		data.here_doc_nbr = 0;
 		signal(SIGINT, handler); // ctrl-C
