@@ -6,18 +6,19 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:10:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 10:38:35 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//FONCTION QUI RENVOIE VERS LES FONCTIONS BUILT-IN
-int	built_in(t_data *data, char **env, int nbr)// Les arguments sont dans data -> data->arg_tabl (arg_tabl[0] étant le nom de la cmd ex: -> env)
+/*	Choose the appropriate builtin function 
+	Arguments are in data -> data->arg_tabl
+	(arg_tabl[0] is the name of cmd - ex: env) */
+int	built_in(t_data *data, char **env, int nbr)
 {
 	int	i;
 
-	//printf("IN BUILT IN\n");
 	data->is_built_in = 1;
 	cmd_redir(data, env, nbr);
 	if (ft_strncmp(data->arg_tabl[0], "pwd") == 0)
@@ -71,6 +72,7 @@ int	bin_echo(t_data *data)
 	return (0);
 }
 
+/* Builtin env: display environment variables if there is a value */
 void	bin_env(t_data *data)
 {
 	int			i;
@@ -90,14 +92,16 @@ void	bin_env(t_data *data)
 	}
 }
 
-int	bin_pwd()
+/* Display the PATH of the current position */
+int	bin_pwd(void)
 {
-	char cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 	return (0);
 }
+
 /* void	bin_cd()
 {
 	

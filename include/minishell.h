@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 10:51:55 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:16:57 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_data
 	int			bin_inpipe;
 	int			nbr_save;
 	int			free_i;
+	int			e;
+	int			f;
 	int			echo_n;
 }	t_data;
 
@@ -153,8 +155,12 @@ int			bin_pwd(void);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
+void		ft_correct_env_name(char **arg, t_data *data);
+void		ft_wrong_env_name(char **arg, t_data *data);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
+void		ft_remove_env_var(char **arg, t_data *data);
+void		ft_name_error(char **arg, t_data *data);
 int			bin_echo(t_data *data);
 //----------------------------------------------------
 
