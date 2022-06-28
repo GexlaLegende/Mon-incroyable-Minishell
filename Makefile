@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
 #    Updated: 2022/06/28 10:26:38 by dbouron          ###   ########lyon.fr    #
