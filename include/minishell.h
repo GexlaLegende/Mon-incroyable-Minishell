@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 10:08:29 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 10:51:55 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_data
 	int			bin_inpipe;
 	int			nbr_save;
 	int			free_i;
+	int			echo_n;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -154,6 +155,7 @@ void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
+int			bin_echo(t_data *data);
 //----------------------------------------------------
 
 //Errors----------------------------------------------
