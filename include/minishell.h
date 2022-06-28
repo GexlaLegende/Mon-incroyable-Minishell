@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:16:57 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 12:22:32 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void		ft_insertion_sort(t_data *data);
 int			ft_search_and_replace_env_var(t_data *data);
 void		ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data);
 char		*ft_is_var_env(t_data *data, char *cmd, int pos, int len);
+char		*ft_search_and_change_env_var(t_data *data, char *str);
+char		*ft_change_var_env(char *str, int pos, t_data *data);
 //----------------------------------------------------
 
 //Execution-------------------------------------------
