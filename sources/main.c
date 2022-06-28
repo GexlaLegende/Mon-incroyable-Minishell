@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 20:23:39 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:25:01 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,17 @@ void setup_term(int	save)
 	   tcsetattr(STDOUT_FILENO, TCSANOW, &t);
 }
 
+void	ft_free_all(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->paths[++i])
+		free(data->paths[i]);
+	free(data->paths);
+	free(data->main_str);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data				data;
@@ -107,7 +118,7 @@ int	main(int argc, char **argv, char **env)
 			parserror(ft_env_var(&data));
 			exekerror(ft_execution(&data, env));
 		}
-		free(data.main_str);
+		ft_free_all(&data);
 		if (data.main_error != -1)
 			ft_lstclear(&data.cmd_table_temp);
 		else

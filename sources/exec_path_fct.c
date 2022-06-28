@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 20:57:15 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:34:01 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	**recup_path(t_data *data)
 			data->nbr = data->nbr + 1;
 	data->path_nbr = data->nbr;
 	tabl = malloc(sizeof(char *) * (data->nbr + 2));
+	tabl[data->nbr + 1] = NULL;
 	while (i-- > 0)
 	{
 		if (str[i] == ':')
@@ -60,6 +61,7 @@ char	**recup_path(t_data *data)
 		}
 	}
 	tabl[data->nbr] = ft_malloc_str(str);
+	free(str);
 	return (tabl);
 }
 
@@ -90,5 +92,8 @@ int	put_path(t_data *data)
 		return (0);
 	}
 	else
+	{
+		free(full_path);
 		return (2);
+	}
 }
