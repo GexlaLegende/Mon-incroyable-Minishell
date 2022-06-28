@@ -31,6 +31,10 @@ int	built_in(t_data *data, char **env, int nbr)
 		bin_unset(&data->arg_tabl[1], data);
 	if (ft_strncmp(data->arg_tabl[0], "echo") == 0)
 		bin_echo(data);
+	if (ft_strncmp(data->arg_tabl[0], "cd") == 0)
+		bin_cd(data);
+/* 	if (ft_strncmp(data->arg_tabl[0], "exit") == 0)
+		bin_echo(exit); */
 	i = 0;
 	while (i <= data->nbr_save + 1)
 		free(data->arg_tabl[i++]);
@@ -80,16 +84,21 @@ void	bin_env(t_data *data)
 
 	i = 0;
 	begin = data->env_table;
-	while (begin)
+	if (data->arg_tabl[1] == NULL)
 	{
-		if (begin->value != NULL)
+		while (begin)
 		{
-			printf("%s", begin->name);
-			printf("=%s\n", begin->value);
+			if (begin->value != NULL)
+			{
+				printf("%s", begin->name);
+				printf("=%s\n", begin->value);
+			}
+			begin = begin->next;
+			i++;
 		}
-		begin = begin->next;
-		i++;
 	}
+	else
+		printf("env: No such file or directory\n");
 }
 
 /* Display the PATH of the current position */
@@ -102,7 +111,14 @@ int	bin_pwd(void)
 	return (0);
 }
 
-/* void	bin_cd()
+void	bin_cd(t_data *data)
 {
-	
-} */
+	char	cwd[PATH_MAX];
+
+	data->e = 0;
+	getcwd(cwd, sizeof(cwd));
+	printf("%s\n", cwd);
+	chdir("/Volumes/Storage/goinfre/dbouron");
+	getcwd(cwd, sizeof(cwd));
+	printf("%s\n", cwd);
+}

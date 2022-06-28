@@ -154,6 +154,7 @@ int			built_in(t_data *data, char **env, int nbr);
 int			ft_is_builtin(const char *s1);
 void		bin_env(t_data *data);
 int			bin_pwd(void);
+void		bin_cd(t_data *data);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
