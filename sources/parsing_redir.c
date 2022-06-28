@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:18:34 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 18:00:16 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:04:56 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	here_doc_fct(t_data *data, char *str)
 	while (1)
 	{
 		str2 = readline("> ");
+		//if (data->is_quote == 0)
+		str2 = ft_search_and_change_env_var(data, str2);
 		if (str_diff(str, str2) == 0)
 			break ;
 		write(fd, str2, ft_strlen(str2));

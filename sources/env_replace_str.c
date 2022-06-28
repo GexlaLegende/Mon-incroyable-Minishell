@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_replace_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:05:39 by dbouron           #+#    #+#             */
 /*   Updated: 2022/06/28 16:30:06 by dbouron          ###   ########lyon.fr   */
@@ -18,7 +18,6 @@ char	*ft_search_and_change_env_var(t_data *data, char *str)
 	int		i;
 
 	i = 0;
-	dprintf(2, "Init = %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 \
