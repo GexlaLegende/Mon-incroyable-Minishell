@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 16:30:26 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 17:47:02 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	built_in(t_data *data, char **env, int nbr)
 		bin_echo(data);
 	if (ft_strncmp(data->arg_tabl[0], "cd") == 0)
 		bin_cd(data);
-/* 	if (ft_strncmp(data->arg_tabl[0], "exit") == 0)
-		bin_echo(exit); */
+	if (ft_strncmp(data->arg_tabl[0], "exit") == 0)
+		bin_exit(data, data->is_pipe);
 	i = 0;
 	while (i <= data->nbr_save + 1)
 		free(data->arg_tabl[i++]);

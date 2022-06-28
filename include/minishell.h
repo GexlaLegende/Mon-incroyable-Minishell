@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 17:02:42 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 17:46:50 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_data
 	int			e;
 	int			f;
 	int			echo_n;
+	int			is_pipe;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
@@ -167,6 +168,7 @@ t_env_list	*ft_search_preenv(t_data *data, char *name);
 void		ft_remove_env_var(char **arg, t_data *data);
 void		ft_name_error(char **arg, t_data *data);
 int			bin_echo(t_data *data);
+void		bin_exit(t_data *data, int pipe);
 //----------------------------------------------------
 
 //Errors----------------------------------------------

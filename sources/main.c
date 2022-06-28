@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 12:26:56 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 17:34:49 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv, char **env)
 			free(data.cmd_table);
 	}
 	ft_env_lstclear(&data.env_table);
+	ft_env_lstclear(&data.env_table_sorted);
 	rl_clear_history();
 	return (0);
 }
