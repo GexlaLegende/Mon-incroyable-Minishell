@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 12:06:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:44:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_data
 	int			bin_inpipe;
 	int			nbr_save;
 	int			free_i;
+	int			e;
+	int			f;
 	int			echo_n;
 }	t_data;
 
@@ -125,6 +127,8 @@ void		ft_insertion_sort(t_data *data);
 int			ft_search_and_replace_env_var(t_data *data);
 void		ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data);
 char		*ft_is_var_env(t_data *data, char *cmd, int pos, int len);
+char		*ft_search_and_change_env_var(t_data *data, char *str);
+char		*ft_change_var_env(char *str, int pos, t_data *data);
 //----------------------------------------------------
 
 //Execution-------------------------------------------
@@ -154,8 +158,12 @@ int			bin_pwd(void);
 void		bin_export(char **arg, t_data *data);
 void		ft_display_env(t_env_list *list);
 t_env_list	*ft_search_env(t_data *data, char *name);
+void		ft_correct_env_name(char **arg, t_data *data);
+void		ft_wrong_env_name(char **arg, t_data *data);
 void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
+void		ft_remove_env_var(char **arg, t_data *data);
+void		ft_name_error(char **arg, t_data *data);
 int			bin_echo(t_data *data);
 //----------------------------------------------------
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:37:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/26 11:54:333 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:21:42 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*rm_quote2(t_data *data, char **tabl, char *str)
 int	ft_is_builtin(const char *s1)
 {
 	size_t	i;
-	
 
 	i = 0;
 	if (ft_strncmp(s1, "pwd") == 0)

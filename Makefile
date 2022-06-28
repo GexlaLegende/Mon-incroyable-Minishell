@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
+#    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/28 11:07:37 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/28 12:05:09 by dbouron          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SOURCES = main.c \
 		  parsing.c \
 		  parsing2.c \
 		  parsing_redir.c \
-		  environnement.c \
+		  env_replace_list.c \
+		  env_replace_str.c \
 		  env_in_list.c \
 		  error.c \
 		  cmd_lst_utils1.c \
@@ -57,7 +58,7 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 #### OTHER ####
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Werror -Wextra #-fsanitize=address -g3
 LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I $(shell brew --prefix readline)/include
 NAME := minishell
