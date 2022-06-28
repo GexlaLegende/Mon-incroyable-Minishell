@@ -6,11 +6,11 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:05:39 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/28 12:23:00 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 16:30:06 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../include/minishell.h>
+#include "../include/minishell.h"
 
 /*	Search and replace environment variables by their value in str of here_doc*/
 char	*ft_search_and_change_env_var(t_data *data, char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 10:38:35 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 16:30:26 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,4 @@ int	bin_pwd(void)
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 	return (0);
-}
-
-void	bin_cd(t_data *data)
-{
-	char	cwd[PATH_MAX];
-
-	data->e = 0;
-	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
-	chdir("/Volumes/Storage/goinfre/dbouron");
-	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
 }
