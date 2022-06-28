@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 23:24:19 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 11:03:40 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,30 @@
 
 void	bin_export(char **arg, t_data *data)
 {
-	int			i;
-	int			j;
-	char		*name;
-	char		*value;
-	t_env_list	*p_env_name;
-
-	j = 0;
-	if (!arg[j])
+	data->f = 0;
+	if (!arg[data->f])
 	{
 		ft_sort_list(data);
 		ft_display_env(data->env_table_sorted);
 		return ;
 	}
-	while (arg[j])
+	while (arg[data->f])
 	{
-		i = 0;
-		while (arg[j][i])
+		data->e = 0;
+		while (arg[data->f][data->e])
 		{
-			while (ft_isalnum(arg[j][i]) == 1 || arg[j][i] == '_')
-				i++;
-			if ((arg[j][i] == '=' || arg[j][i] == '\0') && i > 0)
-			{
-				name = ft_substr(arg[j], 0, i);
-				if (arg[j][i] == '=')
-				{
-					value = ft_substr(arg[j], i + 1, ft_strlen(arg[j]) - (i + 1));
-					i = ft_strlen(arg[j]);
-				}
-				else
-					value = NULL;
-				p_env_name = ft_search_env(data, name);
-				if (!p_env_name)
-					ft_env_lstadd_back(&data->env_table, \
-						ft_env_lstnew(name, value));
-				else
-					p_env_name->value = ft_strdup(value);
-			}
+			while (ft_isalnum(arg[data->f][data->e]) == 1 \
+				|| arg[data->f][data->e] == '_')
+				data->e++;
+			if ((arg[data->f][data->e] == '=' || arg[data->f][data->e] == '\0') \
+				&& data->e > 0)
+				ft_correct_env_name(arg, data);
 			else
-			{
-				while (arg[j][i] && arg[j][i] != ' ')
-					i++;
-				name = ft_substr(arg[j], 0, i);
-				printf("minishell: export: `%s': not a valid identifier\n", name);
-			}
-			if (arg[j][i])
-				i++;
+				ft_wrong_env_name(arg, data);
+			if (arg[data->f][data->e])
+				data->e++;
 		}
-		j++;
+		data->f++;
 	}
 }
 
@@ -95,4 +71,37 @@ t_env_list	*ft_search_env(t_data *data, char *name)
 		current_elmt = current_elmt->next;
 	}
 	return (NULL);
+}
+
+void	ft_correct_env_name(char **arg, t_data *data)
+{
+	char		*name;
+	char		*value;
+	t_env_list	*p_env_name;
+
+	name = ft_substr(arg[data->f], 0, data->e);
+	if (arg[data->f][data->e] == '=')
+	{
+		value = ft_substr(arg[data->f], data->e + 1, \
+			ft_strlen(arg[data->f]) - (data->e + 1));
+		data->e = ft_strlen(arg[data->f]);
+	}
+	else
+		value = NULL;
+	p_env_name = ft_search_env(data, name);
+	if (!p_env_name)
+		ft_env_lstadd_back(&data->env_table, \
+			ft_env_lstnew(name, value));
+	else
+		p_env_name->value = ft_strdup(value);
+}
+
+void	ft_wrong_env_name(char **arg, t_data *data)
+{
+	char	*name;
+
+	while (arg[data->f][data->e] && arg[data->f][data->e] != ' ')
+		data->e++;
+	name = ft_substr(arg[data->f], 0, data->e);
+	printf("minishell: export: `%s': not a valid identifier\n", name);
 }
