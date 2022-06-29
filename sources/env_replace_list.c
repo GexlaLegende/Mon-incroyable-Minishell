@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_replace_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
 /*   Updated: 2022/06/29 16:11:59 by apercebo         ###   ########.fr       */
@@ -78,21 +78,6 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
 }
-
-/*
-	else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
-		|| cmd_list->cmd[i + 1] == '\'' || cmd_list->cmd[i + 1] == '"')
-	{
-		//verify if {('" opened is closed with same quotes system
-		//manage single and double quotes (see notion tests)
-	}
-	else if (cmd_list->cmd[i + 1] == '!' || cmd_list->cmd[i + 1] == '?' \
-		|| cmd_list->cmd[i + 1] == '$' || cmd_list->cmd[i + 1] == '@' \
-		|| cmd_list->cmd[i + 1] == '*')
-	{
-		//replace by nothing or special action (see notion)
-	}
-*/
 
 /* if variable exists, replace by value, if not, replace by nothing */
 char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
