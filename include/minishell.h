@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 20:24:45 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 10:16:31 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ typedef struct s_data
 	int			free_i;
 	int			e;
 	int			f;
+	int			ppi;
+	int			echo_i;
+	int			echo_j;
 	int			echo_n;
 	int			is_pipe;
 }	t_data;
@@ -104,6 +107,13 @@ int			ft_env_lstsize(t_env_list *lst);
 t_env_list	*ft_env_lstlast(t_env_list *lst);
 void		ft_env_lstadd_back(t_env_list **lst, t_env_list *new);
 void		ft_env_lstclear(t_env_list **lst);
+//----------------------------------------------------
+
+//Signals---------------------------------------------
+int			str_is_empty(char *str);
+void		setup_term(int save);
+void		ft_free_all(t_data *data);
+void		main_fonction_two(t_data *data);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------
@@ -149,6 +159,7 @@ int			forward_redir(t_data *data, int i);
 int			backward_redir(t_data *data, int i, int nbr);
 int			getcmd_and_pipe(t_data *data, char **env);
 int			exec_cmds_second(t_data *data, char **env);
+void		exec_cmds_two(t_data *data);
 //----------------------------------------------------
 
 //Builtins--------------------------------------------

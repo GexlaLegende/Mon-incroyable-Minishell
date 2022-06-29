@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/29 09:26:22 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/29 09:58:55 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SOURCES = main.c \
 		  bin_cd.c \
 		  bin_exit.c \
 		  bin_export.c \
-		  bin_unset.c 
+		  signals.c \
+		  bin_unset.c
 
 OBJETS = $(SOURCES:.c=.o)
 INCLUDES = minishell.h

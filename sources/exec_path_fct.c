@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 09:28:49 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 10:13:37 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,20 @@ char	**recup_path(t_data *data)
 int	put_path(t_data *data)
 {
 	char	*full_path;
-	int		i;
 
-	i = -1;
+	data->ppi = -1;
 	if (access(data->arg_tabl[0], X_OK) == 0)
 		return (0);
 	full_path = malloc(sizeof(char) * 2);
 	full_path[0] = '\0';
-	while (access(full_path, X_OK) == -1 && i < data->path_nbr)
+	while (access(full_path, X_OK) == -1 && data->ppi < data->path_nbr)
 	{
-		i++;
+		data->ppi++;
 		full_path[0] = '\0';
 		free(full_path);
-		full_path = ft_1ststrjoin(data->paths[i], data->arg_tabl[0]);
+		full_path = ft_1ststrjoin(data->paths[data->ppi], data->arg_tabl[0]);
 	}
-	i = 0;
+	data->ppi = 0;
 	free(data->arg_tabl[0]);
 	if (access(full_path, X_OK) == 0)
 	{
@@ -92,8 +91,6 @@ int	put_path(t_data *data)
 		return (0);
 	}
 	else
-	{
 		free(full_path);
-		return (2);
-	}
+	return (2);
 }
