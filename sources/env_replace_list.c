@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environnement.c                                    :+:      :+:    :+:   */
+/*   env_replace_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/28 11:39:28 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:11:59 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,12 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 	while (env_list)
 	{
 		if (ft_strncmp(var_name, env_list->name) == 0)
+		{
+			free(var_name);
 			return (env_list->value);
+		}
 		env_list = env_list->next;
 	}
+	free(var_name);
 	return ("");
 }

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:36:59 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:30:55 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,21 @@ int	parserror(int nbr)
 }
 
 //Fonction pour les erreurs d'execution (0 == good)
-void	exekerror(int nbr)
+void	exekerror(int nbr, t_data *data)
 {
+	int	i;
+
+	i = 1;
+	(void)data;
 	if (nbr == 2)
+	{
+		/* while (i <= data->nbr_save + 1)
+			free(data->arg_tabl[i++]);
+		free(data->arg_tabl); */
 		write(2, "Command not found\n", 19);
+		if (data->is_pipe == 1)
+			exit(EXIT_FAILURE);
+	}
 	if (nbr == 3)
 		write(2, "Error with redirections\n", 25);
 	if (nbr == 4)

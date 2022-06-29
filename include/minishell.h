@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 15:31:55 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:01:27 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void		bin_exit(t_data *data, int pipe);
 
 //Errors----------------------------------------------
 int			parserror(int nbr);
-void		exekerror(int nbr);
+void		exekerror(int nbr, t_data *data);
 //----------------------------------------------------
 
 //Utils-----------------------------------------------
