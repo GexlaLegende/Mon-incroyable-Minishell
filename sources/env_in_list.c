@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/29 16:14:27 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 17:19:28 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	ft_put_env_in_lst(t_data *data, char **env)
 /* Duplicate and sort env_table */
 void	ft_sort_list(t_data *data)
 {
-	data->env_table_sorted = NULL;
+	if (data->env_table_sorted)
+		ft_env_lstclear(&data->env_table_sorted);
 	data->env_table_sorted = ft_dup_list(data->env_table);
 	ft_insertion_sort(data);
 }
@@ -61,7 +62,7 @@ t_env_list	*ft_dup_list(t_env_list *list)
 		name = ft_strdup(elemt->name);
 		if (!name)
 			return (NULL);
-		if (elemt->value != NULL)
+		if (elemt->value)
 		{
 			value = ft_strdup(elemt->value);
 			if (!value)

@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 13:37:18 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 17:17:03 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1 || !(argv[0]))
 		exit (0);
 	parserror(ft_put_env_in_lst(&data, env));
+	data.env_table_sorted = NULL;
 	while (1)
 	{
 		main_fonction_two(&data);
