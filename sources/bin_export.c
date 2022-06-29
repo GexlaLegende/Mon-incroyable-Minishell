@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 16:17:27 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 17:47:49 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 		free(p_env_name->value);
 		free(name);
 		p_env_name->value = ft_strdup(value);
+		free(value);
 	}
 }
 
