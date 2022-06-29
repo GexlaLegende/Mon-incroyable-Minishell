@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:37:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 20:37:22 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:28:43 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ char	*ft_found_path(t_data *data, char *str)
 			return (ft_malloc_str(env_list->value));
 		env_list = env_list->next;
 	}
-	return ("");
+	return (ft_malloc_str(""));
 }

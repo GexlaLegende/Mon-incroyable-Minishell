@@ -6,7 +6,7 @@
 #    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/28 21:36:33 by apercebo         ###   ########.fr        #
+#    Updated: 2022/06/29 09:26:22 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 #### OTHER ####
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS := -Wall -Werror -Wextra -fsanitize=address -g3
 LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I $(shell brew --prefix readline)/include
 NAME := minishell
