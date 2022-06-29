@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 12:23:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:35:20 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	bin_export(char **arg, t_data *data)
 	if (!arg[data->f])
 	{
 		ft_sort_list(data);
-		ft_display_env(data->env_table_sorted);
+		ft_display_env(data->env_table);//don't forget to give the sorted list
 		return ;
 	}
 	while (arg[data->f])
@@ -96,7 +96,11 @@ void	ft_correct_env_name(char **arg, t_data *data)
 			ft_env_lstnew(name, value));
 	}
 	else
+	{
+		free(p_env_name->value);
+		free(name);
 		p_env_name->value = ft_strdup(value);
+	}
 }
 
 void	ft_wrong_env_name(char **arg, t_data *data)

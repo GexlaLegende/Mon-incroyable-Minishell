@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:31:48 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 14:39:57 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	ft_remove_env_var(char **arg, t_data *data)
 	name = ft_substr(arg[data->f], 0, data->e);
 	p_env_name = ft_search_preenv(data, name);
 	if (!p_env_name)
+	{
+		free(name);
 		return ;
+	}
 	else if (!p_env_name->next)
 	{
 		free(p_env_name->name);
@@ -75,6 +78,7 @@ void	ft_remove_env_var(char **arg, t_data *data)
 		save_p_next->next = NULL;
 		ft_env_lstclear(&save_p_next);
 	}
+	free(name);
 }
 
 void	ft_name_error(char **arg, t_data *data)
