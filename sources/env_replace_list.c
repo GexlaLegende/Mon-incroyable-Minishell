@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environnement.c                                    :+:      :+:    :+:   */
+/*   env_replace_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/28 11:39:28 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:12:19 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,6 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	}
 }
 
-/*
-	else if (cmd_list->cmd[i + 1] == '{' || cmd_list->cmd[i + 1] == '(' \
-		|| cmd_list->cmd[i + 1] == '\'' || cmd_list->cmd[i + 1] == '"')
-	{
-		//verify if {('" opened is closed with same quotes system
-		//manage single and double quotes (see notion tests)
-	}
-	else if (cmd_list->cmd[i + 1] == '!' || cmd_list->cmd[i + 1] == '?' \
-		|| cmd_list->cmd[i + 1] == '$' || cmd_list->cmd[i + 1] == '@' \
-		|| cmd_list->cmd[i + 1] == '*')
-	{
-		//replace by nothing or special action (see notion)
-	}
-*/
-
 /* if variable exists, replace by value, if not, replace by nothing */
 char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 {
@@ -105,8 +90,12 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 	while (env_list)
 	{
 		if (ft_strncmp(var_name, env_list->name) == 0)
+		{
+			free(var_name);
 			return (env_list->value);
+		}
 		env_list = env_list->next;
 	}
+	free(var_name);
 	return ("");
 }
