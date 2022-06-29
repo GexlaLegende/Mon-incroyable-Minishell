@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 13:51:38 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:33:53 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	built_in(t_data *data, char **env, int nbr)
 	while (i <= data->nbr_save + 1)
 		free(data->arg_tabl[i++]);
 	free(data->arg_tabl);
+	if (data->is_pipe == 0)
+	{
+		dup2(data->stdin_save, 0);
+		dup2(data->stdout_save, 1);
+	}
 	return (0);
 }
 
