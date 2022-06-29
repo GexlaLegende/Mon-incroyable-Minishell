@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_eepc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 17:47:02 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 10:08:37 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,38 @@ int	built_in(t_data *data, char **env, int nbr)
 	return (0);
 }
 
+void	bin_echo_two(t_data *data)
+{
+	data->echo_i--;
+	data->echo_j = 0;
+	while (data->arg_tabl[++data->echo_i])
+	{
+		if (data->echo_j != 0)
+			printf(" ");
+		printf("%s", data->arg_tabl[data->echo_i]);
+		data->echo_j++;
+	}
+	if (data->echo_n == 0)
+		printf("\n");
+}
+
 int	bin_echo(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
+	data->echo_i = 0;
 	data->echo_n = 0;
-	while (data->arg_tabl[++i])
+	while (data->arg_tabl[++data->echo_i])
 	{
-		j = 0;
-		if (data->arg_tabl[i][j++] == '-')
-			while (data->arg_tabl[i][j] && data->arg_tabl[i][j] == 'n')
-				j++;
-		if (j != 1 && data->arg_tabl[i][j] == '\0')
+		data->echo_j = 0;
+		if (data->arg_tabl[data->echo_i][data->echo_j++] == '-')
+			while (data->arg_tabl[data->echo_i][data->echo_j]
+				&& data->arg_tabl[data->echo_i][data->echo_j] == 'n')
+				data->echo_j++;
+		if (data->echo_j != 1
+			&& data->arg_tabl[data->echo_i][data->echo_j] == '\0')
 			data->echo_n = 1;
 		else
 		{
-			i--;
-			j = 0;
-			while (data->arg_tabl[++i])
-			{
-				if (j != 0)
-					printf(" ");
-				printf("%s", data->arg_tabl[i]);
-				j++;
-			}
-			if (data->echo_n == 0)
-				printf("\n");
+			bin_echo_two(data);
 			return (0);
 		}
 	}
