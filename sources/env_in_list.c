@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:19:50 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/28 21:16:40 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 10:01:11 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_insertion_sort(t_data *data)
 	char		*tmp_value;
 
 	start = data->env_table_sorted;
-	while (start->next)
+	while (start && start->next)
 	{
 		min = start;
 		analyse = start->next;

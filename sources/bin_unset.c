@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 11:16:19 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 11:31:48 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	bin_unset(char **arg, t_data *data)
 			while (ft_isalnum(arg[data->f][data->e]) == 1 \
 				|| arg[data->f][data->e] == '_')
 				data->e++;
-			if ((arg[data->f][data->e] == '=' || arg[data->f][data->e] == '\0') \
-				&& data->e > 0)
+			if (arg[data->f][data->e] == '\0')
 				ft_remove_env_var(arg, data);
 			else
 				ft_name_error(arg, data);
@@ -40,7 +39,10 @@ t_env_list	*ft_search_preenv(t_data *data, char *name)
 	t_env_list	*current_elmt;
 
 	current_elmt = data->env_table;
-	while (current_elmt->next)
+	if (current_elmt && !current_elmt->next)
+		if (ft_strncmp(name, current_elmt->name) == 0)
+			return (current_elmt);
+	while (current_elmt && current_elmt->next)
 	{
 		if (ft_strncmp(name, current_elmt->next->name) == 0)
 			return (current_elmt);
@@ -59,6 +61,13 @@ void	ft_remove_env_var(char **arg, t_data *data)
 	p_env_name = ft_search_preenv(data, name);
 	if (!p_env_name)
 		return ;
+	else if (!p_env_name->next)
+	{
+		free(p_env_name->name);
+		free(p_env_name->value);
+		data->env_table = NULL;
+		free(p_env_name);
+	}
 	else
 	{
 		save_p_next = p_env_name->next;
@@ -76,4 +85,5 @@ void	ft_name_error(char **arg, t_data *data)
 		data->e++;
 	name = ft_substr(arg[data->f], 0, data->e);
 	printf("minishell: unset: `%s': not a valid identifier\n", name);
+	free(name);
 }
