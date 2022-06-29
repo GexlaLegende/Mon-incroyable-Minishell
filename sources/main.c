@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:03:16 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:37:18 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	main_fonction_two(t_data *data)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data				data;
+	t_data	data;
 
 	if (argc != 1 || !(argv[0]))
 		exit (0);
