@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 17:17:03 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 16:01:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **env)
 			signal(SIGINT, handler2);
 			signal(SIGQUIT, handler2);
 			parserror(ft_env_var(&data));
-			exekerror(ft_execution(&data, env));
+			exekerror(ft_execution(&data, env), &data);
 		}
 		ft_free_all(&data);
 		if (data.main_error != -1)
