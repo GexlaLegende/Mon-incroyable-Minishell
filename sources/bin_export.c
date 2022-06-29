@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 17:14:07 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 11:46:56 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_correct_env_name(char **arg, t_data *data)
 	t_env_list	*p_env_name;
 
 	name = ft_substr(arg[data->f], 0, data->e);
-	if (arg[data->f][data->e] == '=')
+	if (arg[data->f][data->e] == '=' && arg[data->f][data->e + 1])
 	{
 		value = ft_substr(arg[data->f], data->e + 1, \
 			ft_strlen(arg[data->f]) - (data->e + 1));
@@ -91,8 +91,12 @@ void	ft_correct_env_name(char **arg, t_data *data)
 		value = NULL;
 	p_env_name = ft_search_env(data, name);
 	if (!p_env_name)
+	{
 		ft_env_lstadd_back(&data->env_table, \
 			ft_env_lstnew(name, value));
+		free(name);
+		free(value);
+	}
 	else
 		p_env_name->value = ft_strdup(value);
 }
@@ -105,4 +109,5 @@ void	ft_wrong_env_name(char **arg, t_data *data)
 		data->e++;
 	name = ft_substr(arg[data->f], 0, data->e);
 	printf("minishell: export: `%s': not a valid identifier\n", name);
+	free(name);
 }

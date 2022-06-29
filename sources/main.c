@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/28 21:25:01 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:42:05 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,6 @@ int	main(int argc, char **argv, char **env)
 		else
 			free(data.cmd_table);
 	}
-	ft_env_lstclear(&data.env_table);
-	ft_env_lstclear(&data.env_table_sorted);
-	rl_clear_history();
 	return (0);
 }
 
