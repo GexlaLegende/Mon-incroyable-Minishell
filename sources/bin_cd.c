@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:29:06 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/29 13:47:23 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 14:05:53 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_update_var_env(t_data *data, char *name, char *value)
 	t_env_list	*p_env_name;
 
 	p_env_name = ft_search_env(data, name);
+	free(p_env_name->value);
 	if (p_env_name)
 		p_env_name->value = ft_strdup(value);
 }

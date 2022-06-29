@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 12:23:52 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:23:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ void	ft_correct_env_name(char **arg, t_data *data)
 			ft_env_lstnew(name, value));
 	}
 	else
+	{
+		free(p_env_name->value);
+		free(name);
 		p_env_name->value = ft_strdup(value);
+	}
 }
 
 void	ft_wrong_env_name(char **arg, t_data *data)
