@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:16:31 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:31:55 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_data
 	int			echo_j;
 	int			echo_n;
 	int			is_pipe;
+	int			stdin_save;
+	int			stdout_save;
 }	t_data;
 
 //Lst - cmd ------------------------------------------
