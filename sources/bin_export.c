@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:46:56 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/29 12:23:52 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void	ft_correct_env_name(char **arg, t_data *data)
 	{
 		ft_env_lstadd_back(&data->env_table, \
 			ft_env_lstnew(name, value));
-		free(name);
-		free(value);
 	}
 	else
 		p_env_name->value = ft_strdup(value);

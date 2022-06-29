@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:08:37 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:51:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	built_in(t_data *data, char **env, int nbr)
 	data->is_built_in = 1;
 	cmd_redir(data, env, nbr);
 	if (ft_strncmp(data->arg_tabl[0], "pwd") == 0)
-		return (bin_pwd());
+		bin_pwd();
 	if (ft_strncmp(data->arg_tabl[0], "env") == 0)
 		bin_env(data);
 	if (ft_strncmp(data->arg_tabl[0], "export") == 0)
