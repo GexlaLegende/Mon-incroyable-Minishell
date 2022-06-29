@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 18:01:24 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:36:59 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	parserror(int nbr)
 	if (nbr == 3)
 	{
 		write(2, "Syntax error\n", 14);
-		return (3);
+		return (-1);
 	}
 	if (nbr == -2)
 	{

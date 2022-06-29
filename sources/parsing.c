@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 18:00:26 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:21:09 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_lexer2(t_data *data, char *str)
 				data->ly++;
 			if (str[data->ly] == '|')
 				return (3);
+			data->rdi = 0;
 			data->lexer_error = ft_parser(&str[data->lexer_start],
 					data, data->li - data->lexer_start);
 			if (data->lexer_error != 0)
@@ -57,6 +58,7 @@ int	ft_lexer(char *str, t_data *data)
 		return (data->lexer_error);
 	if (data->squote == 1 || data->dquote == 1)
 		return (2);
+	data->rdi = 0;
 	data->lexer_error = ft_parser(&str[data->lexer_start],
 			data, data->li - data->lexer_start);
 	if (data->lexer_error != 0)
@@ -74,6 +76,8 @@ void	ft_addpipe(t_data *data)
 	redir_type = (int *)malloc(sizeof(int) * 2);
 	redir_file = malloc(sizeof(char *) * 2);
 	str = malloc(sizeof(char) * 2);
+	if (!(str) || !(redir_type) || !(redir_file))
+		exit(EXIT_FAILURE);
 	redir_type[0] = 5;
 	redir_file[0] = NULL;
 	str[0] = '|';
@@ -113,7 +117,6 @@ int	ft_parser2(t_data *data, char *str)
 //Fonction secondaire (deuxieme découpage)
 int	ft_parser(char *str, t_data *data, int end)
 {
-	data->rdi = 0;
 	if (str[end])
 		str[end] = '\0';
 	data->pcommand = NULL;
@@ -122,6 +125,8 @@ int	ft_parser(char *str, t_data *data, int end)
 		return (3);
 	data->redir_type = (int *)malloc(sizeof(int) * (data->tabl_s + 1));
 	data->redir_file = malloc(sizeof(char *) * (data->tabl_s + 1));
+	if (!(data->redir_type) || !(data->redir_file))
+		exit(EXIT_FAILURE);
 	while (data->rdi < data->tabl_s + 1)
 	{
 		data->redir_type[data->rdi] = 0;

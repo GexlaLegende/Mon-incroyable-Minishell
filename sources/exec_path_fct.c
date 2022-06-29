@@ -6,34 +6,13 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:13:37 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:21:45 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // NORME -- {OK}
-
-//RETOURNE LA LIGNE DES PATHS  -  [OK] - 15 lines
-/* char	*recupathline(char **env)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (env[i])
-	{
-		if (env[i][0] == 'P' && env[i][1] == 'A' && env[i][2] == 'T' &&
-				env[i][3] == 'H' && env[i][4] == '=')
-		{
-			//str = malloc(sizeof(char) * (ft_strlen(env[i]) - 4));
-			str = &env[i][5];
-			str[ft_strlen(env[i]) - 5] = '\0';
-		}
-		i++;
-	}
-	return (str);
-} */
 
 //RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
 char	**recup_path(t_data *data)
@@ -65,6 +44,16 @@ char	**recup_path(t_data *data)
 	return (tabl);
 }
 
+char	*safe_malloc(void)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) * 2);
+	if (!str)
+		exit(EXIT_FAILURE);
+	return (str);
+}
+
 //FONCTION QUI JOIN LE PATH ET LA COMMANDE  -  [OK] - 22 lines
 int	put_path(t_data *data)
 {
@@ -73,7 +62,7 @@ int	put_path(t_data *data)
 	data->ppi = -1;
 	if (access(data->arg_tabl[0], X_OK) == 0)
 		return (0);
-	full_path = malloc(sizeof(char) * 2);
+	full_path = safe_malloc();
 	full_path[0] = '\0';
 	while (access(full_path, X_OK) == -1 && data->ppi < data->path_nbr)
 	{

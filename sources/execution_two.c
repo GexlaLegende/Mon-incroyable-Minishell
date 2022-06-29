@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:41:08 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:21:58 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:12:19 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,26 @@ int	getcmd_and_pipe(t_data *data, char **env)
 	return (0);
 }
 
+void	malloc_fds(t_data *data)
+{
+	while (++data->exec_i <= data->lst_nbr)
+	{
+		data->fds[data->exec_i] = malloc(sizeof(int) * 2);
+		if (!data->fds[data->exec_i])
+			exit(EXIT_FAILURE);
+	}
+}
+
 int	exec_cmds_second(t_data *data, char **env)
 {
 	data->exec_i = -1;
 	data->fds = malloc(sizeof(int *) * (data->lst_nbr + 1));
-	while (++data->exec_i <= data->lst_nbr)
-		data->fds[data->exec_i] = malloc(sizeof(int) * 2);
+	if (!data->fds)
+		exit(EXIT_FAILURE);
+	malloc_fds(data);
 	data->exec_i = 0;
 	while (data->exec_i < data->lst_nbr - 1)
-	{
-		pipe(data->fds[data->exec_i]);
-		data->exec_i++;
-	}
+		pipe(data->fds[data->exec_i++]);
 	data->exec_i = 0;
 	while (data->exec_i < data->lst_nbr)
 	{
