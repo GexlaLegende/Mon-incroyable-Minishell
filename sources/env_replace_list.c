@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 12:16:13 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 13:33:58 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	char	*value;
 	char	*str;
 
-	len = 0;
+	len = -1;
 	i = pos;
 	if (cmd_list->cmd[pos + 1] == '0')
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
