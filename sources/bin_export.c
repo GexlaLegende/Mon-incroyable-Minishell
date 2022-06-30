@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 17:47:49 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 10:48:20 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	ft_wrong_env_name(char **arg, t_data *data)
 		data->e++;
 	name = ft_substr(arg[data->f], 0, data->e);
 	printf("minishell: export: `%s': not a valid identifier\n", name);
+	data->last_error = 1;
 	free(name);
 }

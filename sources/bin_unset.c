@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 14:40:47 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:49:39 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	bin_unset(char **arg, t_data *data)
 {
+	data->last_error = 0;
 	data->f = 0;
 	while (arg[data->f])
 	{
@@ -89,5 +90,6 @@ void	ft_name_error(char **arg, t_data *data)
 		data->e++;
 	name = ft_substr(arg[data->f], 0, data->e);
 	printf("minishell: unset: `%s': not a valid identifier\n", name);
+	data->last_error = 1;
 	free(name);
 }

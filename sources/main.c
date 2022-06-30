@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 16:01:40 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:38:57 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	main_fonction_two(t_data *data)
 		bin_exit(data, 0);
 	if (str_is_empty(data->main_str) != 0)
 		add_history(data->main_str);
-	data->main_error = parserror(ft_lexer(data->main_str, data));
+	data->main_error = parserror(ft_lexer(data->main_str, data), data);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -62,8 +62,9 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1 || !(argv[0]))
 		exit (0);
-	parserror(ft_put_env_in_lst(&data, env));
+	parserror(ft_put_env_in_lst(&data, env), &data);
 	data.env_table_sorted = NULL;
+	data.last_error = 0;
 	while (1)
 	{
 		main_fonction_two(&data);
@@ -73,10 +74,11 @@ int	main(int argc, char **argv, char **env)
 			data.cmd_table = data.cmd_table->next;
 			signal(SIGINT, handler2);
 			signal(SIGQUIT, handler2);
-			parserror(ft_env_var(&data));
+			parserror(ft_env_var(&data), &data);
 			exekerror(ft_execution(&data, env), &data);
 		}
 		ft_free_all(&data);
+		printf("ERROR code : %d\n", data.last_error);
 		if (data.main_error != -1)
 			ft_lstclear(&data.cmd_table_temp);
 		else

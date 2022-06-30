@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 15:33:53 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:49:07 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int	built_in(t_data *data, char **env, int nbr)
 	data->is_built_in = 1;
 	cmd_redir(data, env, nbr);
 	if (ft_strncmp(data->arg_tabl[0], "pwd") == 0)
-		bin_pwd();
+		bin_pwd(data);
 	if (ft_strncmp(data->arg_tabl[0], "env") == 0)
 		bin_env(data);
 	if (ft_strncmp(data->arg_tabl[0], "export") == 0)
+	{
+		data->last_error = 0;
 		bin_export(&data->arg_tabl[1], data);
+	}
 	if (ft_strncmp(data->arg_tabl[0], "unset") == 0)
 		bin_unset(&data->arg_tabl[1], data);
 	if (ft_strncmp(data->arg_tabl[0], "echo") == 0)
@@ -79,9 +82,11 @@ int	bin_echo(t_data *data)
 		else
 		{
 			bin_echo_two(data);
+			data->last_error = 0;
 			return (0);
 		}
 	}
+	data->last_error = 0;
 	return (0);
 }
 
@@ -105,17 +110,22 @@ void	bin_env(t_data *data)
 			begin = begin->next;
 			i++;
 		}
+		data->last_error = 0;
 	}
 	else
+	{
+		data->last_error = 127;
 		printf("env: No such file or directory\n");
+	}
 }
 
 /* Display the PATH of the current position */
-int	bin_pwd(void)
+int	bin_pwd(t_data *data)
 {
 	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
+	data->last_error = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:04:37 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:03:10 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	exec_one_cmd(t_data *data, char **env)
 	if (pid == 0)
 		if (cmd_redir(data, env, 0) != 0)
 			return (3);
-	waitpid(pid, NULL, 0);
+	wait_loop(data);
 	if (access("/tmp/.here_doca", F_OK) == 0)
 		unlink("/tmp/.here_doca");
 	pid = 0;
