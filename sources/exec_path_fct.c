@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 16:53:57 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:14:11 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,27 @@ char	**recup_path(t_data *data)
 	tabl[data->nbr] = ft_malloc_str(str);
 	free(str);
 	return (tabl);
+}
+
+void	wait_loop(t_data *data)
+{
+	int	error_code;
+	int	status;
+
+	status = wait(&data->last_error);
+	while (status != -1)
+	{
+		if (WIFEXITED(data->last_error))
+		{
+			error_code = WEXITSTATUS(data->last_error);
+		}
+		else if (WIFSIGNALED(data->last_error))
+		{
+			error_code = WTERMSIG(data->last_error) + 128;
+		}
+		status = wait(&data->last_error);
+	}
+	data->last_error = error_code;
 }
 
 char	*safe_malloc(void)

@@ -6,11 +6,18 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 12:13:36 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:45:08 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	syntax_error(t_data *data)
+{
+	write(2, "Syntax error after > < >> <<", 21);
+	data->last_error = 258;
+	return (1);
+}
 
 //Fonction pour les erreurs de parsing
 int	parserror(int nbr, t_data *data)
@@ -34,11 +41,7 @@ int	parserror(int nbr, t_data *data)
 		return (-1);
 	}
 	if (nbr == -2)
-	{
-		write(2, "Syntax error after > < >> <<", 21);
-		data->last_error = 258;
-		return (1);
-	}
+		return (syntax_error(data));
 	if (nbr == -3)
 		write(2, "Malloc went wrong", 17);
 	if (nbr == -3)

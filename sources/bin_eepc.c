@@ -6,21 +6,14 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:49:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:58:28 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/*	Choose the appropriate builtin function 
-	Arguments are in data -> data->arg_tabl
-	(arg_tabl[0] is the name of cmd - ex: env) */
-int	built_in(t_data *data, char **env, int nbr)
+void	built_in_two(t_data *data)
 {
-	int	i;
-
-	data->is_built_in = 1;
-	cmd_redir(data, env, nbr);
 	if (ft_strncmp(data->arg_tabl[0], "pwd") == 0)
 		bin_pwd(data);
 	if (ft_strncmp(data->arg_tabl[0], "env") == 0)
@@ -36,6 +29,18 @@ int	built_in(t_data *data, char **env, int nbr)
 		bin_echo(data);
 	if (ft_strncmp(data->arg_tabl[0], "cd") == 0)
 		bin_cd(data);
+}
+
+/*	Choose the appropriate builtin function 
+	Arguments are in data -> data->arg_tabl
+	(arg_tabl[0] is the name of cmd - ex: env) */
+int	built_in(t_data *data, char **env, int nbr)
+{
+	int	i;
+
+	data->is_built_in = 1;
+	cmd_redir(data, env, nbr);
+	built_in_two(data);
 	if (ft_strncmp(data->arg_tabl[0], "exit") == 0)
 		bin_exit(data, data->is_pipe);
 	i = 0;
@@ -117,15 +122,4 @@ void	bin_env(t_data *data)
 		data->last_error = 127;
 		printf("env: No such file or directory\n");
 	}
-}
-
-/* Display the PATH of the current position */
-int	bin_pwd(t_data *data)
-{
-	char	cwd[PATH_MAX];
-
-	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
-	data->last_error = 0;
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:05:10 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:14:07 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,6 @@ int	cmd_redir(t_data *data, char **env, int nbr)
 		execve(data->arg_tabl[0], data->arg_tabl, env);
 	}
 	return (0);
-}
-
-void	wait_loop(t_data *data)
-{
-	int	error_code;
-	int	status;
-
-	status = wait(&data->last_error);
-	while (status != -1)
-	{
-		if (WIFEXITED(data->last_error))
-		{
-			error_code = WEXITSTATUS(data->last_error);
-		}
-		else if (WIFSIGNALED(data->last_error))
-		{
-			error_code = WTERMSIG(data->last_error) + 128;
-		}
-		status = wait(&data->last_error);
-	}
-	data->last_error = error_code;
 }
 
 int	exec_cmds(t_data *data, char **env)

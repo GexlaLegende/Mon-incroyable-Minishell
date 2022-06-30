@@ -6,45 +6,43 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:41:08 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:19:22 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:20:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	getcmd_and_pipe_two(t_data *data)
+int	getcmd_and_pipe_two(t_data *data)
 {
-	if (data->exec_i != data->lst_nbr - 1)
-		dup2(data->fds[data->exec_i][1], STDOUT_FILENO);
-	if (data->exec_i != 0)
-		dup2(data->fds[data->exec_i - 1][0], STDIN_FILENO);
-	while (data->j < data->lst_nbr - 1)
+	data->pid = fork();
+	if (data->pid == 0)
 	{
-		close(data->fds[data->j][0]);
-		close(data->fds[data->j][1]);
-		data->j = data->j + 1;
+		if (data->exec_i != data->lst_nbr - 1)
+			dup2(data->fds[data->exec_i][1], STDOUT_FILENO);
+		if (data->exec_i != 0)
+			dup2(data->fds[data->exec_i - 1][0], STDIN_FILENO);
+		while (data->j < data->lst_nbr - 1)
+		{
+			close(data->fds[data->j][0]);
+			close(data->fds[data->j][1]);
+			data->j = data->j + 1;
+		}
+		return (2);
 	}
+	if (data->cmd_table->next)
+		data->cmd_table = data->cmd_table->next;
+	if (data->cmd_table->next)
+		data->cmd_table = data->cmd_table->next;
+	data->last_error = 127;
+	data->exec_i++;
+	return (0);
 }
 
 int	getcmd_and_pipe(t_data *data, char **env)
 {
 	if (ft_is_builtin(data->arg_tabl[0]) != 0)
 		if (put_path(data) == 2)
-		{
-			data->pid = fork();
-			if (data->pid == 0)
-			{
-				getcmd_and_pipe_two(data);
-				return (2);
-			}
-			if (data->cmd_table->next)
-				data->cmd_table = data->cmd_table->next;
-			if (data->cmd_table->next)
-				data->cmd_table = data->cmd_table->next;
-			data->last_error = 127;
-			data->exec_i++;
-			return (0);
-		}
+			return (getcmd_and_pipe_two(data));
 	data->j = 0;
 	data->pid = fork();
 	if (data->pid == 0)

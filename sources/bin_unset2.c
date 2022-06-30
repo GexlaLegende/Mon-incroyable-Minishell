@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_unset2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:44 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 12:07:08 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 13:58:36 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ void	ft_clear_elmt(t_data *data, char *name)
 		ft_env_lstclear(&save_p_next);
 	}
 	free(name);
+}
+
+int	bin_pwd(t_data *data)
+{
+	char	cwd[PATH_MAX];
+
+	getcwd(cwd, sizeof(cwd));
+	printf("%s\n", cwd);
+	data->last_error = 0;
+	return (0);
 }
