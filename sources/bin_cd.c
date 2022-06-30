@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:29:06 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/29 14:05:53 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:45:10 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ void	bin_cd(t_data *data)
 	int		error;
 	char	cwd[PATH_MAX];
 
-	error = 0;
+	data->last_error = 0;
 	if (!data->arg_tabl[1])
 	{
 		error = chdir(ft_chr_var_env(data, "HOME"));
 		if (error != 0)
 			printf("minishell: cd: No PATH found\n");
+		if (error != 0)
+			data->last_error = 1;
 		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
 		ft_update_var_env(data, "PWD", ft_chr_var_env(data, "HOME"));
 	}
@@ -32,6 +34,8 @@ void	bin_cd(t_data *data)
 		if (error != 0)
 			printf("minishell: cd: %s: No such file or directory\n", \
 				data->arg_tabl[1]);
+		if (error != 0)
+			data->last_error = 1;
 		ft_update_var_env(data, "OLDPWD", ft_chr_var_env(data, "PWD"));
 		ft_update_var_env(data, "PWD", getcwd(cwd, sizeof(cwd)));
 	}

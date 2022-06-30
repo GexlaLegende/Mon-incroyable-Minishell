@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:41:08 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 16:55:17 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 10:19:22 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	getcmd_and_pipe(t_data *data, char **env)
 				data->cmd_table = data->cmd_table->next;
 			if (data->cmd_table->next)
 				data->cmd_table = data->cmd_table->next;
+			data->last_error = 127;
 			data->exec_i++;
 			return (0);
 		}
