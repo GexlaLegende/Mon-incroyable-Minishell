@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 15:38:43 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:13:29 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 		env_list = env_list->next;
 	}
 	free(var_name);
-	return ("");
+	return (NULL);
 }
