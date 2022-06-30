@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:35:47 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:13:36 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	exekerror(int nbr, t_data *data)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	(void)data;
 	if (nbr == 2)
 	{
-		/* while (i <= data->nbr_save + 1)
+		while (i <= data->nbr_save + 1)
 			free(data->arg_tabl[i++]);
-		free(data->arg_tabl); */
+		free(data->arg_tabl);
 		data->last_error = 127;
 		write(2, "Command not found\n", 19);
 		if (data->is_pipe == 1)
