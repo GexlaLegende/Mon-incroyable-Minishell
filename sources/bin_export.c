@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:53 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:48:20 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 12:05:32 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ void	ft_correct_env_name(char **arg, t_data *data)
 
 	name = ft_substr(arg[data->f], 0, data->e);
 	if (arg[data->f][data->e] == '=' && arg[data->f][data->e + 1])
-	{
 		value = ft_substr(arg[data->f], data->e + 1, \
 			ft_strlen(arg[data->f]) - (data->e + 1));
+	if (arg[data->f][data->e] == '=' && arg[data->f][data->e + 1])
 		data->e = ft_strlen(arg[data->f]);
-	}
 	else
 		value = NULL;
 	p_env_name = ft_search_env(data, name);
