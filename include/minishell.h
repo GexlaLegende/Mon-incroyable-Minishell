@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
 /*   Updated: 2022/06/30 10:40:50 by apercebo         ###   ########.fr       */
@@ -183,6 +183,8 @@ void		bin_unset(char **arg, t_data *data);
 t_env_list	*ft_search_preenv(t_data *data, char *name);
 void		ft_remove_env_var(char **arg, t_data *data);
 void		ft_name_error(char **arg, t_data *data);
+void		ft_clear_first_elmt(t_data *data);
+void		ft_clear_elmt(t_data *data, char *name);
 int			bin_echo(t_data *data);
 void		bin_exit(t_data *data, int pipe);
 //----------------------------------------------------
