@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:56 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:49:39 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:10:30 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_name_error(char **arg, t_data *data)
 		data->e++;
 	name = ft_substr(arg[data->f], 0, data->e);
 	printf("minishell: unset: `%s': not a valid identifier\n", name);
+	data->last_error = 1;
 	free(name);
 }
 
@@ -112,17 +113,5 @@ void	ft_clear_elmt(t_data *data, char *name)
 		save_p_next->next = NULL;
 		ft_env_lstclear(&save_p_next);
 	}
-	free(name);
-}
-
-void	ft_name_error(char **arg, t_data *data)
-{
-	char	*name;
-
-	while (arg[data->f][data->e] && arg[data->f][data->e] != ' ')
-		data->e++;
-	name = ft_substr(arg[data->f], 0, data->e);
-	printf("minishell: unset: `%s': not a valid identifier\n", name);
-	data->last_error = 1;
 	free(name);
 }

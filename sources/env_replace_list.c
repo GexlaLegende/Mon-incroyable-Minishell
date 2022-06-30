@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/29 16:11:59 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:56:27 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	ft_search_and_replace_env_var(t_data *data)
 		while (cmd_list->cmd[i])
 		{
 			quotes_switch(data, cmd_list->cmd, i);
-			if (cmd_list->cmd[i] == '$' \
-				&& (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \
-				|| cmd_list->cmd[i + 1] == '_') && data->squote == 0)
+			if (cmd_list->cmd[i] == '$' && (ft_isalnum(cmd_list->cmd[i + 1]) \
+				== 1 || cmd_list->cmd[i + 1] == '_' || cmd_list->cmd[i + 1] \
+				== '?') && data->squote == 0)
 			{
 				ft_replace_var_env(cmd_list, i, data);
 				if (i > 0)
@@ -66,6 +66,9 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	i = pos;
 	if (cmd_list->cmd[pos + 1] == '0')
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
+	else if (cmd_list->cmd[pos + 1] == '?')
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, \
+			ft_itoa(data->last_error));
 	else
 	{
 		while (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \

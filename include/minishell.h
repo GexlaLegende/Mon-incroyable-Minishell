@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 10:40:50 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:16:29 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ int			str_diff(char *str1, char *str2);
 char		*ft_malloc_str(char *s1);
 void		ft_putendl(char *s);
 char		*ft_found_path(t_data *data, char *str);
+int			ft_intlen(int n);
+char		*ft_itoa(int n);
 //----------------------------------------------------
 
 #endif
