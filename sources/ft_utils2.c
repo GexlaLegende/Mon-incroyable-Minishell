@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:49:00 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:16:02 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:52:42 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_replace_word(char *str, int start, int len, char *word)
 	{
 		if (k == start)
 		{
-			while (word[j])
+			while (word && word[j])
 				result[i++] = word[j++];
 			k = start + len;
 		}

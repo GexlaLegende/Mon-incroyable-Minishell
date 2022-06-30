@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 15:30:03 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 15:49:26 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,5 @@ char	*ft_is_var_env(t_data *data, char *cmd, int pos, int len)
 		env_list = env_list->next;
 	}
 	free(var_name);
-	return ("");
+	return (NULL);
 }
