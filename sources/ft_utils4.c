@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 11:14:38 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 20:25:20 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:34:49 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-static int	ftreturn(int neg)
-{
-	if (neg >= 0)
-		return (-1);
-	else
-		return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	int			nbr;
@@ -87,7 +79,7 @@ int	ft_atoi(const char *str)
 	while (str[nbr] >= 48 && str[nbr] <= 57)
 	{
 		if (result * 10 + (str[nbr] - 48) < result)
-			return (ftreturn(neg));
+			return (-2);
 		result = result * 10 + (str[nbr] - 48);
 		nbr++;
 	}
