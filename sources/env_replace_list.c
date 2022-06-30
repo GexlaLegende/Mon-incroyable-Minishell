@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_replace_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 15:30:03 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 15:38:43 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ int	ft_env_var(t_data *data)
 	return (0);
 }
 
-void	ft_init_quotes(t_data *data)
-{
-	data->squote = 0;
-	data->dquote = 0;
-}
-
 /*	Search and replace environment variables by their value
 	in each element of the cmd_list */
 int	ft_search_and_replace_env_var(t_data *data)
@@ -37,7 +31,8 @@ int	ft_search_and_replace_env_var(t_data *data)
 	t_cmd_list	*cmd_list;
 
 	cmd_list = data->cmd_table;
-	ft_init_quotes(data);
+	data->squote = 0;
+	data->dquote = 0;
 	while (cmd_list)
 	{
 		i = 0;
@@ -52,8 +47,7 @@ int	ft_search_and_replace_env_var(t_data *data)
 				if (i > 0)
 					i--;
 			}
-			if (cmd_list->cmd[i])
-				i++;
+			i++;
 		}
 		cmd_list = cmd_list->next;
 	}
