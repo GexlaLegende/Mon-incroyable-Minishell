@@ -6,7 +6,7 @@
 /*   By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:19:43 by dbouron           #+#    #+#             */
-/*   Updated: 2022/06/30 11:56:27 by dbouron          ###   ########lyon.fr   */
+/*   Updated: 2022/06/30 12:16:13 by dbouron          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,24 @@ void	ft_replace_var_env(t_cmd_list *cmd_list, int pos, t_data *data)
 	int		len;
 	int		i;
 	char	*value;
+	char	*str;
 
 	len = 0;
 	i = pos;
 	if (cmd_list->cmd[pos + 1] == '0')
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, "minishell");
 	else if (cmd_list->cmd[pos + 1] == '?')
-		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, \
-			ft_itoa(data->last_error));
+	{
+		str = ft_itoa(data->last_error);
+		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, 2, str);
+		free(str);
+	}
 	else
 	{
 		while (ft_isalnum(cmd_list->cmd[i + 1]) == 1 \
 			|| cmd_list->cmd[i + 1] == '_')
-		{
-			len++;
-			i++;
-		}
+			if (len++)
+				i++;
 		value = ft_is_var_env(data, cmd_list->cmd, pos, len);
 		cmd_list->cmd = ft_replace_word(cmd_list->cmd, pos, len + 1, value);
 	}
