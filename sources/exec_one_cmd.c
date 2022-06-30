@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 16:10:53 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:22:37 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl)
 		else
 			i--;
 	}
-	printf("%d\n", data->nbr);
 	tabl[data->nbr] = ft_malloc_str(str);
 	tabl = rm_quote(tabl, data);
 	return (tabl);
