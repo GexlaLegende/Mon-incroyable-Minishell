@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 16:21:20 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:01:04 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	syntax_error(t_data *data)
 {
 	write(2, "Syntax error after > < >> <<\n", 30);
 	data->last_error = 258;
+	ft_lstclear(&data->cmd_table);
 	return (-1);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbouron <dbouron@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/31 16:06:54 by apercebo          #+#    #+#              #
-#    Updated: 2022/06/30 14:59:36 by dbouron          ###   ########lyon.fr    #
+#    Updated: 2022/06/30 17:04:58 by apercebo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ INC := $(addprefix $(DIR_INC)/,$(INCLUDES))
 #### OTHER ####
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Werror -Wextra #-fsanitize=address -g3
 LDFLAGS := -L /usr/include -lreadline -L $(shell brew --prefix readline)/lib
 CPPFLAGS := -I $(shell brew --prefix readline)/include
 NAME := minishell

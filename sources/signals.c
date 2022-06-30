@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 09:51:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 10:00:05 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:46:02 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,15 @@ void	ft_free_all(t_data *data)
 		free(data->paths[i]);
 	free(data->paths);
 	free(data->main_str);
+}
+
+void	exec_cmds_two(t_data *data)
+{
+	while (data->exec_i < data->lst_nbr - 1)
+	{
+		close(data->fds[data->exec_i][0]);
+		close(data->fds[data->exec_i][1]);
+		data->exec_i++;
+	}
+	data->exec_i = 0;
 }

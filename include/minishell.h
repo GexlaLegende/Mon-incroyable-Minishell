@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 13:20:16 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:25:38 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int			getcmd_and_pipe(t_data *data, char **env);
 int			getcmd_and_pipe_two(t_data *data);
 int			exec_cmds_second(t_data *data, char **env);
 void		exec_cmds_two(t_data *data);
+void		getcmd_and_pipe_three(t_data *data);
 //----------------------------------------------------
 
 //Builtins--------------------------------------------
@@ -213,6 +214,7 @@ void		ft_putendl(char *s);
 char		*ft_found_path(t_data *data, char *str);
 int			ft_intlen(int n);
 char		*ft_itoa(int n);
+int			ft_atoi(const char *str);
 //----------------------------------------------------
 
 #endif

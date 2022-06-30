@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:37:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 15:45:18 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:45:39 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ char	**rm_quote(char **tabl, t_data *data)
 	while (tabl[data->j])
 	{
 		data->i = 0;
-		//printf("ICI\n");
-		//dprintf(2, "TABL - %s\n", tabl[data->j]);
 		str = malloc(sizeof(char) * (ft_strlen(tabl[data->j]) + 1));
 		if (!str)
 			exit(EXIT_FAILURE);

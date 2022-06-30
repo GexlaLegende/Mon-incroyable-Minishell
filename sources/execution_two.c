@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:41:08 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 13:20:38 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:45:53 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ int	getcmd_and_pipe_two(t_data *data)
 	return (0);
 }
 
+void	getcmd_and_pipe_three(t_data *data)
+{
+	if (data->exec_i != data->lst_nbr - 1)
+		dup2(data->fds[data->exec_i][1], STDOUT_FILENO);
+	if (data->exec_i != 0)
+		dup2(data->fds[data->exec_i - 1][0], STDIN_FILENO);
+	while (data->j < data->lst_nbr - 1)
+	{
+		close(data->fds[data->j][0]);
+		close(data->fds[data->j][1]);
+		data->j = data->j + 1;
+	}
+}
+
 int	getcmd_and_pipe(t_data *data, char **env)
 {
 	if (ft_is_builtin(data->arg_tabl[0]) != 0)
@@ -47,7 +61,7 @@ int	getcmd_and_pipe(t_data *data, char **env)
 	data->pid = fork();
 	if (data->pid == 0)
 	{
-		getcmd_and_pipe_two(data);
+		getcmd_and_pipe_three(data);
 		if (ft_is_builtin(data->arg_tabl[0]) == 0)
 		{
 			built_in(data, env, data->bin_nbr);
@@ -100,15 +114,4 @@ int	exec_cmds_second(t_data *data, char **env)
 	}
 	data->exec_i = 0;
 	return (0);
-}
-
-void	exec_cmds_two(t_data *data)
-{
-	while (data->exec_i < data->lst_nbr - 1)
-	{
-		close(data->fds[data->exec_i][0]);
-		close(data->fds[data->exec_i][1]);
-		data->exec_i++;
-	}
-	data->exec_i = 0;
 }
