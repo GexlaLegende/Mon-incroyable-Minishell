@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 10:35:43 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:19:33 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,3 @@ int	main(int argc, char **argv, char **env)
 			free(data.cmd_table);
 	}
 }
-
-//aff_list_env(&data);
-//afflistchaine(&data);
-//rl_clear_history();    //Ne fonctionne pas
-//str = readline("Minishell \033[31m❯\033[33m❯\033[32m❯\033[00m ");

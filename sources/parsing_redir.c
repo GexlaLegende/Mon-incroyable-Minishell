@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:18:34 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 11:12:28 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:19:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	redir_parsing(char *str, t_data *data)
 	return (data->rdj - data->rdi);
 }
 
-//ERREUR >< ET CAS <> <-- A NE PAS GERERreturn (2)
 int	count_redir(char *str, t_data *data)
 {
 	int	i;

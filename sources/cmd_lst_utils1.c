@@ -6,13 +6,12 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:37 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/27 17:43:30 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:17:13 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* Ajoute l’élément ’new’ à la fin de la liste. */
 void	ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new)
 {
 	t_cmd_list	*begin;
@@ -34,7 +33,6 @@ void	ft_lstadd_back(t_cmd_list **alst, t_cmd_list *new)
 	newelm->next = new;
 }
 
-/* Ajoute l’élément ’new’ au début de la liste. */
 void	ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new)
 {
 	if (alst != NULL && new != NULL)
@@ -44,8 +42,6 @@ void	ft_lstadd_front(t_cmd_list **alst, t_cmd_list *new)
 	}
 }
 
-/* Supprime et libère la mémoire de l’élément passé en
-paramètre, et de tous les éléments qui suivent */
 void	ft_lstclear(t_cmd_list **lst)
 {
 	t_cmd_list	*nexto;
@@ -70,7 +66,6 @@ void	ft_lstclear(t_cmd_list **lst)
 	}
 }
 
-/* Compte le nombre d’éléments de la liste. */
 int	ft_lstsize(t_cmd_list *lst)
 {
 	int			nbr;

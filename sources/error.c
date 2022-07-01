@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:23:31 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 22:38:55 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:18:39 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	syntax_error(t_data *data)
 	return (-1);
 }
 
-//Fonction pour les erreurs de parsing
 int	parserror(int nbr, t_data *data)
 {
 	if (nbr == 1)
@@ -53,7 +52,6 @@ int	parserror(int nbr, t_data *data)
 	return (0);
 }
 
-//Fonction pour les erreurs d'execution (0 == good)
 void	exekerror(int nbr, t_data *data)
 {
 	int	i;

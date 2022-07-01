@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:51:48 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 19:30:07 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:19:12 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	backward_redir(t_data *data, int i, int nbr)
 	return (0);
 }
 
-// 1 - >> 2 - > 3 - << 4 - <
 int	cmd_redir(t_data *data, char **env, int nbr)
 {
 	int		i;
@@ -116,7 +115,6 @@ int	exec_cmds(t_data *data, char **env)
 	return (0);
 }
 
-//FONCTION PRINCIPALE DE L'EXECUTION
 int	ft_execution(t_data *data, char **env)
 {
 	t_cmd_list	*last;

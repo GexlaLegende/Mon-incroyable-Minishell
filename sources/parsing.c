@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 10:25:13 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/29 11:21:09 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:19:55 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_lexer2(t_data *data, char *str)
 	return (0);
 }
 
-//Fonction principale du parsing (premier découpage)
 int	ft_lexer(char *str, t_data *data)
 {
 	data->squote = 0;
@@ -66,7 +65,6 @@ int	ft_lexer(char *str, t_data *data)
 	return (0);
 }
 
-//Fonction pour l'ajout du maillon pipe dans la liste chainée
 void	ft_addpipe(t_data *data)
 {
 	char	*str;
@@ -114,7 +112,6 @@ int	ft_parser2(t_data *data, char *str)
 	return (0);
 }
 
-//Fonction secondaire (deuxieme découpage)
 int	ft_parser(char *str, t_data *data, int end)
 {
 	if (str[end])
@@ -143,13 +140,3 @@ int	ft_parser(char *str, t_data *data, int end)
 	data->here_doc_nbr = data->here_doc_nbr + 1;
 	return (0);
 }
-
-//TODO
-// FONCTION D"ERREUR A MACHINER -- à moitier fait ça mais sa passe crème tkt
-// LES SEGFAULTS (à trouver avant de les corriger)return (2)
-
-// FAIT | GERER LES NOM DE FICHIER APRES LES REDIR KI -
-// - COMMENCE PAR UN CHAR SPE EX : |, &, %.....
-// FAIT |N'EST PAS AUTORISER : ! # * ( ) ; / ?
-
-//Si $variable non trouvé marche pour heredoc mais pas les autre ?? (ps: oskour)

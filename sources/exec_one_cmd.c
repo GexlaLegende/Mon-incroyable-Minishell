@@ -6,15 +6,12 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:40 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 19:45:28 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:18:58 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// NORME -- {OK}
-
-// execve (PATH+cmd | tabl [PATH+cmd][arg1][arg2]... | tabl env)
 int	exec_one_cmd(t_data *data, char **env)
 {
 	int	pid;
@@ -44,7 +41,6 @@ int	exec_one_cmd(t_data *data, char **env)
 	return (0);
 }
 
-//Return le nombre d'arguments via les espaces - [OK] - 20 lines
 int	get_argnbr(char *str, t_data *data)
 {
 	int	i;
@@ -92,7 +88,6 @@ char	**put_cmd_in_arg(int i, t_data *data, char *str, char **tabl)
 	return (tabl);
 }
 
-//Retourne un tableau avec la commande puis les args - [OK] - 29 lines [X] --
 char	**get_cmd(t_data *data)
 {
 	char	*str;

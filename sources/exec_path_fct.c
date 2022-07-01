@@ -6,15 +6,12 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 11:12:14 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:19:04 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// NORME -- {OK}
-
-//RETOURNE UN TABLEAU DE PATHS  -  [OK] - 25 lines //path_return
 char	**recup_path(t_data *data)
 {
 	int		i;
@@ -75,7 +72,6 @@ char	*safe_malloc(void)
 	return (str);
 }
 
-//FONCTION QUI JOIN LE PATH ET LA COMMANDE  -  [OK] - 22 lines
 int	put_path(t_data *data)
 {
 	char	*full_path;
