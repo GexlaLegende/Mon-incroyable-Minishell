@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:16 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 22:39:00 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:35:43 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	main_fonction_two(t_data *data)
 	data->paths = recup_path(data);
 	data->cmd_table = ft_lstnew(NULL, NULL, NULL);
 	data->here_doc_nbr = 0;
+	data->nbr_save = 0;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	setup_term(0);

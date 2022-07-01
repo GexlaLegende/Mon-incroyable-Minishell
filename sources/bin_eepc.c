@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 10:00:04 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:27:17 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	bin_echo_two(t_data *data)
 	while (data->arg_tabl[++data->echo_i])
 	{
 		if (data->echo_j != 0)
-			printf(" ");
-		printf("%s", data->arg_tabl[data->echo_i]);
+			write(1, " ", 2);
+		write(1, data->arg_tabl[data->echo_i],
+			ft_strlen(data->arg_tabl[data->echo_i]));
 		data->echo_j++;
 	}
 	if (data->echo_n == 0)
@@ -91,6 +92,8 @@ int	bin_echo(t_data *data)
 			return (0);
 		}
 	}
+	if (data->echo_n == 0)
+		printf("\n");
 	data->last_error = 0;
 	return (0);
 }
