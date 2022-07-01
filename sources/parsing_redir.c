@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:18:34 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 22:36:35 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:12:28 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	redir_parsing(char *str, t_data *data)
 				== '>') && data->squote == 0 && data->dquote == 0)
 			break ;
 		if (ft_is_chr(str[data->rdj], data) == 1)
-			return (-2); //return syntax error with > < >> <<
+			return (-2);
 		data->redir_file[data->r_tabl]
 			= ft_strmjoin(data->redir_file[data->r_tabl], str[data->rdj]);
 		data->rdj++;

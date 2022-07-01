@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:38 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 10:33:08 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:15:09 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_number(char *str)
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (!str[i])
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -46,7 +46,8 @@ void	bin_exit(t_data *data, int is_pipe)
 		rl_clear_history();
 		if (data->nbr_save == 1)
 		{
-			if (is_number(data->arg_tabl[1]) == 0 || ft_atoi(data->arg_tabl[1]) == -2)
+			if (is_number(data->arg_tabl[1]) == 0
+				|| ft_atoi(data->arg_tabl[1]) == -2)
 			{
 				printf(" numeric argument required\n");
 				exit(255);

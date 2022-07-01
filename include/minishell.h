@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:26:18 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:01:10 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:11:49 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ void		main_fonction_two(t_data *data);
 //----------------------------------------------------
 
 //Parsing---------------------------------------------
-int			ft_lexer(char *str, t_data *data); //parsing
-int			ft_parser(char *str, t_data *data, int end); //parsing2
+int			ft_lexer(char *str, t_data *data);
+int			ft_parser(char *str, t_data *data, int end);
 void		ft_addpipe(t_data *data);
 void		quotes_switch(t_data *data, char *str, int i);
 int			redir_parsing(char *str, t_data *data);
@@ -198,7 +198,7 @@ void		exekerror(int nbr, t_data *data);
 
 //Utils-----------------------------------------------
 char		*ft_strmjoin(char *s1, char c);
-size_t		ft_strlen(const char *str); // le mien navait pas le const;
+size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_isalnum(int c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
