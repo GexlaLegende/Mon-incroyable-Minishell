@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:38 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 22:40:32 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:51:40 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_number(char *str)
 
 void	bin_exit(t_data *data, int is_pipe)
 {
-	if (data->nbr_save > 1 && )
+	if (data->nbr_save > 1)
 		printf("exit: too many arguments\n");
 	if (data->nbr_save > 1)
 		if (is_pipe == 1)

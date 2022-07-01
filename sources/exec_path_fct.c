@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:22:41 by apercebo          #+#    #+#             */
-/*   Updated: 2022/06/30 19:50:55 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:00:11 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@ int	put_path(t_data *data)
 	char	*full_path;
 
 	data->ppi = -1;
+	//printf("STR - %s\n", data->arg_tabl[0]);
 	if (access(data->arg_tabl[0], X_OK) == 0)
 		return (0);
 	full_path = safe_malloc();
 	full_path[0] = '\0';
 	while (access(full_path, X_OK) == -1 && data->ppi < data->path_nbr)
 	{
+		//printf("STR - %s\n", full_path);
 		data->ppi++;
 		full_path[0] = '\0';
 		free(full_path);
@@ -95,6 +97,7 @@ int	put_path(t_data *data)
 	data->ppi = 0;
 	if (access(full_path, X_OK) == 0)
 	{
+		//printf("STR - %s\n", full_path);
 		free(data->arg_tabl[0]);
 		data->arg_tabl[0] = ft_malloc_str(full_path);
 		free(full_path);
