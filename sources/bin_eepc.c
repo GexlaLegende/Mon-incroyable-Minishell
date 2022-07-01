@@ -6,7 +6,7 @@
 /*   By: apercebo <apercebo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:06:46 by apercebo          #+#    #+#             */
-/*   Updated: 2022/07/01 10:27:17 by apercebo         ###   ########.fr       */
+/*   Updated: 2022/07/01 11:09:46 by apercebo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	bin_echo_two(t_data *data)
 	while (data->arg_tabl[++data->echo_i])
 	{
 		if (data->echo_j != 0)
-			write(1, " ", 2);
+			write(1, " ", 1);
 		write(1, data->arg_tabl[data->echo_i],
 			ft_strlen(data->arg_tabl[data->echo_i]));
 		data->echo_j++;
